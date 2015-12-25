@@ -3,10 +3,12 @@ import {combineReducers} from 'redux';
 import user from './Auth/user';
 import login from './Auth/login';
 import register from './Auth/register';
-import categories from './categories';
-import category from './category';
-import comments from './comments';
-import favorites from './favorites';
+import categories from './Category/categories';
+import category from './Category/category';
+import companies from './Company/companies';
+import company from './Company/company';
+import services from './Service/services';
+import service from './Service/service';
 
 const rootReducer = combineReducers({
   user,
@@ -14,8 +16,10 @@ const rootReducer = combineReducers({
   register,
   categories,
   category,
-  comments,
-  favorites
+  companies,
+  company,
+  services,
+  service
 });
 
 export default rootReducer;

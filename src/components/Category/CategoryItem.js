@@ -7,22 +7,25 @@ import { Icon } from 'react-native-icons';
 export default class CategoryItem extends Component {
 
   renderContent(category) {
+    //<View style={styles.container}>
+    //  <View style={{flexDirection: "row",  paddingBottom:10}}>
+    //    {category.thumbnail ? <Image style={[styles.thumbnail]} source={{uri:category.thumbnail.name}}/> : <View/> }
+    //  </View>
+    //
+    //  <View>
+    //    <Text style={{ padding:10, textAlign:"center" }}>{category.name}</Text>
+    //  </View>
+    //</View>
     return (
-      <View style={styles.container}>
-        <View style={{flexDirection: "row",  paddingBottom:10}}>
-          {category.thumbnail ? <Image style={[styles.thumbnail]} source={{uri:category.thumbnail.name}}/> : <View/> }
-        </View>
-
-        <View>
-          <Text style={{ padding:10, textAlign:"center" }}>{category.name}</Text>
-        </View>
-      </View>
+      <Image source={{uri:category.thumbnail.name}} style={styles.container}>
+        <Text style={styles.text}>{category.name}</Text>
+      </Image>
     )
   }
 
   render() {
 
-    const category = this.props.data;
+    const {category} = this.props;
 
     if (category.id && category.id > 0) {
       return this.renderContent(category);
@@ -33,7 +36,13 @@ export default class CategoryItem extends Component {
 }
 
 var styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    alignSelf: 'stretch',
+    width: null,
+    height: 200,
+    opacity:.8
+  },
   img: {
     height: 200,
     borderRadius: 5,
