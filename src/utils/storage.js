@@ -2,6 +2,7 @@
 import React,{AsyncStorage} from 'react-native';
 
 export const USER_STORAGE_KEY = 'user';
+export const CATEGORY_STORAGE_KEY = 'user';
 
 export const saveUser = (user, cb)=> {
 
