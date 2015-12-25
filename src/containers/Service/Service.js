@@ -13,10 +13,6 @@ class Service extends Component {
     super(props);
   }
 
-  componentWillMount() {
-    const {dispatch} = this.props;
-  }
-
   render() {
     return (
       <ScrollView style={styles.container}>

@@ -4,6 +4,7 @@ import {connect} from '../../../node_modules/react-redux/native';
 import {fetchCategories} from './../../actions/Category/categories';
 import CategoryList from './../../components/Category/CategoryList';
 import LoadingIndicator from './../../components/LoadingIndicator';
+import {assets} from './../../utils/assets';
 const Actions = require('react-native-router-flux').Actions;
 
 class Categories extends Component {
@@ -27,16 +28,35 @@ class Categories extends Component {
 
     const { categories } = this.props;
 
-    if (categories.isFetching) {
-      return <LoadingIndicator />;
-    }
 
     return (
-      <CategoryList categories={categories.collection} loadCategory={this.loadCategory}/>
+      <Image source={assets.bg} style={styles.container}>
+
+
+        {categories.isFetching ? <LoadingIndicator /> : <View/>}
+
+
+        <CategoryList categories={categories.collection} loadCategory={this.loadCategory}/>
+
+
+      </Image>
+
+
     );
 
   }
 }
+
+const styles = StyleSheet.create({
+  //
+  container: {
+    flex: 1,
+    width: null,
+    height: null,
+    padding: 10
+  }
+
+});
 
 function mapStateToProps(state) {
   const { categories } = state
