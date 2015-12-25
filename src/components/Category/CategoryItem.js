@@ -7,15 +7,6 @@ import { Icon } from 'react-native-icons';
 export default class CategoryItem extends Component {
 
   renderContent(category) {
-    //<View style={styles.container}>
-    //  <View style={{flexDirection: "row",  paddingBottom:10}}>
-    //    {category.thumbnail ? <Image style={[styles.thumbnail]} source={{uri:category.thumbnail.name}}/> : <View/> }
-    //  </View>
-    //
-    //  <View>
-    //    <Text style={{ padding:10, textAlign:"center" }}>{category.name}</Text>
-    //  </View>
-    //</View>
     return (
       <Image source={{uri:category.thumbnail.name}} style={styles.container}>
         <Text style={styles.text}>{category.name}</Text>

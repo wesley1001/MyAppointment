@@ -7,6 +7,7 @@ import TabIcon from './components/TabIcon';
 import Categories from './containers/Category/Categories';
 import Category from './containers/Category/Category';
 import Company from './containers/Company/Company';
+import Service from './containers/Service/Service';
 
 export default class App extends Component {
 
@@ -52,6 +53,11 @@ export default class App extends Component {
             <Route name="companyEntity" component={Company} title=""
                    hideNavBar={false}
               />
+
+            <Route name="serviceEntity" component={Service} title=""
+                   hideNavBar={false}
+              />
+
 
           </Router>
 
