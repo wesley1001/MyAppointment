@@ -4,7 +4,7 @@ import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, Li
 import {connect} from '../../../node_modules/react-redux/native';
 import {fetchCategory} from './../../actions/Category/category';
 import CategoryItem from './../../components/Category/CategoryItem';
-import Companies from './../Company/Companies';
+import CompanyList from './../../components/Company/CompanyList';
 import LoadingIndicator from './../../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
 
@@ -18,6 +18,12 @@ class Category extends Component {
     const {dispatch} = this.props;
   }
 
+  loadCompany(company) {
+    Actions.companyEntity({
+      data: company
+    });
+  }
+
   render() {
 
     const {category} = this.props;
@@ -29,7 +35,7 @@ class Category extends Component {
     return (
       <ScrollView style={styles.container}>
         <CategoryItem category={this.props.data}/>
-        <Companies data={this.props.data.companies}/>
+        <CompanyList companies={this.props.data.companies} loadCompany={this.loadCompany.bind(this)}/>
       </ScrollView>
     );
 

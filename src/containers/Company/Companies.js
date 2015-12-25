@@ -32,7 +32,7 @@ class Companies extends Component {
     }
 
     return (
-      <View >
+      <View>
         <CompanyList companies={data} loadCompany={this.loadCompany.bind(this)}/>
       </View>
     );

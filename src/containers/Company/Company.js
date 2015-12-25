@@ -4,7 +4,7 @@ import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, Li
 import {connect} from '../../../node_modules/react-redux/native';
 import {fetchCompany} from './../../actions/Company/company';
 import CompanyItem from './../../components/Company/CompanyItem';
-import Services from './../../containers/Service/Services';
+import ServiceList from './../../components/Service/ServiceList';
 import LoadingIndicator from './../../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
 
@@ -14,22 +14,18 @@ class Company extends Component {
     super(props);
   }
 
-  componentWillMount() {
-    const {dispatch} = this.props;
+  loadService(service) {
+    Actions.serviceEntity({
+      data: service
+    });
   }
 
   render() {
 
-    const {company} = this.props;
-
-    if (company.isFetching) {
-      return <LoadingIndicator />;
-    }
-
     return (
       <ScrollView style={styles.container}>
         <CompanyItem company={this.props.data}/>
-        <Services data={this.props.data.services}/>
+        <ServiceList services={this.props.data.services} loadService={this.loadService}/>
       </ScrollView>
     );
 

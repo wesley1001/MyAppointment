@@ -18,13 +18,6 @@ class Service extends Component {
   }
 
   render() {
-
-    const {service} = this.props;
-
-    if (service.isFetching) {
-      return <LoadingIndicator />;
-    }
-
     return (
       <ScrollView style={styles.container}>
         <ServiceItem service={this.props.data}/>
