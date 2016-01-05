@@ -5,6 +5,7 @@ import {connect} from '../../../node_modules/react-redux/native';
 import {fetchCategory} from './../../actions/Category/category';
 import CompanyList from './../../components/Company/CompanyList';
 import LoadingIndicator from './../../components/LoadingIndicator';
+import {assets} from './../../utils/assets';
 const Actions = require('react-native-router-flux').Actions;
 
 class Category extends Component {
@@ -16,6 +17,7 @@ class Category extends Component {
 
   loadCompany(company) {
     Actions.companyEntity({
+      title:company.name,
       data: company
     });
   }
@@ -29,9 +31,9 @@ class Category extends Component {
     }
 
     return (
-      <ScrollView style={styles.container}>
-        <CompanyList companies={this.props.data.companies} loadCompany={this.loadCompany.bind(this)}/>
-      </ScrollView>
+        <Image source={assets.bg} style={styles.container}>
+          <CompanyList companies={this.props.data.companies} loadCompany={this.loadCompany.bind(this)}/>
+        </Image>
     );
 
   }
@@ -40,7 +42,9 @@ class Category extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 64,
+    width: null,
+    height: null,
+    padding: 10
   },
   buttonWrapper: {
     flex: 1,

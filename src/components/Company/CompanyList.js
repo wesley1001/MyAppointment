@@ -6,9 +6,16 @@ export default class CompanyList extends Component {
 
   renderRow(company) {
     return (
-      <View style={styles.row}>
+      <View style={styles.container}>
         <TouchableHighlight onPress={() => this.props.loadCompany(company)} underlayColor="transparent">
-          <Image style={styles.thumbnail} source={{uri:company.thumbnail.name}}/>
+          <View style={{flexDirection:'row'}}>
+            <Image style={styles.thumbnail} source={{uri:company.thumbnail.name}}/>
+            <View style={{flexDirection:'column'}} >
+              <Text style={styles.name}> {company.name}</Text>
+              <Text style={styles.description}> {company.name}</Text>
+              <Text style={styles.mobile}> {company.name}</Text>
+            </View>
+          </View>
         </TouchableHighlight>
       </View>
     )
@@ -35,28 +42,38 @@ export default class CompanyList extends Component {
 }
 
 var styles = StyleSheet.create({
-  list: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    paddingVertical: 20
-  },
-  row: {
-    justifyContent: 'center',
+
+  container: {
     padding: 5,
+    paddingTop: 10,
+    paddingBottom: 10,
     margin: 3,
-    width: 100,
-    height: 100,
-    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: 'white',
+    opacity: 0.5,
   },
+
+  name: {
+    color: 'black',
+    fontSize: 40
+  },
+
+  description: {
+    color: 'black',
+    fontSize: 13,
+    paddingLeft:5
+  },
+
+  mobile: {
+    color:'black',
+    paddingLeft:5
+  },
+
   thumbnail: {
     width: 80,
     height: 80,
-    borderRadius: 40,
+    borderRadius: 40
   },
-  text: {
-    flex: 1,
-    marginTop: 5,
-    marginBottom: 5,
-  },
+
 });

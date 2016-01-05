@@ -4,12 +4,48 @@ import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, Li
 
 export default class ServiceList extends Component {
 
+
+  handleAppointment(service) {
+    return this.props.confirmAppointment(service);
+  }
+
+  handleServiceRoute(service) {
+    return this.props.loadService(service);
+  }
+
   renderRow(service) {
     return (
-      <View style={styles.row}>
-        <TouchableHighlight onPress={() => this.props.loadService(service)} underlayColor="transparent">
-          <Image style={styles.thumbnail} source={{uri:service.thumbnail.name}}/>
+      <View style={styles.cellContainer}>
+        <TouchableHighlight onPress={this.handleServiceRoute.bind(this)} underlayColor='transparent'>
+
+          <View style={styles.cellWrapper}>
+
+            <View style={styles.titleWrapper}>
+              <Text style={styles.title}>
+                {service.name}
+              </Text>
+            </View>
+
+            <View style={styles.priceWrapper}>
+              <Text style={styles.price}>
+                50 KD
+              </Text>
+
+              <TouchableHighlight onPress={this.handleAppointment.bind(this)} underlayColor='transparent'>
+                <View style={styles.bookButtonWrapper} >
+
+                  <Text style={styles.bookButton}>
+                    Book
+                  </Text>
+                </View>
+              </TouchableHighlight>
+            </View>
+          </View>
+
         </TouchableHighlight>
+
+        <View style={styles.separator}/>
+
       </View>
     )
   }
@@ -21,42 +57,66 @@ export default class ServiceList extends Component {
 
     return (
       <ListView
-        contentContainerStyle={styles.list}
         dataSource={dataSource}
         renderRow={this.renderRow.bind(this)}
-        contentInset={{bottom:49}}
-        style={{paddingTop:64}}
         automaticallyAdjustContentInsets={false}
-        ref='listView'
-        />
+        style={styles.container}
+      />
     )
 
   }
+
+
+
 }
 
 var styles = StyleSheet.create({
-  list: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    paddingVertical:20
+  container: {
+    backgroundColor: '#FFFFFD',
+    margin:10
   },
-  row: {
-    justifyContent: 'center',
-    padding: 5,
-    margin: 3,
-    width: 100,
-    height: 100,
-    alignItems: 'center',
+  cellContainer:{
   },
-  thumbnail: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+  cellWrapper: {
+    flexDirection:'row',
+    flex:1,
+    justifyContent:'flex-start',
+    marginTop:10,
+    marginBottom:10,
+    alignItems:'center'
   },
-  text: {
-    flex: 1,
-    marginTop: 5,
-    marginBottom: 5,
+  titleWrapper: {
+    justifyContent:'flex-start',
+    flex:1,
   },
+  priceWrapper:{
+    justifyContent:'flex-end',
+    flexDirection:'row',
+    flex:1,
+    alignItems:'center'
+  },
+  title: {
+    color: '#DA552F',
+  },
+  price: {
+    textAlign:'right'
+  },
+  bookButtonWrapper:{
+    marginLeft:10,
+    backgroundColor:'yellow',
+    justifyContent:'center',
+    padding:4,
+    paddingLeft:10,
+    paddingRight:10
+  },
+  bookButton: {
+    color:'black',
+    textAlign:'right',
+    fontSize:12
+  },
+  separator: {
+    height:0.5,
+    backgroundColor:'#E8E8E8'
+  }
+
 });

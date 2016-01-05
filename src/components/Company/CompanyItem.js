@@ -9,7 +9,9 @@ export default class CompanyItem extends Component {
   renderContent(company) {
     return (
       <Image source={{uri:company.thumbnail.name}} style={styles.container}>
-        <Text style={styles.text}>{company.name}</Text>
+        <View style={styles.textView}>
+          <Text style={styles.name}>{company.name}</Text>
+        </View>
       </Image>
     )
   }
@@ -27,48 +29,23 @@ export default class CompanyItem extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignSelf: 'stretch',
     width: null,
     height: 200,
-    opacity:.8
+    opacity:.8,
+    justifyContent:'flex-end'
   },
-  img: {
-    height: 200,
-    borderRadius: 5,
-    paddingTop: 10
-  },
-  commentImg: {
-    width: 24,
-    height: 22,
-    marginRight: 50,
-    alignSelf: "center",
-  },
-  favoriteImg: {
-    width: 24,
-    height: 22,
-    alignSelf: "center"
-  },
-  thumbnail: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end'
+  textView:{
+    backgroundColor: 'black',
+    opacity: 0.8,
+    height:50,
+    justifyContent:'center',
+    alignItems:'center'
   },
   name: {
-    color: '#888888',
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignSelf: 'center',
-    textAlign: 'right',
-    paddingRight: 3
-  },
-  createdAt: {
-    flex: 1,
-    fontWeight: '200',
-    color: '#888888',
-    fontSize: 12,
-    alignSelf: 'center'
+    color:'#FFFFFF',
+    fontSize:26,
+    fontWeight:'600',
+    alignSelf:'center'
   }
 
 });

@@ -13,7 +13,12 @@ class Service extends Component {
     super(props);
   }
 
+  // fetch timings
+
+
   render() {
+    // show timings
+
     return (
       <ScrollView style={styles.container}>
         <ServiceItem service={this.props.data}/>

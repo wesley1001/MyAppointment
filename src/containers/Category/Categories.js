@@ -1,5 +1,5 @@
 'use strict';
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View,ScrollView } from 'react-native';
 import {connect} from '../../../node_modules/react-redux/native';
 import {fetchCategories} from './../../actions/Category/categories';
 import CategoryList from './../../components/Category/CategoryList';
@@ -20,6 +20,7 @@ class Categories extends Component {
 
   loadCategory(category) {
     Actions.categoryEntity({
+      title:category.name,
       data: category
     });
   }
@@ -28,20 +29,11 @@ class Categories extends Component {
 
     const { categories } = this.props;
 
-
     return (
-      <Image source={assets.bg} style={styles.container}>
-
-
+      <ScrollView>
         {categories.isFetching ? <LoadingIndicator /> : <View/>}
-
-
         <CategoryList categories={categories.collection} loadCategory={this.loadCategory}/>
-
-
-      </Image>
-
-
+      </ScrollView>
     );
 
   }

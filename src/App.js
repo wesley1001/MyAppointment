@@ -1,5 +1,5 @@
 'use strict';
-import React, { Component, StyleSheet,Navigator,Text,View,Image} from 'react-native';
+import React, { Component, StyleSheet,Navigator,Text,View,Image,StatusBarIOS} from 'react-native';
 import {Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
@@ -10,6 +10,10 @@ import Company from './containers/Company/Company';
 import Service from './containers/Service/Service';
 
 export default class App extends Component {
+
+  componentWillMount() {
+    StatusBarIOS.setStyle('light-content');
+  }
 
   render() {
     return (

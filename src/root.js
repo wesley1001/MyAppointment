@@ -2,8 +2,15 @@ import React,{Component} from 'react-native';
 import { Provider } from 'react-redux/native';
 import configureStore from './store/configure-store';
 import App from './App';
+import CodePush from "react-native-code-push";
 
 class Root extends Component {
+
+  constructor(props) {
+    super(props);
+    CodePush.sync();
+  }
+
   render() {
     return (
       <Provider store={configureStore()}>

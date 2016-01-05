@@ -19,6 +19,7 @@ class Companies extends Component {
 
   loadCompany(company) {
     Actions.companyEntity({
+      title:company.name,
       data: company
     });
   }
