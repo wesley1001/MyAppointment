@@ -26,7 +26,7 @@ export default class App extends Component {
 
         <Route name="login" component={Login} title="Login"
                hideNavBar={false}
-               navigationBarStyle={{backgroundColor: ' rgb(217, 102, 255)',borderBottomColor: ' rgb(217, 102, 255)'}}
+               navigationBarStyle={{backgroundColor: ' rgb(217, 102, 255)'}}
                titleStyle={{ color:'white', fontSize:17}}
                barButtonTextStyle={{ fontSize:17, color:'white' }}
                schema="default"
@@ -42,7 +42,7 @@ export default class App extends Component {
                   barButtonTextStyle={{ fontSize:17, color:'white' }}
             >
             <Route name="categories" schema="default" title="My Appointment"
-                   navigationBarStyle={{backgroundColor: ' rgb(217, 102, 255)',borderBottomColor: ' rgb(217, 102, 255)'}}
+                   navigationBarStyle={{backgroundColor: ' rgb(217, 102, 255)'}}
                    titleStyle={{ color:'white', fontSize:17}}
                    barButtonTextStyle={{ fontSize:17, color:'white' }}
                    component={Categories}

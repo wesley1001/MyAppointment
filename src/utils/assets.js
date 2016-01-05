@@ -1,5 +1,5 @@
 export const assets = {
-  mark: require('./../assets/img/mark.png'),
-  line:require('./../assets/img/line.png'),
-  bg:require('./../assets/img/bg.png')
+  mark: require('./../../assets/img/mark.png'),
+  line:require('./../../assets/img/line.png'),
+  bg:require('./../../assets/img/bg.png')
 };

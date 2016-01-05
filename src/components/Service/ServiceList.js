@@ -1,39 +1,37 @@
 'use strict';
 
 import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView } from 'react-native';
+import { Icon } from 'react-native-icons';
 
 export default class ServiceList extends Component {
-
-
-  handleAppointment(service) {
-    return this.props.confirmAppointment(service);
-  }
-
-  handleServiceRoute(service) {
-    return this.props.loadService(service);
-  }
 
   renderRow(service) {
     return (
       <View style={styles.cellContainer}>
-        <TouchableHighlight onPress={this.handleServiceRoute.bind(this)} underlayColor='transparent'>
+        <TouchableHighlight onPress={() => ''} underlayColor='transparent'>
 
           <View style={styles.cellWrapper}>
 
             <View style={styles.titleWrapper}>
-              <Text style={styles.title}>
+              <Text style={styles.name}>
                 {service.name}
               </Text>
             </View>
 
             <View style={styles.priceWrapper}>
               <Text style={styles.price}>
-                50 KD
+                {service.price ? service.price : '30'} KD
               </Text>
 
-              <TouchableHighlight onPress={this.handleAppointment.bind(this)} underlayColor='transparent'>
+              <TouchableHighlight onPress={() => this.props.loadService(service)} underlayColor='transparent'>
                 <View style={styles.bookButtonWrapper} >
 
+                  <Icon
+                    name='ion|calendar'
+                    size={20}
+                    color='#887700'
+                    style={styles.calendarIcon}
+                  />
                   <Text style={styles.bookButton}>
                     Book
                   </Text>
@@ -87,7 +85,7 @@ var styles = StyleSheet.create({
   },
   titleWrapper: {
     justifyContent:'flex-start',
-    flex:1,
+    flex:2,
   },
   priceWrapper:{
     justifyContent:'flex-end',
@@ -95,28 +93,39 @@ var styles = StyleSheet.create({
     flex:1,
     alignItems:'center'
   },
-  title: {
+  name: {
     color: '#DA552F',
+    fontSize:20
   },
   price: {
-    textAlign:'right'
+    textAlign:'right',
+    color:'gray',
+    fontSize:13
   },
   bookButtonWrapper:{
+    flexDirection:'row',
     marginLeft:10,
-    backgroundColor:'yellow',
+    backgroundColor:' #00b377',
     justifyContent:'center',
     padding:4,
     paddingLeft:10,
-    paddingRight:10
+    paddingRight:10,
+    borderRadius:2
   },
   bookButton: {
-    color:'black',
+    color:'white',
     textAlign:'right',
-    fontSize:12
+    fontSize:12,
+    alignSelf:'center',
+    paddingLeft:3
   },
   separator: {
-    height:0.5,
+    height:1,
     backgroundColor:'#E8E8E8'
+  },
+  calendarIcon :{
+    height:20,
+    width:20
   }
 
 });

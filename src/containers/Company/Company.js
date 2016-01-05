@@ -7,6 +7,7 @@ import CompanyItem from './../../components/Company/CompanyItem';
 import ServiceList from './../../components/Service/ServiceList';
 import LoadingIndicator from './../../components/LoadingIndicator';
 import CompanyMap from './../../components/Company/CompanyMap';
+import CompanyDescription from './../../components/Company/CompanyDescription';
 const Actions = require('react-native-router-flux').Actions;
 
 class Company extends Component {
@@ -23,7 +24,7 @@ class Company extends Component {
   loadService(service) {
     Actions.serviceEntity({
       title:service.name,
-      data: service
+      service: service
     });
   }
 
@@ -44,11 +45,8 @@ class Company extends Component {
 
   }
 
-  handleConfirm(){
-
-  }
-
   render() {
+
     const {data} = this.props;
     let mapPin = {
       title:data.name,
@@ -57,19 +55,26 @@ class Company extends Component {
       longitude:parseFloat(data.longitude)
     };
 
+    let selectedComponent;
+
+    if(this.state.selectedIndex === 1) {
+      selectedComponent = <CompanyDescription company={data} />
+    } else if(this.state.selectedIndex === 2) {
+      selectedComponent = <CompanyMap pin={mapPin} />
+    } else {
+      selectedComponent = <ServiceList services={this.props.data.services} loadService={this.loadService.bind(this)} confirmAppointment={this.confirmAppointment.bind(this)}/>
+    }
+
     return (
 
       <ScrollView style={styles.container}>
         <CompanyItem company={this.props.data}/>
         <View style={{margin:5,marginTop:20}}>
-          <SegmentedControlIOS values={['Services', 'Map']} tintColor="rgb(217, 102, 255)" momentary={true} selectedIndex={this.state.selectedIndex}
+          <SegmentedControlIOS values={['Services', 'Description', 'Map']} tintColor="rgb(217, 102, 255)" momentary={true} selectedIndex={0}
                                onChange={this.onChange}
           />
 
-          {this.state.selectedIndex === 0 ?
-            <ServiceList services={this.props.data.services} loadService={this.loadService.bind(this)} confirmAppointment={this.confirmAppointment.bind(this)}/>
-            :
-            <CompanyMap pin={mapPin} />}
+          {selectedComponent}
 
         </View>
       </ScrollView>

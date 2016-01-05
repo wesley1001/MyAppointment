@@ -25,7 +25,6 @@ function serviceFailure(error) {
   }
 }
 
-
 export function fetchService(serviceID) {
   const url = API_ROOT + '/services/' + serviceID;
   return (dispatch) => {
@@ -39,4 +38,22 @@ export function fetchService(serviceID) {
         dispatch(serviceFailure(err))
       })
   }
+}
+
+export function fetchTiming(date,categoryID,companyID,serviceID) {
+  let parsedDate = date.toISOString().slice(0, 10);
+  var url = API_URL +'/timings/?category=' + categoryID + '&company=' + companyID + '&service=' + serviceID + '&date=' + parsedDate;
+  console.log('url',url);
+  fetch(url)
+    .then((response)=>response.json())
+    .then((responseData)=> {
+      //let timings = responseData.data;
+      //
+      //this.setState({
+      //  dataSource: this.state.dataSource
+      //    .cloneWithRows(timings),
+      //  showProgress: false
+      //}, this);
+
+    });
 }
