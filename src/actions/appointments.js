@@ -25,12 +25,14 @@ function appointmentFailure(error) {
   }
 }
 
-export function createAppointment(date,userID,appointmentID) {
+export function createAppointment(date,userID,appointmentID,cb = ()=> {
+  success: false
+}) {
 
   var url = API_ROOT +'/appointment/make';
 
   let params = {
-    date: this.props.date.toISOString().slice(0, 10),
+    date: date.toISOString().slice(0, 10),
     user_id: userID,
     timing_id: appointmentID
   };
@@ -43,10 +45,18 @@ export function createAppointment(date,userID,appointmentID) {
     })
       .then(response => response.json())
       .then(json => {
-        dispatch(appointmentSuccess(json))
+        if(json.success) {
+          dispatch(appointmentSuccess(json));
+          return cb({success: true});
+        } else {
+          dispatch(appointmentFailure(json.message));
+          return cb = () => {cb.success = false}
+        }
       })
       .catch((err)=> {
-        dispatch(appointmentFailure(err))
+        dispatch(appointmentFailure(err));
+        return cb({success: false});
+
       })
   }
 }

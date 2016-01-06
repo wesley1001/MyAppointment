@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView,ScrollView } from 'react-native';
+import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView,ScrollView,AlertIOS } from 'react-native';
 import {connect} from '../../../node_modules/react-redux/native';
 import ServiceItem from './../../components/Service/ServiceItem';
 import Calendar from './../../components/Calendar';
@@ -14,52 +14,51 @@ class Service extends Component {
 
   constructor(props) {
     super(props);
-
     this.state={
       date: new Date()
     };
-
     this.onDateChange = this.onDateChange.bind(this);
   }
 
   componentDidMount() {
-    const {dispatch} = this.props;
-    dispatch(fetchTiming(this.state.date,this.props.companyData.id,this.props.data.id));
+    const {dispatch,companyData,data} = this.props;
+    dispatch(fetchTiming(this.state.date,companyData.id,data.id));
   }
 
-
   handleConfirm(timing) {
+    const date = this.state.date;
     const {dispatch} = this.props;
     let user = {}; //@todo : get from reducer
     user.id=1;
-    dispatch(createAppointment(this.state.date,user.id,timing.id));
+    dispatch(createAppointment(date,user.id,timing.id, (cb) => {
+      if(cb.success) {
+        AlertIOS.alert('Booking Confirmed on '+this.state.date.toISOString().slice(0, 10)+' at '+timing.time, null, [{text: 'OK'}]);
+        Actions.pop();
+      } else {
+        AlertIOS.alert('Booking Failed ? try again ', null, [{text: 'OK'}]);
+      }
+    }));
   }
 
   onDateChange(date) {
-    const {dispatch} = this.props;
+    const {dispatch,companyData,data} = this.props;
     this.setState({ date: date });
-    dispatch(fetchTiming(this.state.date,this.props.companyData.id,this.props.data.id));
+    dispatch(fetchTiming(this.state.date,companyData.id,data.id));
   }
 
   render() {
-    const {timings} = this.props;
+    const {timings,appointments} = this.props;
     return (
       <ScrollView style={styles.container}>
         <Calendar date={this.state.date} onDateChange={this.onDateChange.bind(this)} />
-
         <View style={styles.separator}/>
-
         <View style={styles.timingHeading}>
           <Text style={styles.timingLabel}>Available Appointment on {this.state.date.toISOString().slice(0, 10)} </Text>
         </View>
-
         <View style={[styles.separator,{marginBottom:10}]}/>
-
-        {timings.isFetching ? <LoadingIndicator />:  <TimingList timings={timings.entity}  onConfirm={this.handleConfirm.bind(this)} />}
-
+        {timings.isFetching || appointments.isFetching ? <LoadingIndicator /> :  <TimingList timings={timings.entity}  onConfirm={this.handleConfirm.bind(this)} />}
       </ScrollView>
     );
-
   }
 }
 
@@ -85,13 +84,13 @@ const styles = StyleSheet.create({
   },
 });
 
-
 function mapStateToProps(state) {
-  const { service,timings } = state
+  const { service,timings,appointments } = state
   return {
     ...state,
     service: service,
-    timings:timings
+    timings:timings,
+    appointments:appointments
   }
 }
 
