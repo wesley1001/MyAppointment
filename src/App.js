@@ -30,7 +30,7 @@ export default class App extends Component {
                titleStyle={{ color:'white', fontSize:17}}
                barButtonTextStyle={{ fontSize:17, color:'white' }}
                schema="default"
-          />
+        />
 
         <Route name="register" component={Register} title="Register" schema="default" hideNavBar={false}/>
 
@@ -40,7 +40,7 @@ export default class App extends Component {
                   style={{backgroundColor:' rgb(217, 102, 255)'}}
                   titleStyle={{ color:'white', fontSize:17}}
                   barButtonTextStyle={{ fontSize:17, color:'white' }}
-            >
+          >
             <Route name="categories" schema="default" title="My Appointment"
                    navigationBarStyle={{backgroundColor: ' rgb(217, 102, 255)'}}
                    titleStyle={{ color:'white', fontSize:17}}
@@ -48,24 +48,24 @@ export default class App extends Component {
                    component={Categories}
                    hideNavBar={false}
                    type="replace"
-              />
-
+            />
             <Route name="categoryEntity" component={Category} title=""
                    hideNavBar={false}
-              />
+            />
 
             <Route name="companyEntity" component={Company} title=""
                    hideNavBar={false}
-              />
+            />
 
             <Route name="serviceEntity" component={Service} title=""
                    hideNavBar={false}
-              />
-
-
+            />
           </Router>
 
+
         </Route>
+
+
       </Router>
 
     )

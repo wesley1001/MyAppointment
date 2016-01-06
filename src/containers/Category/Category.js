@@ -26,12 +26,9 @@ class Category extends Component {
 
     const {category} = this.props;
 
-    if (category.isFetching) {
-      return <LoadingIndicator />;
-    }
-
     return (
         <Image source={assets.bg} style={styles.container}>
+          {category.isFetching ? <LoadingIndicator /> : <View />}
           <CompanyList companies={this.props.data.companies} loadCompany={this.loadCompany.bind(this)}/>
         </Image>
     );
@@ -45,7 +42,6 @@ const styles = StyleSheet.create({
     width: null,
     height: null,
     padding: 10,
-    paddingTop:64
   },
   buttonWrapper: {
     flex: 1,
