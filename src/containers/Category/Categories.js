@@ -30,8 +30,8 @@ class Categories extends Component {
     const { categories } = this.props;
 
     return (
-      <ScrollView>
-        {categories.isFetching ? <LoadingIndicator /> : <View/>}
+      <ScrollView style={styles.container}>
+        {categories.isFetching ? <LoadingIndicator  /> : <View/>}
         <CategoryList categories={categories.collection} loadCategory={this.loadCategory}/>
       </ScrollView>
     );
@@ -42,10 +42,7 @@ class Categories extends Component {
 const styles = StyleSheet.create({
   //
   container: {
-    flex: 1,
-    width: null,
-    height: null,
-    padding: 10
+    paddingTop:64
   }
 
 });
