@@ -11,7 +11,7 @@ export default class CategoryList extends Component {
       <View style={styles.row}>
         <TouchableHighlight onPress={() => this.props.loadCategory(category)} underlayColor="transparent">
           <View>
-            <Image style={styles.thumbnail} source={{uri:category.thumbnail.name}}/>
+            <Image style={styles.thumbnail} source={{uri:category.thumbnail.name}} resizeModel={'contain'}/>
             <Text style={styles.text}> {category.name}</Text>
           </View>
         </TouchableHighlight>
@@ -40,9 +40,10 @@ export default class CategoryList extends Component {
 var styles = StyleSheet.create({
   list: {
     justifyContent: 'center',
-    flexDirection: 'row',
+    flexDirection: 'column',
     flexWrap: 'wrap',
-    paddingVertical: 20
+    paddingVertical: 20,
+    alignItems:'center'
   },
   row: {
     justifyContent: 'center',
@@ -51,12 +52,13 @@ var styles = StyleSheet.create({
     marginBottom:40,
     width: 150,
     height: 150,
+    borderRadius:75,
     alignItems: 'center',
   },
   thumbnail: {
-    width: 130,
-    height: 130,
-    borderRadius: 65,
+    width: 150,
+    height: 150,
+    borderRadius: 75,
   },
   text: {
     marginBottom: 5,
