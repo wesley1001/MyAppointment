@@ -7,6 +7,7 @@ export default class CategoryList extends Component {
 
   renderRow(category) {
     return (
+
       <View style={styles.row}>
         <TouchableHighlight onPress={() => this.props.loadCategory(category)} underlayColor="transparent">
           <View>
@@ -39,6 +40,7 @@ export default class CategoryList extends Component {
 var styles = StyleSheet.create({
   list: {
     justifyContent: 'center',
+    flexDirection: 'row',
     flexWrap: 'wrap',
     paddingVertical: 20
   },
