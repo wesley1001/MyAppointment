@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
     flex: 1,
     width: null,
     height: null,
-    padding: 10
+    padding: 10,
+    paddingTop:64
   },
   buttonWrapper: {
     flex: 1,

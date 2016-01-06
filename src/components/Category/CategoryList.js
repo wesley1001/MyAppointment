@@ -28,8 +28,6 @@ export default class CategoryList extends Component {
         contentContainerStyle={styles.list}
         dataSource={dataSource}
         renderRow={this.renderRow.bind(this)}
-        contentInset={{bottom:49}}
-        style={{paddingTop:64}}
         automaticallyAdjustContentInsets={false}
         ref='listView'
         />
@@ -41,7 +39,6 @@ export default class CategoryList extends Component {
 var styles = StyleSheet.create({
   list: {
     justifyContent: 'center',
-    flexDirection: 'row',
     flexWrap: 'wrap',
     paddingVertical: 20
   },
@@ -64,6 +61,6 @@ var styles = StyleSheet.create({
     paddingTop:5,
     alignSelf:'center',
     color:'#5BC3BE',
-    fontSize:14
+    fontSize:18
   },
 });

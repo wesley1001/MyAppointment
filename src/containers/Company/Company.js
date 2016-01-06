@@ -59,7 +59,7 @@ class Company extends Component {
 
     return (
 
-      <ScrollView style={styles.container}>
+      <ScrollView contentContainerStyle={[styles.container]}>
         <CompanyItem company={this.props.data}/>
         <View style={{margin:5,marginTop:20}}>
           <SegmentedControlIOS values={['Services', 'Description', 'Map']} tintColor="rgb(217, 102, 255)" momentary={true} selectedIndex={0}
@@ -77,8 +77,7 @@ class Company extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: 64
+    paddingTop: 64,
   },
   buttonWrapper: {
     flex: 1,

@@ -33,13 +33,20 @@ class Companies extends Component {
     }
 
     return (
-      <View>
+      <ScrollView contentContainerStyle={[styles.container]}>
         <CompanyList companies={data} loadCompany={this.loadCompany.bind(this)}/>
-      </View>
+      </ScrollView>
     );
 
   }
 }
+
+const styles = StyleSheet.create({
+  container:{
+    paddingTop: 64,
+    margin:5
+  }
+});
 
 function mapStateToProps(state) {
   const { companies } = state

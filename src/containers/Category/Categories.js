@@ -30,19 +30,28 @@ class Categories extends Component {
     const { categories } = this.props;
 
     return (
-      <ScrollView style={styles.container}>
-        {categories.isFetching ? <LoadingIndicator  /> : <View/>}
-        <CategoryList categories={categories.collection} loadCategory={this.loadCategory}/>
-      </ScrollView>
+        <Image source={assets.bghome} style={styles.container}>
+          {categories.isFetching ? <LoadingIndicator  /> : <View/>}
+          <CategoryList categories={categories.collection} loadCategory={this.loadCategory}/>
+        </Image>
     );
 
   }
 }
 
 const styles = StyleSheet.create({
-  //
   container: {
+    flex: 1,
+    width: null,
+    height: null,
+    padding: 10,
     paddingTop:64
+  },
+  imageContainer:{
+    flex: 1,
+    width: null,
+    height: null,
+    padding: 10
   }
 
 });

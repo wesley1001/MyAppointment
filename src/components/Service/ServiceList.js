@@ -105,7 +105,7 @@ var styles = StyleSheet.create({
   bookButtonWrapper:{
     flexDirection:'row',
     marginLeft:10,
-    backgroundColor:' #80ffe6',
+    backgroundColor:'#80ffe6',
     justifyContent:'center',
     padding:4,
     paddingLeft:10,
@@ -113,7 +113,7 @@ var styles = StyleSheet.create({
     borderRadius:2
   },
   bookButton: {
-    color:'white',
+    color:'#ff8c1a',
     textAlign:'right',
     fontSize:12,
     alignSelf:'center',
