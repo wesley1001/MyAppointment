@@ -61,6 +61,9 @@ var styles = StyleSheet.create({
   },
   text: {
     marginBottom: 5,
-    alignSelf:'center'
+    paddingTop:5,
+    alignSelf:'center',
+    color:'#5BC3BE',
+    fontSize:14
   },
 });

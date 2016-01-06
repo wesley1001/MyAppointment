@@ -40,20 +40,22 @@ export function fetchService(serviceID) {
   }
 }
 
-export function fetchTiming(date,categoryID,companyID,serviceID) {
-  let parsedDate = date.toISOString().slice(0, 10);
-  var url = API_URL +'/timings/?category=' + categoryID + '&company=' + companyID + '&service=' + serviceID + '&date=' + parsedDate;
-  console.log('url',url);
-  fetch(url)
-    .then((response)=>response.json())
-    .then((responseData)=> {
-      //let timings = responseData.data;
-      //
-      //this.setState({
-      //  dataSource: this.state.dataSource
-      //    .cloneWithRows(timings),
-      //  showProgress: false
-      //}, this);
 
-    });
+export function fetchTiming(date,companyID,serviceID) {
+  let parsedDate = date.toISOString().slice(0, 10);
+
+  var url = API_ROOT +'/timings/?company=' + companyID + '&service=' + serviceID + '&date=' + parsedDate;
+
+  console.log(url);
+  return (dispatch) => {
+    dispatch(serviceRequest());
+    return fetch(url)
+      .then(response => response.json())
+      .then(json => {
+        dispatch(serviceSuccess(json))
+      })
+      .catch((err)=> {
+        dispatch(serviceFailure(err))
+      })
+  }
 }

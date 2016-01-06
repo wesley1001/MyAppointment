@@ -1,43 +1,29 @@
 'use strict';
 
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView } from 'react-native';
-import { Icon } from 'react-native-icons';
+import React, { Component,ListView,TouchableHighlight, StyleSheet, Text, View,AlertIOS } from 'react-native';
+import LoadingIndicator from './../components/LoadingIndicator';
 
-export default class ServiceList extends Component {
+export default class TimingList extends Component {
 
-  renderRow(service) {
+
+  // fetch timings
+  confirmAppointment = (timing) => {
+    AlertIOS.alert('confirm your booking ? ', null, [{text: 'Yes', onPress:()=>{this.props.onConfirm(timing)}},{text:'No'}]);
+  }
+
+  renderRow(timing) {
     return (
       <View style={styles.cellContainer}>
-        <TouchableHighlight onPress={() => ''} underlayColor='transparent'>
+        <TouchableHighlight onPress={()=>this.confirmAppointment(timing)} underlayColor='transparent'>
 
           <View style={styles.cellWrapper}>
 
             <View style={styles.titleWrapper}>
               <Text style={styles.name}>
-                {service.name}
+                {timing.time}
               </Text>
             </View>
 
-            <View style={styles.priceWrapper}>
-              <Text style={styles.price}>
-                {service.price ? service.price : '30'} KD
-              </Text>
-
-              <TouchableHighlight onPress={() => this.props.loadService(this.props.company,service)} underlayColor='transparent'>
-                <View style={styles.bookButtonWrapper} >
-
-                  <Icon
-                    name='ion|calendar'
-                    size={20}
-                    color='#887700'
-                    style={styles.calendarIcon}
-                  />
-                  <Text style={styles.bookButton}>
-                    Book
-                  </Text>
-                </View>
-              </TouchableHighlight>
-            </View>
           </View>
 
         </TouchableHighlight>
@@ -46,32 +32,34 @@ export default class ServiceList extends Component {
 
       </View>
     )
+
   }
 
   render() {
-    const {services} = this.props;
+
+    const {timings} = this.props;
+
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
-    let dataSource = services ? ds.cloneWithRows(services) : ds.cloneWithRows([]);
+    let dataSource = timings ? ds.cloneWithRows(timings) : ds.cloneWithRows([]);
 
     return (
+
       <ListView
         dataSource={dataSource}
         renderRow={this.renderRow.bind(this)}
         automaticallyAdjustContentInsets={false}
         style={styles.container}
       />
-    )
+    );
 
   }
-
-
 
 }
 
 var styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFD',
-    margin:10
+
   },
   cellContainer:{
   },
@@ -81,7 +69,9 @@ var styles = StyleSheet.create({
     justifyContent:'flex-start',
     marginTop:10,
     marginBottom:10,
-    alignItems:'center'
+    alignItems:'center',
+    paddingRight:5,
+    paddingLeft:5
   },
   titleWrapper: {
     justifyContent:'flex-start',
@@ -95,7 +85,7 @@ var styles = StyleSheet.create({
   },
   name: {
     color: '#DA552F',
-    fontSize:20
+    fontSize:15
   },
   price: {
     textAlign:'right',

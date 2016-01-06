@@ -5,8 +5,6 @@ const {
   Component,
   StyleSheet,
   MapView,
-  View,
-  Text
   } = React;
 
 export default class CompanyMap extends Component {

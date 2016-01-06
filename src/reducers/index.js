@@ -9,6 +9,8 @@ import companies from './Company/companies';
 import company from './Company/company';
 import services from './Service/services';
 import service from './Service/service';
+import timings from './timings';
+import appointments from './appointments';
 
 const rootReducer = combineReducers({
   user,
@@ -19,7 +21,9 @@ const rootReducer = combineReducers({
   companies,
   company,
   services,
-  service
+  service,
+  timings,
+  appointments
 });
 
 export default rootReducer;

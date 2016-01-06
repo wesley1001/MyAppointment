@@ -18,13 +18,14 @@ class Company extends Component {
       selectedIndex : 0
     };
     this.onChange = this.onChange.bind(this);
-    this.confirmAppointment = this.confirmAppointment.bind(this);
   }
 
-  loadService(service) {
+  loadService(company,service) {
+    // @todo :replace company with reducer company
     Actions.serviceEntity({
       title:service.name,
-      service: service
+      data: service,
+      companyData: company
     });
   }
 
@@ -34,20 +35,11 @@ class Company extends Component {
     });
   }
 
-  confirmAppointment(service) {
-
-    Actions.serviceEntity({
-      title:service.name,
-      data: service
-    });
-
-    //AlertIOS.alert('confirm your booking ? ', null, [{text: 'Yes', onPress:()=>{this.handleConfirm()}},{text:'No'}]);
-
-  }
 
   render() {
 
     const {data} = this.props;
+
     let mapPin = {
       title:data.name,
       subtitle:data.location,
@@ -62,7 +54,7 @@ class Company extends Component {
     } else if(this.state.selectedIndex === 2) {
       selectedComponent = <CompanyMap pin={mapPin} />
     } else {
-      selectedComponent = <ServiceList services={this.props.data.services} loadService={this.loadService.bind(this)} confirmAppointment={this.confirmAppointment.bind(this)}/>
+      selectedComponent = <ServiceList company={data} services={data.services} loadService={this.loadService.bind(this)} />
     }
 
     return (
