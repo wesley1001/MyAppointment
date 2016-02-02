@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component, Text, View,  TouchableHighlight, TextInput, Image,ActivityIndicatorIOS,ScrollView,StyleSheet } from 'react-native';
 import LoadingIndicator from './../../components/LoadingIndicator';
-import { connect } from '../../../node_modules/react-redux/native';
+import { connect } from '../../../node_modules/react-redux';
 import {signup,onRegisterFormFieldChange} from '../../actions/Auth/register';
 import RegisterScene from './../../components/Auth/RegisterScene';
 

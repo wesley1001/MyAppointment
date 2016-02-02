@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView,ScrollView,SegmentedControlIOS,AlertIOS } from 'react-native';
-import {connect} from '../../../node_modules/react-redux/native';
+import {connect} from '../../../node_modules/react-redux';
 import {fetchCompany} from './../../actions/Company/company';
 import CompanyItem from './../../components/Company/CompanyItem';
 import ServiceList from './../../components/Service/ServiceList';

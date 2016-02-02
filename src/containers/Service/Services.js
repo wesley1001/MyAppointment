@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
-import {connect} from '../../../node_modules/react-redux/native';
+import {connect} from '../../../node_modules/react-redux';
 import {fetchServices} from './../../actions/Service/services';
 import ServiceList from './../../components/Service/ServiceList';
 import LoadingIndicator from './../../components/LoadingIndicator';

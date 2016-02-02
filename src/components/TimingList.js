@@ -9,7 +9,7 @@ export default class TimingList extends Component {
   // fetch timings
   confirmAppointment = (timing) => {
     AlertIOS.alert('confirm your booking ? ', null, [{text: 'Yes', onPress:()=>{this.props.onConfirm(timing)}},{text:'No'}]);
-  }
+  };
 
   renderRow(timing) {
     return (

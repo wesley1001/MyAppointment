@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView,ScrollView,AlertIOS } from 'react-native';
-import {connect} from '../../../node_modules/react-redux/native';
+import {connect} from '../../../node_modules/react-redux';
 import ServiceItem from './../../components/Service/ServiceItem';
 import Calendar from './../../components/Calendar';
 import TimingList from './../../components/TimingList';

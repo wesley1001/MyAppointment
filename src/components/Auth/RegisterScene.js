@@ -13,7 +13,7 @@ export default class RegisterScene extends Component {
 
   handleLoginRoutePress = () => {
     this.props.onLoginRoutePress();
-  }
+  };
 
   render() {
 

@@ -3,7 +3,7 @@ import React, { Component,View,Image } from 'react-native';
 import LoadingIndicator from './../../components/LoadingIndicator';
 import LoginScene from './../../components/Auth/LoginScene';
 import {login,onLoginFormFieldChange} from '../../actions/Auth/login';
-import {connect} from '../../../node_modules/react-redux/native';
+import {connect} from '../../../node_modules/react-redux';
 import {getUser,saveUser} from './../../utils/storage';
 import {assets} from './../../utils/assets';
 
@@ -47,7 +47,7 @@ class Login extends Component {
 
   handleForgotPasswordRoute() {
     // @todo: implement route
-    return Actions.home();
+    Actions.category();
   }
 
   onFieldChange(value, field) {
