@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView,ScrollView,SegmentedControlIOS,AlertIOS } from 'react-native';
+import React, { Component, StyleSheet, Text, View, ScrollView, SegmentedControlIOS } from 'react-native';
 import {connect} from '../../../node_modules/react-redux';
 import {fetchCompany} from './../../actions/Company/company';
 import CompanyItem from './../../components/Company/CompanyItem';
@@ -78,10 +78,6 @@ class Company extends Component {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 64,
-  },
-  buttonWrapper: {
-    flex: 1,
-    flexDirection: 'row'
   }
 });
 

@@ -1,5 +1,5 @@
 'use strict';
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import React, { Component, StyleSheet, Text, View } from 'react-native';
 import {connect} from '../../../node_modules/react-redux';
 import {fetchCategories} from './../../actions/Category/categories';
 import CompanyList from './../../components/Company/CompanyList';

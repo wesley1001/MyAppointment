@@ -1,5 +1,5 @@
 'use strict'
-import React, { Component,ScrollView,View, Image } from 'react-native';
+import React, { Component, ScrollView, View, Image } from 'react-native';
 import LoadingIndicator from './../../components/LoadingIndicator';
 import LoginScene from './../../components/Auth/LoginScene';
 import {login,onLoginFormFieldChange} from '../../actions/Auth/login';
@@ -79,7 +79,7 @@ class Login extends Component {
           onRegisterRoutePress={this.handleRegisterRoute.bind(this)}
           onForgotPasswordRoutePress={this.handleForgotPasswordRoute.bind(this)}
           onChange={this.onFieldChange.bind(this)}
-          />
+        />
 
       </ScrollView>
     );
