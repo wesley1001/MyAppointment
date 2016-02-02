@@ -1,5 +1,5 @@
 'use strict'
-import React, { Component,View,Image } from 'react-native';
+import React, { Component,ScrollView,View, Image } from 'react-native';
 import LoadingIndicator from './../../components/LoadingIndicator';
 import LoginScene from './../../components/Auth/LoginScene';
 import {login,onLoginFormFieldChange} from '../../actions/Auth/login';
@@ -36,7 +36,7 @@ class Login extends Component {
     dispatch(login(credentials, (cb)=> {
       if (cb.success) {
         saveUser(cb.user);
-        Actions.tabBar();
+        Actions.home();
       }
     }));
   }
@@ -47,7 +47,7 @@ class Login extends Component {
 
   handleForgotPasswordRoute() {
     // @todo: implement route
-    Actions.category();
+    Actions.home();
   }
 
   onFieldChange(value, field) {
@@ -66,7 +66,7 @@ class Login extends Component {
     const { login } = this.props;
 
     return (
-      <View style={{flex: 1,padding: 10}}>
+      <ScrollView style={{flex: 1,padding: 10}}>
 
         <Image style={{  height: 100, marginTop: 80,  alignSelf: 'center'}} source={assets.mark}/>
 
@@ -82,7 +82,7 @@ class Login extends Component {
           />
 
 
-      </View>
+      </ScrollView>
     );
 
   }
