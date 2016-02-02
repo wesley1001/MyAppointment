@@ -8,7 +8,7 @@ class Root extends Component {
 
   constructor(props) {
     super(props);
-    //CodePush.sync();
+    CodePush.sync();
   }
 
   render() {

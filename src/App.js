@@ -3,7 +3,6 @@ import React, { Component, Navigator, StatusBarIOS} from 'react-native';
 import {Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
-import TabIcon from './components/TabIcon';
 import Categories from './containers/Category/Categories';
 import Category from './containers/Category/Category';
 import Company from './containers/Company/Company';
