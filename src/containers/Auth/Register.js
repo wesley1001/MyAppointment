@@ -1,5 +1,5 @@
 'use strict';
-import React, { Component, Text, View, TouchableHighlight, TextInput, Image,ActivityIndicatorIOS,ScrollView,StyleSheet } from 'react-native';
+import React, { Component, View, ScrollView,StyleSheet } from 'react-native';
 import LoadingIndicator from './../../components/LoadingIndicator';
 import { connect } from '../../../node_modules/react-redux';
 import {signup,onRegisterFormFieldChange} from '../../actions/Auth/register';
@@ -10,8 +10,11 @@ const Actions = require('react-native-router-flux').Actions;
 class Register extends Component {
 
   constructor(props) {
+
     super(props);
+
     const {fields} = this.props.register.form;
+
     this.state = {
       fields: {
         name: fields.name,
@@ -64,7 +67,6 @@ class Register extends Component {
           onLoginRoutePress={this.handleLoginRoute.bind(this)}
           onChange={this.onFieldChange.bind(this)}
           />
-
 
       </ScrollView>
     );

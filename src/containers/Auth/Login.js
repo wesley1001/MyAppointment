@@ -81,7 +81,6 @@ class Login extends Component {
           onChange={this.onFieldChange.bind(this)}
           />
 
-
       </ScrollView>
     );
 
