@@ -43,7 +43,6 @@ class Companies extends Component {
 
 const styles = StyleSheet.create({
   container:{
-    paddingTop: 64,
     margin:5
   }
 });
