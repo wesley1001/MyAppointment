@@ -25,7 +25,7 @@ export default class App extends Component {
         <Schema name="tab" type="switch" icon={TabIcon}/>
 
         <Route name="login" component={Login} title="Login"
-               hideNavBar={false}
+               hideNavBar={true}
                navigationBarStyle={{backgroundColor: ' rgb(217, 102, 255)'}}
                titleStyle={{ color:'white', fontSize:17}}
                barButtonTextStyle={{ fontSize:17, color:'white' }}
