@@ -34,7 +34,8 @@ export default class CompanyList extends Component {
         style={{paddingTop:64}}
         automaticallyAdjustContentInsets={false}
         ref='listView'
-        />
+
+      />
     )
 
   }

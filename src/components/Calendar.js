@@ -24,4 +24,6 @@ export default class Calendar extends Component {
 
 }
 
-var styles = StyleSheet.create({});
+var styles = StyleSheet.create({
+
+});

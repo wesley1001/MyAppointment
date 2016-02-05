@@ -1,5 +1,4 @@
 import React, { Component, StyleSheet,Navigator,Text,View,Image} from 'react-native'
-
 import { Icon } from 'react-native-icons';
 
 export default class TabIcon extends Component {
@@ -7,12 +6,12 @@ export default class TabIcon extends Component {
     return (
       <View>
         <Icon
-          name={this.props.tabIcon}
+          name={this.props.selected ? this.props.selectedTabIcon : this.props.tabIcon }
           size={25}
-          color={ this.props.selected ? 'gray' :'#FFFFFF'}
-          style={{width:25,height:25,alignSelf:'center'}}
+          color={ this.props.selected ? '#66b2ff' :'#FFFFFF'}
+          style={{width:25,height:25,alignSelf:'center',fontWeight:'600',}}
           />
-        <Text style={{color: this.props.selected ? 'gray' :'#FFFFFF'}}>{this.props.title}</Text>
+        <Text style={{color: this.props.selected ? '#66b2ff' :'#FFFFFF', fontSize:12, fontWeight:'600',fontFamily:'Menlo-Bold'}}>{this.props.title}</Text>
       </View>
     );
   }

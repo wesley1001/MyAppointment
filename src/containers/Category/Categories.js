@@ -1,5 +1,5 @@
 'use strict';
-import React, { Component, View, Image, StyleSheet } from 'react-native';
+import React, { Component, View, Image, StyleSheet, ScrollView } from 'react-native';
 import {connect} from '../../../node_modules/react-redux';
 import {fetchCategories} from './../../actions/Category/categories';
 import CategoryList from './../../components/Category/CategoryList';
@@ -30,10 +30,13 @@ class Categories extends Component {
     const { categories } = this.props;
 
     return (
-        <Image source={assets.bghome} style={styles.container}>
-          {categories.isFetching ? <LoadingIndicator  /> : <View/>}
-          <CategoryList categories={categories.collection} loadCategory={this.loadCategory}/>
-        </Image>
+      <View style={styles.container}>
+        <View style={styles.logoWrapper}>
+          <Image source={assets.logo} style={styles.logo} />
+        </View>
+        {categories.isFetching ? <LoadingIndicator  /> : <View/>}
+        <CategoryList categories={categories.collection} loadCategory={this.loadCategory}/>
+      </View>
     );
 
   }
@@ -45,7 +48,15 @@ const styles = StyleSheet.create({
     width: null,
     height: null,
     padding: 10,
-    paddingTop:20
+    paddingTop:20,
+    paddingBottom:49,
+  },
+  logoWrapper:{
+    alignItems:'center'
+  },
+  logo: {
+    width:150,
+    height:150,
   }
 
 });
