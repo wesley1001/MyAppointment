@@ -64,6 +64,7 @@ var styles = StyleSheet.create({
     alignSelf:'center',
     color:'rgb(217, 102, 255)',
     fontSize:16,
+    fontWeight:'800',
     fontFamily:'menlo'
   },
 

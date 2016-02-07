@@ -10,6 +10,8 @@ import Service from './containers/Service/Service';
 import TabIcon from './components/TabIcon';
 import Map from './containers/Company/Map';
 import Settings from './components/Settings';
+import {connect} from './../node_modules/react-redux';
+
 export default class App extends Component {
 
   componentWillMount() {
@@ -30,13 +32,6 @@ export default class App extends Component {
         />
         <Schema name="tab" type="switch" icon={TabIcon}  />
 
-        <Route name="auth" hideNavBar={true} >
-          <Router>
-            <Route name="login" component={Login} initial={true}/>
-            <Route name="register" component={Register} title="Register" schema="default" hideNavBar={false}/>
-          </Router>
-        </Route>
-
         <Route name="home">
           <Router footer={TabBar} tabBarStyle={{backgroundColor:'#99ddff'}} showNavigationBar={false}>
             <Route name="tab1" schema="tab" title="Home" hideNavBar={false} selectedTabIcon="ion|ios-home" tabIcon="ion|ios-home-outline">
@@ -55,6 +50,14 @@ export default class App extends Component {
             <Route name="settings" schema="tab" title="Settings" component={Settings} selectedTabIcon="ion|ios-gear" tabIcon="ion|ios-gear-outline" />
           </Router>
         </Route>
+
+        <Route name="auth" hideNavBar={true} >
+          <Router>
+            <Route name="login" component={connect(state => ({login: state.login}))(Login)} initial={true}/>
+            <Route name="register" component={Register} title="Register" schema="default" hideNavBar={false}/>
+          </Router>
+        </Route>
+
 
       </Router>
     )

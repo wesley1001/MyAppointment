@@ -9,7 +9,7 @@ import {assets} from './../../utils/assets';
 
 const Actions = require('react-native-router-flux').Actions;
 
-class Login extends Component {
+export default class Login extends Component {
 
   constructor(props) {
     super(props);
@@ -63,6 +63,7 @@ class Login extends Component {
 
   render() {
 
+    console.log(this.props);
     const { login } = this.props;
 
     return (
@@ -87,13 +88,13 @@ class Login extends Component {
   }
 
 }
-
-function mapStateToProps(state) {
-  const { login } = state
-  return {
-    ...state,
-    login
-  }
-}
-
-export default connect(mapStateToProps)(Login)
+//
+//function mapStateToProps(state) {
+//  const { login } = state
+//  return {
+//    ...state,
+//    login
+//  }
+//}
+//
+//export default connect(mapStateToProps)(Login)

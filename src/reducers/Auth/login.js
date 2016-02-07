@@ -8,6 +8,7 @@ import {
 import {Record} from 'immutable';
 import validate from './../../validators/Auth/loginValidator';
 import rules from './../../validators/validationRules';
+const Actions = require('react-native-router-flux').Actions;
 
 const InitialState = Record({
   isLoggedIn: false,
@@ -48,10 +49,15 @@ export default function login(state = initialState, action = {}) {
 
       return validate(rules(nextState, action));
     }
+    case Actions.onPush:
+    {
+      console.log('pushed login route');
+    }
 
     default:
       return state;
   }
+
 }
 
 

@@ -30,13 +30,10 @@ class Categories extends Component {
     const { categories } = this.props;
 
     return (
-      <View style={styles.container}>
-        <View style={styles.logoWrapper}>
-          <Image source={assets.logo} style={styles.logo} />
-        </View>
+      <Image source={assets.lotus} style={styles.container}>
         {categories.isFetching ? <LoadingIndicator  /> : <View/>}
         <CategoryList categories={categories.collection} loadCategory={this.loadCategory}/>
-      </View>
+      </Image>
     );
 
   }
@@ -48,17 +45,9 @@ const styles = StyleSheet.create({
     width: null,
     height: null,
     padding: 10,
-    paddingTop:20,
+    paddingTop:200,
     paddingBottom:49,
-  },
-  logoWrapper:{
-    alignItems:'center'
-  },
-  logo: {
-    width:150,
-    height:150,
   }
-
 });
 
 function mapStateToProps(state) {
