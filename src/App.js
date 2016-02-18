@@ -10,6 +10,7 @@ import Service from './containers/Service/Service';
 import TabIcon from './components/TabIcon';
 import Map from './containers/Company/Map';
 import Settings from './components/Settings';
+import EmployeeList from './components/Company/EmployeeList';
 import {connect} from './../node_modules/react-redux';
 
 export default class App extends Component {
@@ -40,6 +41,7 @@ export default class App extends Component {
                 <Route name="categoryEntity" component={Category} />
                 <Route name="companyEntity" component={Company} />
                 <Route name="serviceEntity" component={Service}  />
+                <Route name="employeeList" component={EmployeeList} schema="modal" />
               </Router>
             </Route>
             <Route name="tab2" schema="tab" title="Browse" hideNavBar={true}  selectedTabIcon="ion|ios-location" tabIcon="ion|ios-location-outline">

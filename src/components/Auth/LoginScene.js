@@ -32,6 +32,8 @@ export default class LoginScene extends Component {
       editable: !login.isFetching,
       hasError: login.form.fields.emailHasError,
       error: 'Please enter valid email',
+      autoCapitalize:'none',
+      autoCorrect:false
     };
 
     let password = {
@@ -41,7 +43,7 @@ export default class LoginScene extends Component {
       secureTextEntry: true,
       editable: !login.isFetching,
       hasError: login.form.fields.passwordHasError,
-      error: 'Must have 6-12 numbers, letters or special characters',
+      error: 'Must have 6-12 numbers, letters or special characters'
     };
 
     const loginForm = t.struct({
@@ -57,7 +59,6 @@ export default class LoginScene extends Component {
     };
 
     return (
-
       <View>
 
         <Form ref="form"
@@ -65,17 +66,18 @@ export default class LoginScene extends Component {
               options={options}
               value={this.props.credentials}
               onChange={this.props.onChange}
-          />
+        />
 
         <FormButton
           isDisabled={!login.form.isValid || login.isFetching}
           onPress={this.handleLogin.bind(this)}
-          buttonText='الدخول'/>
+          buttonText='الدخول'
+        />
 
         <TouchableHighlight onPress={this.handleRegisterRoutePress.bind(this)} underlayColor='transparent'
                             style={[styles.center,styles.mTop20]}
-          >
-          <Text style={[styles.label,styles.textUnderline]}>Don't have an account? Register</Text>
+        >
+          <Text style={[styles.label,styles.textUnderline]}>Dont have an account? Register</Text>
         </TouchableHighlight>
 
         <TouchableHighlight onPress={this.handleForgotPasswordRoutePress.bind(this)} style={[styles.center,styles.mTop20]}
@@ -84,6 +86,7 @@ export default class LoginScene extends Component {
         </TouchableHighlight>
 
       </View>
+
     )
   }
 

@@ -62,7 +62,7 @@ class Company extends Component {
       <ScrollView contentContainerStyle={[styles.container]}>
         <CompanyItem company={this.props.data}/>
         <View style={{margin:5,marginTop:20}}>
-          <SegmentedControlIOS values={['Services', 'Description', 'Map']} tintColor="rgb(217, 102, 255)" momentary={true} selectedIndex={0}
+          <SegmentedControlIOS values={['Services', 'Description', 'Map']} tintColor="#99ddff" momentary={true} selectedIndex={0}
                                onChange={this.onChange}
           />
 

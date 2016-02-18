@@ -94,7 +94,7 @@ var styles = StyleSheet.create({
     alignItems:'center'
   },
   name: {
-    color: '#DA552F',
+    color: '#000000',
     fontSize:20
   },
   price: {

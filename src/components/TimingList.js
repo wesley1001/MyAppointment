@@ -5,16 +5,10 @@ import LoadingIndicator from './../components/LoadingIndicator';
 
 export default class TimingList extends Component {
 
-
-  // fetch timings
-  confirmAppointment = (timing) => {
-    AlertIOS.alert('confirm your booking ? ', null, [{text: 'Yes', onPress:()=>{this.props.onConfirm(timing)}},{text:'No'}]);
-  };
-
   renderRow(timing) {
     return (
       <View style={styles.cellContainer}>
-        <TouchableHighlight onPress={()=>this.confirmAppointment(timing)} underlayColor='transparent'>
+        <TouchableHighlight onPress={()=>this.props.makeAppointment(timing)} underlayColor='transparent'>
 
           <View style={styles.cellWrapper}>
 
