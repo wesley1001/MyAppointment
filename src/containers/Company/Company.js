@@ -1,9 +1,9 @@
 'use strict';
 
 import React, { PropTypes } from 'react';
-import { Component, StyleSheet, Text, View, ScrollView, SegmentedControlIOS } from 'react-native';
-import {connect} from '../../../node_modules/react-redux';
-import {fetchCompany} from './../../actions/Company/company';
+import { Component, View, ScrollView, SegmentedControlIOS } from 'react-native';
+import { connect } from '../../../node_modules/react-redux';
+import { fetchCompany } from './../../actions/Company/company';
 import CompanyItem from './../../components/Company/CompanyItem';
 import ServiceList from './../../components/Service/ServiceList';
 import LoadingIndicator from './../../components/LoadingIndicator';
@@ -64,7 +64,7 @@ class Company extends Component {
       }
 
       return (
-        <ScrollView contentContainerStyle={[styles.container]}>
+        <ScrollView contentContainerStyle={{paddingTop: 64}}>
           <CompanyItem company={company.entity}/>
           <View style={{margin:5,marginTop:20}}>
             <SegmentedControlIOS values={['Services', 'Description', 'Map']} tintColor="#99ddff" momentary={true} selectedIndex={0}
@@ -77,12 +77,6 @@ class Company extends Component {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 64
-  }
-});
 
 function mapStateToProps(state) {
   return {

@@ -1,13 +1,14 @@
 'use strict';
 
-import React, { Component,ScrollView,AlertIOS,Modal } from 'react-native';
-import {connect} from '../../../node_modules/react-redux';
+import React from 'react';
+import { Component,ScrollView,AlertIOS,Modal } from 'react-native';
+import { connect } from '../../../node_modules/react-redux';
 import ServiceItem from './../../components/Service/ServiceItem';
 import Calendar from './../../components/Calendar';
 import TimingList from './../../components/TimingList';
 import LoadingIndicator from './../../components/LoadingIndicator';
-import {fetchTiming} from './../../actions/timings';
-import {createAppointment} from './../../actions/appointments';
+import { fetchTiming } from './../../actions/timings';
+import { createAppointment } from './../../actions/appointments';
 const Actions = require('react-native-router-flux').Actions;
 
 class Appointment extends Component {
@@ -16,30 +17,29 @@ class Appointment extends Component {
     super(props);
     this.state={
       date: new Date(),
+      time: 0
     };
     this.onDateChange = this.onDateChange.bind(this);
-    this.confirmAppointment = this.confirmAppointment.bind(this);
+    this.onTimeSelect = this.onTimeSelect.bind(this);
   }
 
   componentDidMount() {
     const {dispatch} = this.props;
     dispatch(fetchTiming());
-    //dispatch(fetchTiming(this.state.date,companyData.id,data.id));
+  }
+
+  onDateChange(date) {
+    const {dispatch,companyData,data} = this.props;
+    this.setState({ date: date });
   }
 
   // fetch timings
-  confirmAppointment(timing) {
-    Actions.pop();
-    AlertIOS.alert('confirm your booking ? ', null, [{text: 'Yes', onPress:()=>{this.handleConfirm(timing)}},{text:'No'}]);
+  onTimeSelect(time) {
+    this.setState({ time: time });
   };
 
-  makeAppointment(timing) {
-    alert(JSON.stringify(timing));
-    //Actions.employeeList({
-    //  timing:timing,
-    //  title:'Select Employee',
-    //  confirmAppointment:this.confirmAppointment.bind(this)
-    //});
+  makeAppointment() {
+    //AlertIOS.alert('confirm your booking ? ', null, [{text: 'Yes', onPress:()=>{this.handleConfirm(timing)}},{text:'No'}]);
   }
 
   handleConfirm(timing) {
@@ -57,12 +57,6 @@ class Appointment extends Component {
     }));
   }
 
-  onDateChange(date) {
-    const {dispatch,companyData,data} = this.props;
-    this.setState({ date: date });
-    //dispatch(fetchTiming(this.state.date,companyData.id,data.id));
-  }
-
   render() {
     const {timings,employees,company} = this.props;
     return (
@@ -70,7 +64,7 @@ class Appointment extends Component {
         <Calendar date={this.state.date} onDateChange={this.onDateChange.bind(this)} />
         <TimingList timings={timings}
                     onConfirm={this.handleConfirm.bind(this)}
-                    makeAppointment={this.makeAppointment.bind(this)}
+                    onTimeSelect={this.onTimeSelect.bind(this)}
                     date={this.state.date}
         />
       </ScrollView>

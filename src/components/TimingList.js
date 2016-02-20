@@ -6,14 +6,14 @@ import Seperator from './../components/Seperator';
 
 export default class TimingList extends Component {
 
-  renderRow(timing) {
+  renderRow(time) {
     return (
-      <View style={styles.cellContainer}>
-        <TouchableHighlight onPress={()=>this.props.selectDateTime(timing)} underlayColor='transparent'>
+      <View style={styles.cellContainer} key={time.id} >
+        <TouchableHighlight onPress={()=>this.props.onTimeSelect(time)} underlayColor='transparent'>
           <View style={styles.cellWrapper}>
             <View style={styles.titleWrapper}>
               <Text style={styles.name}>
-                {timing.time_en}
+                {time.time_en}
               </Text>
             </View>
           </View>
@@ -26,7 +26,7 @@ export default class TimingList extends Component {
   render() {
     const {timings} = this.props;
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
-    let dataSource = timings ? ds.cloneWithRows(timings.collection) : ds.cloneWithRows([]);
+    let dataSource = timings.collection ? ds.cloneWithRows(timings.collection) : ds.cloneWithRows([]);
     return (
       <View >
         <Seperator />
