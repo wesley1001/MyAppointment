@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react';
 import { Component, View, ScrollView, SegmentedControlIOS } from 'react-native';
 import { connect } from '../../../node_modules/react-redux';
-import { fetchCompany } from './../../actions/Company/company';
+import { fetchCompany,setCompanyService } from './../../actions/Company/company';
 import CompanyItem from './../../components/Company/CompanyItem';
 import ServiceList from './../../components/Service/ServiceList';
 import LoadingIndicator from './../../components/LoadingIndicator';
@@ -27,9 +27,10 @@ class Company extends Component {
   }
 
   loadDateTime(service) {
+    const {dispatch} = this.props;
+    dispatch(setCompanyService(service));
     Actions.appointmentContainer({
-      title:service.name,
-      serviceID: service.id
+      title:service.name
     });
   }
 
@@ -60,7 +61,7 @@ class Company extends Component {
       } else if(this.state.selectedIndex === 2) {
         selectedComponent = <CompanyMap pin={mapPin} />
       } else {
-        selectedComponent = <ServiceList company={company.entity} services={company.entity.services} selectDateTime={this.loadDateTime.bind(this)} />
+        selectedComponent = <ServiceList company={company.entity} services={company.entity.services} loadDateTime={this.loadDateTime.bind(this)} />
       }
 
       return (

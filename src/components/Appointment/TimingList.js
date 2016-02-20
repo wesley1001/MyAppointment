@@ -1,8 +1,8 @@
 'use strict';
 import React from 'react';
 import { Component,ListView,TouchableHighlight,StyleSheet,Text,View,AlertIOS } from 'react-native';
-import LoadingIndicator from './../components/LoadingIndicator';
-import Seperator from './../components/Seperator';
+import LoadingIndicator from './../LoadingIndicator';
+import Seperator from './../Seperator';
 
 export default class TimingList extends Component {
 

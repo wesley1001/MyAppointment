@@ -24,7 +24,7 @@ export default class ServiceList extends Component {
                 {service.pivot.price ? service.pivot.price : '30'} KD
               </Text>
 
-              <TouchableHighlight onPress={() => this.props.selectDateTime(service)} underlayColor='transparent'>
+              <TouchableHighlight onPress={() => this.props.loadDateTime(service)} underlayColor='transparent'>
                 <View style={styles.bookButtonWrapper} >
 
                   <Icon

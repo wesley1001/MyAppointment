@@ -7,8 +7,9 @@ import {
 const initialState = {
   collection: [],
   isFetching: false,
-  error: null,
-}
+  error: null
+
+};
 
 export default function timings(state = initialState, action = {}) {
   switch (action.type) {
