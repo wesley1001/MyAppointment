@@ -6,7 +6,7 @@ import Register from './containers/Auth/Register';
 import Categories from './containers/Category/Categories';
 import Category from './containers/Category/Category';
 import Company from './containers/Company/Company';
-import Service from './containers/Service/Service';
+import Appointment from './containers/Appointment/Appointment';
 import TabIcon from './components/TabIcon';
 import Map from './containers/Company/Map';
 import Settings from './components/Settings';
@@ -40,7 +40,7 @@ export default class App extends Component {
                 <Route name="categories" component={Categories} hideNavBar={true}/>
                 <Route name="categoryEntity" component={Category} />
                 <Route name="companyEntity" component={Company} />
-                <Route name="serviceEntity" component={Service}  />
+                <Route name="appointmentContainer" component={Appointment}  />
                 <Route name="employeeList" component={EmployeeList} schema="modal" />
               </Router>
             </Route>

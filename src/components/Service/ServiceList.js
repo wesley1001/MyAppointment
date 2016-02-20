@@ -1,6 +1,7 @@
 'use strict';
 
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView } from 'react-native';
+import React, { PropTypes } from 'react';
+import { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView } from 'react-native';
 import { Icon } from 'react-native-icons';
 
 export default class ServiceList extends Component {
@@ -23,13 +24,13 @@ export default class ServiceList extends Component {
                 {service.pivot.price ? service.pivot.price : '30'} KD
               </Text>
 
-              <TouchableHighlight onPress={() => this.props.loadService(this.props.company,service)} underlayColor='transparent'>
+              <TouchableHighlight onPress={() => this.props.selectDateTime(service)} underlayColor='transparent'>
                 <View style={styles.bookButtonWrapper} >
 
                   <Icon
                     name='ion|calendar'
                     size={20}
-                    color='#887700'
+                    color='white'
                     style={styles.calendarIcon}
                   />
                   <Text style={styles.bookButton}>
@@ -113,7 +114,7 @@ var styles = StyleSheet.create({
     borderRadius:2
   },
   bookButton: {
-    color:'#ff8c1a',
+    color:'white',
     textAlign:'right',
     fontSize:12,
     alignSelf:'center',

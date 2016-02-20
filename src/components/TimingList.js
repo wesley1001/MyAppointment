@@ -1,51 +1,50 @@
 'use strict';
-
-import React, { Component,ListView,TouchableHighlight, StyleSheet, Text, View,AlertIOS } from 'react-native';
+import React from 'react';
+import { Component,ListView,TouchableHighlight,StyleSheet,Text,View,AlertIOS } from 'react-native';
 import LoadingIndicator from './../components/LoadingIndicator';
+import Seperator from './../components/Seperator';
 
 export default class TimingList extends Component {
 
   renderRow(timing) {
     return (
       <View style={styles.cellContainer}>
-        <TouchableHighlight onPress={()=>this.props.makeAppointment(timing)} underlayColor='transparent'>
-
+        <TouchableHighlight onPress={()=>this.props.selectDateTime(timing)} underlayColor='transparent'>
           <View style={styles.cellWrapper}>
-
             <View style={styles.titleWrapper}>
               <Text style={styles.name}>
-                {timing.time}
+                {timing.time_en}
               </Text>
             </View>
-
           </View>
-
         </TouchableHighlight>
-
         <View style={styles.separator}/>
-
       </View>
     )
-
   }
 
   render() {
-
     const {timings} = this.props;
-
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
-    let dataSource = timings ? ds.cloneWithRows(timings) : ds.cloneWithRows([]);
-
+    let dataSource = timings ? ds.cloneWithRows(timings.collection) : ds.cloneWithRows([]);
     return (
-
-      <ListView
-        dataSource={dataSource}
-        renderRow={this.renderRow.bind(this)}
-        automaticallyAdjustContentInsets={false}
-        style={styles.container}
-      />
+      <View >
+        <Seperator />
+        <View style={styles.timingHeading}>
+          <Text style={styles.timingLabel}>choose time on {this.props.date.toISOString().slice(0, 10)} </Text>
+        </View>
+        <Seperator />
+        {timings.isFetching ? <LoadingIndicator style={{marginTop:10}}/> : <View/>}
+        <ListView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          dataSource={dataSource}
+          renderRow={this.renderRow.bind(this)}
+          automaticallyAdjustContentInsets={false}
+          style={styles.container}
+        />
+      </View>
     );
-
   }
 
 }
@@ -110,6 +109,16 @@ var styles = StyleSheet.create({
   calendarIcon :{
     height:20,
     width:20
-  }
+  },
+  timingHeading: {
+    justifyContent:'center',
+    alignItems:'center',
+    paddingTop:10,
+    paddingBottom:10
+  },
+  timingLabel:{
+    fontSize:15,
+    color:'purple'
+  },
 
 });

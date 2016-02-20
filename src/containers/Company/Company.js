@@ -26,12 +26,10 @@ class Company extends Component {
     dispatch(fetchCompany(this.props.id));
   }
 
-  loadService(company,service) {
-    // @todo :replace company with reducer company
-    Actions.serviceEntity({
+  loadDateTime(service) {
+    Actions.appointmentContainer({
       title:service.name,
-      id: service.id,
-      companyData: company
+      serviceID: service.id
     });
   }
 
@@ -62,7 +60,7 @@ class Company extends Component {
       } else if(this.state.selectedIndex === 2) {
         selectedComponent = <CompanyMap pin={mapPin} />
       } else {
-        selectedComponent = <ServiceList company={company.entity} services={company.entity.services} loadService={this.loadService.bind(this)} />
+        selectedComponent = <ServiceList company={company.entity} services={company.entity.services} selectDateTime={this.loadDateTime.bind(this)} />
       }
 
       return (

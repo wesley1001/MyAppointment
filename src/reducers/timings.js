@@ -5,7 +5,7 @@ import {
 } from '../constants/ActionTypes'
 
 const initialState = {
-  entity: {},
+  collection: [],
   isFetching: false,
   error: null,
 }
@@ -22,7 +22,7 @@ export default function timings(state = initialState, action = {}) {
       return {
         ... state,
         isFetching: false,
-        entity: action.entity,
+        collection: action.collection,
         error: null
       }
     case TIMING_FAILURE:
