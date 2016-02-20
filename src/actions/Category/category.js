@@ -2,8 +2,7 @@ import {API_ROOT} from './../../utils/config';
 import {
   CATEGORY_REQUEST,
   CATEGORY_SUCCESS,
-  CATEGORY_FAILURE,
-  CATEGORY_FAVORITE,
+  CATEGORY_FAILURE
 } from '../../constants/ActionTypes';
 
 function categoryRequest() {

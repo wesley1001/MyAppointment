@@ -1,16 +1,16 @@
 'use strict';
 
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView} from 'react-native';
-
+import React from 'react';
+import { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView} from 'react-native';
 import { Icon } from 'react-native-icons';
 
 export default class CompanyItem extends Component {
 
   renderContent(company) {
     return (
-      <Image source={{uri:company.thumbnail.name}} style={styles.container}>
+      <Image source={{uri:company.image}} style={styles.container}>
         <View style={styles.textView}>
-          <Text style={styles.name}>{company.name}</Text>
+          <Text style={styles.name}>{company.name_en}</Text>
         </View>
       </Image>
     )

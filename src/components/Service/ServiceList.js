@@ -14,13 +14,13 @@ export default class ServiceList extends Component {
 
             <View style={styles.titleWrapper}>
               <Text style={styles.name}>
-                {service.name}
+                {service.name_en}
               </Text>
             </View>
 
             <View style={styles.priceWrapper}>
               <Text style={styles.price}>
-                {service.price ? service.price : '30'} KD
+                {service.pivot.price ? service.pivot.price : '30'} KD
               </Text>
 
               <TouchableHighlight onPress={() => this.props.loadService(this.props.company,service)} underlayColor='transparent'>

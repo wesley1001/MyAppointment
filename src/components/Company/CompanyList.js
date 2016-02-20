@@ -9,10 +9,10 @@ export default class CompanyList extends Component {
       <View style={styles.container}>
         <TouchableHighlight onPress={() => this.props.loadCompany(company)} underlayColor="transparent">
           <View style={{flexDirection:'row'}}>
-            <Image style={styles.thumbnail} source={{uri:company.thumbnail.name}}/>
+            <Image style={styles.thumbnail} source={{uri:company.image}}/>
             <View style={{flexDirection:'column'}} >
-              <Text style={styles.name}> {company.name}</Text>
-              <Text style={styles.description}> {company.description}</Text>
+              <Text style={styles.name}> {company.name_en}</Text>
+              <Text style={styles.description}> {company.description_en}</Text>
             </View>
           </View>
         </TouchableHighlight>
@@ -51,15 +51,15 @@ var styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     backgroundColor: 'white',
-    opacity: 0.5,
+    opacity: 0.4,
   },
   name: {
     color: 'black',
-    fontSize: 40
+    fontSize: 30
   },
   description: {
     color: 'black',
-    fontSize: 13,
+    fontSize: 15,
     paddingLeft:5
   },
   thumbnail: {

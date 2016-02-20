@@ -10,8 +10,8 @@ export default class CategoryList extends Component {
       <TouchableHighlight onPress={() => this.props.loadCategory(category)} underlayColor="transparent">
         <View >
           <View style={styles.row}>
-            <Image style={styles.thumbnail} source={{uri:category.thumbnail.name}} resizeModel={'contain'}/>
-            <Text style={styles.text}> {category.name}</Text>
+            <Image style={styles.thumbnail} source={{uri:category.image}} resizeModel={'contain'}/>
+            <Text style={styles.text}> {category.name_en}</Text>
           </View>
         </View>
       </TouchableHighlight>

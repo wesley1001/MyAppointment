@@ -1,25 +1,16 @@
 'use strict';
-import React from 'react-native';
+import React from 'react';
 
-const {
-  Component,
-  StyleSheet,
-  View,
-  Text
-  } = React;
+import { Component,StyleSheet,View,Text } from 'react-native';
 
 export default class CompanyDescription extends Component {
-
-
   render() {
     return (
-        <View style={styles.container}>
-
-          <Text>
-            {this.props.company.description}
-          </Text>
-
-        </View>
+      <View style={styles.container}>
+        <Text>
+          {this.props.company.description_en}
+        </Text>
+      </View>
     );
   }
 }

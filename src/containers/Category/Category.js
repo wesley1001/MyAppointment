@@ -1,6 +1,6 @@
 'use strict';
-
-import React, { Component, Image, StyleSheet, View } from 'react-native';
+import React, {PropTypes} from 'react';
+import { Component, Image, StyleSheet, View } from 'react-native';
 import {connect} from '../../../node_modules/react-redux';
 import {fetchCategory} from './../../actions/Category/category';
 import CompanyList from './../../components/Company/CompanyList';
@@ -12,29 +12,35 @@ class Category extends Component {
 
   constructor(props) {
     super(props);
+  }
 
+  componentWillMount() {
+    const {dispatch} = this.props;
+    dispatch(fetchCategory(this.props.id));
   }
 
   loadCompany(company) {
     Actions.companyEntity({
       title:company.name,
-      data: company
+      id: company.id
     });
   }
 
   render() {
-
     const {category} = this.props;
-
     return (
         <Image source={assets.bg} style={styles.container}>
           {category.isFetching ? <LoadingIndicator /> : <View />}
-          <CompanyList companies={this.props.data.companies} loadCompany={this.loadCompany.bind(this)}/>
+          <CompanyList companies={this.props.category.entity.companies} loadCompany={this.loadCompany.bind(this)}/>
         </Image>
     );
-
   }
 }
+
+
+Category.propTypes = {
+  dispatch: PropTypes.func.isRequired
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -42,19 +48,14 @@ const styles = StyleSheet.create({
     width: null,
     height: null,
     padding: 10,
-  },
-  buttonWrapper: {
-    flex: 1,
-    flexDirection: 'row',
   }
 });
 
 function mapStateToProps(state) {
-  const { category } = state
   return {
     ...state,
-    category: category,
+    category: state.category
   }
 }
 
-export default connect(mapStateToProps)(Category)
+export default connect(mapStateToProps)(Category);

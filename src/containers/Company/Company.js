@@ -1,6 +1,7 @@
 'use strict';
 
-import React, { Component, StyleSheet, Text, View, ScrollView, SegmentedControlIOS } from 'react-native';
+import React, { PropTypes } from 'react';
+import { Component, StyleSheet, Text, View, ScrollView, SegmentedControlIOS } from 'react-native';
 import {connect} from '../../../node_modules/react-redux';
 import {fetchCompany} from './../../actions/Company/company';
 import CompanyItem from './../../components/Company/CompanyItem';
@@ -20,11 +21,16 @@ class Company extends Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  componentWillMount() {
+    const {dispatch} = this.props;
+    dispatch(fetchCompany(this.props.id));
+  }
+
   loadService(company,service) {
     // @todo :replace company with reducer company
     Actions.serviceEntity({
       title:service.name,
-      data: service,
+      id: service.id,
       companyData: company
     });
   }
@@ -37,55 +43,53 @@ class Company extends Component {
 
 
   render() {
+    const {company } = this.props;
 
-    const {data} = this.props;
+    if(company.isFetching) {
+      return ( <LoadingIndicator />);
+    }  else {
+      let mapPin = {
+        title:company.entity.name,
+        subtitle:company.entity.location,
+        latitude:parseFloat(company.entity.latitude),
+        longitude:parseFloat(company.entity.longitude)
+      };
 
-    let mapPin = {
-      title:data.name,
-      subtitle:data.location,
-      latitude:parseFloat(data.latitude),
-      longitude:parseFloat(data.longitude)
-    };
+      let selectedComponent;
 
-    let selectedComponent;
+      if(this.state.selectedIndex === 1) {
+        selectedComponent = <CompanyDescription company={company.entity} />
+      } else if(this.state.selectedIndex === 2) {
+        selectedComponent = <CompanyMap pin={mapPin} />
+      } else {
+        selectedComponent = <ServiceList company={company.entity} services={company.entity.services} loadService={this.loadService.bind(this)} />
+      }
 
-    if(this.state.selectedIndex === 1) {
-      selectedComponent = <CompanyDescription company={data} />
-    } else if(this.state.selectedIndex === 2) {
-      selectedComponent = <CompanyMap pin={mapPin} />
-    } else {
-      selectedComponent = <ServiceList company={data} services={data.services} loadService={this.loadService.bind(this)} />
+      return (
+        <ScrollView contentContainerStyle={[styles.container]}>
+          <CompanyItem company={company.entity}/>
+          <View style={{margin:5,marginTop:20}}>
+            <SegmentedControlIOS values={['Services', 'Description', 'Map']} tintColor="#99ddff" momentary={true} selectedIndex={0}
+                                 onChange={this.onChange}
+            />
+            {selectedComponent}
+          </View>
+        </ScrollView>
+      );
     }
-
-    return (
-
-      <ScrollView contentContainerStyle={[styles.container]}>
-        <CompanyItem company={this.props.data}/>
-        <View style={{margin:5,marginTop:20}}>
-          <SegmentedControlIOS values={['Services', 'Description', 'Map']} tintColor="#99ddff" momentary={true} selectedIndex={0}
-                               onChange={this.onChange}
-          />
-
-          {selectedComponent}
-
-        </View>
-      </ScrollView>
-    );
-
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 64,
+    paddingTop: 64
   }
 });
 
 function mapStateToProps(state) {
-  const { company } = state;
   return {
     ...state,
-    company: company
+    company: state.company
   }
 }
 

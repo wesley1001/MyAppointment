@@ -2,7 +2,12 @@ import {
   SET_USER
 } from '../../constants/ActionTypes';
 
-export default function user(state = {}, action = {}) {
+const initialState= {
+  isAuthenticated :false,
+  data: {}
+};
+
+export default function user(state = initialState, action = {}) {
   switch (action.type) {
     case SET_USER:
       return Object.assign({}, state, action.user)
