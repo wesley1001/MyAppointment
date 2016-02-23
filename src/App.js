@@ -37,10 +37,10 @@ export default class App extends Component {
           <Router footer={TabBar} tabBarStyle={{backgroundColor:'#99ddff'}} showNavigationBar={false}>
             <Route name="tab1" title="Home" schema="tab" hideNavBar={false} selectedTabIcon="ion|ios-home" tabIcon="ion|ios-home-outline">
               <Router >
+                <Route name="appointmentContainer" component={Appointment}  />
                 <Route name="categories" component={Categories} hideNavBar={true}/>
                 <Route name="categoryEntity" component={Category} />
                 <Route name="companyEntity" component={Company} />
-                <Route name="appointmentContainer" component={Appointment}  />
                 <Route name="employeeList" component={EmployeeList} schema="modal" hideNavBar={true} />
               </Router>
             </Route>

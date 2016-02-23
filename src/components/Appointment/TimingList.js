@@ -8,7 +8,7 @@ export default class TimingList extends Component {
 
   renderRow(time) {
     return (
-      <View style={styles.cellContainer} key={time.id} >
+      <View style={[styles.cellContainer,this.props.selectedTime.id == time.id ? styles.activeCell:'']} key={time.id} >
         <TouchableHighlight onPress={()=>this.props.onTimeSelect(time)} underlayColor='transparent'>
           <View style={styles.cellWrapper}>
             <View style={styles.titleWrapper}>
@@ -56,6 +56,11 @@ var styles = StyleSheet.create({
 
   },
   cellContainer:{
+    margin:5,
+    backgroundColor:'#E6E6E6'
+  },
+  activeCell : {
+    backgroundColor:'#99ddff'
   },
   cellWrapper: {
     flexDirection:'row',
@@ -78,8 +83,8 @@ var styles = StyleSheet.create({
     alignItems:'center'
   },
   name: {
-    color: '#DA552F',
-    fontSize:15
+    color: 'white',
+    fontSize:14
   },
   price: {
     textAlign:'right',
@@ -122,5 +127,6 @@ var styles = StyleSheet.create({
     fontSize:15,
     color:'purple'
   },
+
 
 });

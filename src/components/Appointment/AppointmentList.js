@@ -11,7 +11,7 @@ export default class AppointmentList extends Component {
   logout = () => {};
 
   render() {
-    const {company,time,date} = this.props;
+    const {company,selectedTime,date} = this.props;
     return (
       <View style={styles.cellContainer}>
         <TouchableHighlight onPress={() => ''} underlayColor='transparent'>
@@ -30,7 +30,7 @@ export default class AppointmentList extends Component {
             </View>
             <View style={styles.rightCol}>
               <Text>{company.service.pivot.price|0} KD</Text>
-              <Text>{time.time_en} ({company.service.pivot.duration_en})</Text>
+              <Text>{selectedTime.time_en} ({company.service.pivot.duration_en})</Text>
               <Text>{date.toISOString().slice(0, 10)}</Text>
             </View>
           </View>

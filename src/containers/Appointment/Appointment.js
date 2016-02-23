@@ -27,9 +27,22 @@ class Appointment extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const {dispatch} = this.props;
-    dispatch(fetchTiming());
+
+    //dispatch(fetchTiming());
+
+  }
+
+  componentDidMount() {
+
+    // set initial time
+    if(this.props.timings) {
+      this.setState({
+        time:this.props.timings.collection[0],
+        appointmentListVisible : true
+      });
+    }
   }
 
   onDateChange(date) {
@@ -39,7 +52,7 @@ class Appointment extends Component {
   // fetch timings
   onTimeSelect(time) {
     this.setState({ time: time });
-    this.setState({ appointmentListVisible : true})
+    this.setState({ appointmentListVisible : true});
   };
 
   listEmployees() {
@@ -51,14 +64,13 @@ class Appointment extends Component {
     this.setState({
       selectedEmployee:employee
     });
-
     this.refs.modal1.close();
-
   }
 
   //makeAppointment() {
   //AlertIOS.alert('confirm your booking ? ', null, [{text: 'Yes', onPress:()=>{this.handleConfirm(timing)}},{text:'No'}]);
   //}
+
 
   //handleConfirm(timing) {
   //  const date = this.state.date;
@@ -83,13 +95,14 @@ class Appointment extends Component {
         <TimingList timings={timings}
                     onTimeSelect={this.onTimeSelect.bind(this)}
                     date={this.state.date}
+                    selectedTime={this.state.time}
         />
         {! this.state.appointmentListVisible ? <View/> :
           <View>
             <AppointmentList
               company={company}
               date={this.state.date}
-              time={this.state.time}
+              selectedTime={this.state.time}
               listEmployees={this.listEmployees.bind(this)}
               selectedEmployee={this.state.selectedEmployee ? this.state.selectedEmployee.name_en : 'Any Employee'}
             />
@@ -131,6 +144,10 @@ Appointment.propTypes = {
 function mapStateToProps(state) {
   return {
     ...state,
+    //timings:state.timings,
+    //company:state.company,
+    //employees:state.company.entity.employees
+
     timings:state.timings,
     company:state.company,
     employees:state.company.entity.employees

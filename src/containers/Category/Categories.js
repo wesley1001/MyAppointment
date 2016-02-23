@@ -16,7 +16,7 @@ class Categories extends Component {
 
   componentWillMount() {
     const {dispatch} = this.props;
-    dispatch(fetchCategories());
+    //dispatch(fetchCategories());
   }
 
   loadCategory(category) {
@@ -30,17 +30,20 @@ class Categories extends Component {
   render() {
     const { categories } = this.props;
     return (
-      <Image source={assets.lotus} style={{
-        flex: 1,
-        width:null,
-        height:null,
-        paddingTop:100,
-        paddingBottom:100
-      }}
-      >
-        {categories.isFetching ? <LoadingIndicator  /> : <View/>}
-        <CategoryList categories={categories.collection} loadCategory={this.loadCategory}/>
-      </Image>
+      //<Image source={assets.lotus} style={{
+      //  flex: 1,
+      //  width:null,
+      //  height:null,
+      //  paddingTop:100,
+      //  paddingBottom:100
+      //}}
+      //>
+      //  {categories.isFetching ? <LoadingIndicator  /> : <View/>}
+      //<CategoryList categories={categories.collection} loadCategory={this.loadCategory}/>
+      //</Image>
+      <View>
+
+      </View>
     );
   }
 }
