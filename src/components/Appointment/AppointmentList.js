@@ -19,19 +19,27 @@ export default class AppointmentList extends Component {
             <View style={styles.leftCol}>
               <Icon
                 name='ion|person'
-                size={20}
-                color={'gold'}
-                style={{width:20,height:20,alignSelf:'center',fontWeight:100}}
+                size={40}
+                color={'white'}
+                style={{width:40,height:40,alignSelf:'center',fontWeight:100}}
               />
             </View>
             <View style={styles.middleCol}>
-              <Text>{company.service.name_en}</Text>
-              <Text onPress={()=>this.props.listEmployees()}>{this.props.selectedEmployee}</Text>
+              <Text style={styles.serviceName}>{company.service.name_en}</Text>
+              <View style={styles.employeeSelectWrapper}>
+                <Text style={styles.employeeName} onPress={()=>this.props.listEmployees()}>{this.props.selectedEmployee}</Text>
+                <Icon
+                  name='ion|chevron-right'
+                  size={10}
+                  color={'black'}
+                  style={{width:10,height:10,alignSelf:'center',fontWeight:300}}
+                />
+              </View>
             </View>
             <View style={styles.rightCol}>
-              <Text>{company.service.pivot.price|0} KD</Text>
-              <Text>{selectedTime.time_en} ({company.service.pivot.duration_en})</Text>
-              <Text>{date.toISOString().slice(0, 10)}</Text>
+              <Text style={styles.price}>{company.service.pivot.price|0} KD</Text>
+              <Text style={styles.date}>{date.toISOString().slice(0, 10)}</Text>
+              <Text style={styles.time}>{selectedTime.time_en} ({company.service.pivot.duration_en})</Text>
             </View>
           </View>
         </TouchableHighlight>
@@ -62,15 +70,21 @@ var styles = StyleSheet.create({
     padding:10,
   },
   rightCol:{
-    flex:2,
+    flex:1.5,
   },
   middleCol:{
-    flex:1,
+    flex:2,
     paddingRight:10,
     paddingLeft:10,
   },
   leftCol:{
     flex:1,
+    backgroundColor:'#e7e7e7',
+    height:60,
+    width:50,
+    borderRadius:30,
+    alignItems:'center',
+    justifyContent:'center'
   },
   separatorWrapper:{
     flexDirection:'row',
@@ -82,7 +96,38 @@ var styles = StyleSheet.create({
     height:0.5,
     backgroundColor:'#f0f5f5',
     flex:4
+  },
+  serviceName: {
+    fontSize:12,
+    color:'#239077'
+  },
+  employeeSelectWrapper: {
+    backgroundColor:'#99ddff',
+    padding:5,
+    marginTop:10,
+    flexDirection:'row',
+  },
+  employeeName:{
+    fontSize:12,
+    padding:3,
+    color:'white'
+  },
+  price:{
+    fontSize:11,
+    color:'#084033'
+
+  },
+  time:{
+    fontSize:11,
+    color:'#084033'
+
+  },
+  date:{
+    fontSize:11,
+    color:'#084033'
+
   }
+
 
 });
 

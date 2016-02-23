@@ -104,7 +104,7 @@ class Appointment extends Component {
               date={this.state.date}
               selectedTime={this.state.time}
               listEmployees={this.listEmployees.bind(this)}
-              selectedEmployee={this.state.selectedEmployee ? this.state.selectedEmployee.name_en : 'Any Employee'}
+              selectedEmployee={this.state.selectedEmployee ? this.state.selectedEmployee.name_en : 'Any Staff'}
             />
           </View>
         }

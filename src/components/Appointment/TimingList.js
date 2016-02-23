@@ -57,7 +57,7 @@ var styles = StyleSheet.create({
   },
   cellContainer:{
     margin:5,
-    backgroundColor:'#E6E6E6'
+    backgroundColor:'#e7e7e7'
   },
   activeCell : {
     backgroundColor:'#99ddff'
