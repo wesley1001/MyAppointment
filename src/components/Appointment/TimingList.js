@@ -39,6 +39,7 @@ export default class TimingList extends Component {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           dataSource={dataSource}
+          renderRow={(rowData, sec, i) => this.renderRow.bind(this)}
           renderRow={this.renderRow.bind(this)}
           automaticallyAdjustContentInsets={false}
           style={styles.container}
@@ -88,12 +89,13 @@ var styles = StyleSheet.create({
   bookButtonWrapper:{
     flexDirection:'row',
     marginLeft:10,
-    backgroundColor:' #00b377',
     justifyContent:'center',
     padding:4,
     paddingLeft:10,
     paddingRight:10,
-    borderRadius:2
+    borderRadius:2,
+    backgroundColor:'blue',
+
   },
   bookButton: {
     color:'white',

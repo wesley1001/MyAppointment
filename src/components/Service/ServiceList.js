@@ -65,8 +65,6 @@ export default class ServiceList extends Component {
 
   }
 
-
-
 }
 
 var styles = StyleSheet.create({

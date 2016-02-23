@@ -1,96 +1,76 @@
 'use strict';
 
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView } from 'react-native';
+import React from 'react';
+import { Component, View, Text, TouchableHighlight, StyleSheet,ListView } from 'react-native';
+import { Icon } from 'react-native-icons';
 
 export default class EmployeeList extends Component {
 
-
-  render() {
-
+  renderRow(employee) {
     return (
-      <View style={{backgroundColor:'white'}}>
-        <View style={[{backgroundColor:'white',padding:64,paddingRight:10,paddingLeft:10}]}>
-          <View style={styles.cellContainer}>
-            <TouchableHighlight onPress={() => this.props.confirmAppointment(this.props.timing)} underlayColor='transparent'>
-              <View style={styles.cellWrapper}>
-                <View style={styles.middleCol}>
-                  <Text>Employee 123</Text>
-                </View>
-              </View>
-            </TouchableHighlight>
-          </View>
-          <View style={styles.separatorWrapper}>
-            <View style={styles.separator} />
-          </View>
-          <View style={styles.cellContainer}>
-            <TouchableHighlight onPress={() => this.props.confirmAppointment(this.props.timing)} underlayColor='transparent'>
-              <View style={styles.cellWrapper}>
-                <View style={styles.middleCol}>
-                  <Text>Employee ABC</Text>
-                </View>
-              </View>
-            </TouchableHighlight>
-          </View>
+      <View>
+        <View style={styles.container}>
+          <TouchableHighlight onPress={() => this.props.onEmployeeSelect(employee)} underlayColor="transparent">
+            <View style={styles.cellWrapper}>
+              <Icon
+                name='ion|person-add'
+                size={24}
+                color={'gray'}
+                style={styles.followIcon}
+              />
+              <Text style={styles.title}>
+                {employee.name_en}
+              </Text>
+            </View>
+          </TouchableHighlight>
+          <View style={styles.separator}/>
         </View>
       </View>
     );
+  }
 
+  render() {
+    const {employees} = this.props;
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
+    let dataSource = employees ? ds.cloneWithRows(employees) : ds.cloneWithRows([]);
+    return (
+      <ListView
+        dataSource={dataSource}
+        renderRow={this.renderRow.bind(this)}
+        style={styles.container}
+        contentContainerStyle={{justifyContent:'flex-start',alignItems:'flex-start'}}
+      />
+    )
   }
 }
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFD',
-    margin:5
-  },
-  cellContainer:{
     flexDirection:'row',
-    justifyContent:'flex-start',
-    alignItems:'center',
+
     marginTop:5,
     marginBottom:5
   },
-  cellWrapper: {
-    flex:5,
-  },
-  imageContainer: {
-    flex:1,
-  },
-  image: {
-    height: 36,
-    width: 36,
-    borderRadius: 18,
-  },
-  titleContainer: {
-    flex:4,
-    alignSelf:'center'
+  cellWrapper:{
+    flexDirection:'row',
+    alignItems:'flex-start'
   },
   title: {
     fontSize: 15,
     textAlign: 'left',
     color: '#DA552F',
+    alignSelf:'flex-start',
+    paddingLeft:10,
+    paddingRight:10
   },
-  followWrapper: {
-    flex:1,
-    justifyContent:'flex-end'
+  separator: {
+    height:0.5,
+    backgroundColor:'#E8E8E8'
   },
   followIcon: {
     height:20,
     width:20,
-  },
-  separatorWrapper:{
-    flexDirection:'row',
-    flex:1,
-    justifyContent:'flex-start',
-    alignItems:'center',
-    backgroundColor: 'white',
-  },
-  separator: {
-    height:1,
-    backgroundColor:'red',
-  },
-  middleCol:{
-    padding:10
-  },
+    alignSelf:'flex-start'
+  }
 
 });

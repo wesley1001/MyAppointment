@@ -38,9 +38,9 @@ export default class CategoryList extends Component {
 
 var styles = StyleSheet.create({
   list: {
-    justifyContent: 'space-around',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems:'center',
+    flexDirection: 'column',
     marginTop:30
   },
   row: {
@@ -62,7 +62,7 @@ var styles = StyleSheet.create({
     marginBottom: 5,
     paddingTop:5,
     alignSelf:'center',
-    color:'rgb(217, 102, 255)',
+    color:'black',
     fontSize:16,
     fontWeight:'800',
     fontFamily:'menlo'
