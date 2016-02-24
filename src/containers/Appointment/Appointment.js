@@ -10,7 +10,7 @@ import ServiceItem from './../../components/Service/ServiceItem';
 import Calendar from './../../components/Appointment/Calendar';
 import TimingList from './../../components/Appointment/TimingList';
 import AppointmentList from './../../components/Appointment/AppointmentList';
-import EmployeeList from './../../components/Company/EmployeeList';
+import EmployeePicker from './../../components/Company/EmployeePicker';
 import LoadingIndicator from './../../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
 const Modal = require('react-native-modalbox');
@@ -24,23 +24,17 @@ class Appointment extends Component {
       selectedDate: new Date(),
       selectedTime: {},
       selectedEmployee: {},
+      showEmployeeListModal : false
     };
   }
   componentDidMount() {
     const {dispatch} = this.props;
     dispatch(fetchTiming());
-    // set initial time
-    //if(this.props.timings) {
-    //  this.setState({
-    //    time:this.props.timings.collection[0],
-    //    appointmentListVisible : true
-    //  });
-    //}
   }
 
   listEmployees() {
     this.refs.scrollView.scrollTo({x: 0});
-    this.refs.modal1.open();
+    this.setState({ showEmployeeListModal:true });
   }
 
   onDateChange(date) {
@@ -50,12 +44,11 @@ class Appointment extends Component {
   // fetch timings
   onTimeSelect(time) {
     this.setState({ selectedTime: time });
-    console.log(this.state.selectedTime);
   };
 
   onEmployeeSelect(employee){
     this.setState({ selectedEmployee:employee });
-    this.refs.modal1.close();
+    this.setState({ showEmployeeListModal:false });
   }
 
   //makeAppointment() {
@@ -101,26 +94,11 @@ class Appointment extends Component {
           listEmployees={this.listEmployees.bind(this)}
         />
 
-        <Modal
-          backdrop={true} backdropOpacity={0.8} backdropColor="black"
-          position="bottom"
-          style={{justifyContent:'flex-start',height:400}}
-          ref={"modal1"}
-          swipeToClose={true}
-          backdropContent={
-            <Icon
-              name='ion|close'
-              size={20}
-              color={'white'}
-              style={{width:20,height:20,alignSelf:'flex-end',fontWeight:700,paddingTop:150,margin:10}}
-            />
-          }
-        >
-          <EmployeeList
-            employees={employees}
-            onEmployeeSelect={this.onEmployeeSelect.bind(this)}
-          />
-        </Modal>
+        <EmployeePicker
+          employees={employees}
+          onEmployeeSelect={this.onEmployeeSelect.bind(this)}
+          isVisible={this.state.showEmployeeListModal}
+        />
 
       </ScrollView>
     );
