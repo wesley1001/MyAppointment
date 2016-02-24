@@ -11,7 +11,7 @@ export default class AppointmentList extends Component {
   logout = () => {};
 
   render() {
-    const {company,date} = this.props;
+    const {company,selectedEmployeeName} = this.props;
     return (
       <View style={styles.cellContainer}>
         <View style={styles.cellWrapper}>
@@ -25,19 +25,25 @@ export default class AppointmentList extends Component {
           </View>
           <View style={styles.middleCol}>
             <Text style={styles.serviceName}>{company.service.name_en}</Text>
-            <View style={styles.employeeSelectWrapper}>
-              <Text style={styles.employeeName} onPress={()=>this.props.listEmployees()}>{this.props.selectedEmployee}</Text>
-              <Icon
-                name='ion|chevron-right'
-                size={10}
-                color={'black'}
-                style={{width:10,height:10,alignSelf:'center',fontWeight:300}}
-              />
-            </View>
+            <Text style={styles.price}>{company.service.pivot.price|0} KD</Text>
           </View>
           <View style={styles.rightCol}>
-            <Text style={styles.price}>{company.service.pivot.price|0} KD</Text>
-            <Text style={styles.date}>{date.toISOString().slice(0, 10)}</Text>
+            <Text style={styles.staff}>Pick a Staff</Text>
+            <TouchableHighlight onPress={()=>this.props.listEmployees()} underlayColor="transparent">
+              <View style={styles.employeeSelectWrapper}>
+                <View style={{flex:2}}>
+                  <Text style={styles.employeeName} >{selectedEmployeeName}</Text>
+                </View>
+                <View style={{flex:1}}>
+                  <Icon
+                    name='ion|chevron-right'
+                    size={15}
+                    color={'white'}
+                    style={{width:15,height:15,alignSelf:'flex-end',fontWeight:'300'}}
+                  />
+                </View>
+              </View>
+            </TouchableHighlight>
           </View>
         </View>
         <View style={styles.separatorWrapper}>
@@ -53,7 +59,6 @@ AppointmentList.propTypes = {
   service : PropTypes.object,
   employees: PropTypes.array,
   //selectedTime:PropTypes.object
-  //date:PropTypes.string @todo:find proper propType for date
 };
 
 var styles = StyleSheet.create({
@@ -69,10 +74,10 @@ var styles = StyleSheet.create({
     padding:10,
   },
   rightCol:{
-    flex:1.5,
+    flex:2,
   },
   middleCol:{
-    flex:2,
+    flex:1.5,
     paddingRight:10,
     paddingLeft:10,
   },
@@ -97,7 +102,7 @@ var styles = StyleSheet.create({
     flex:4
   },
   serviceName: {
-    fontSize:12,
+    fontSize:13,
     color:'#239077'
   },
   employeeSelectWrapper: {
@@ -105,28 +110,28 @@ var styles = StyleSheet.create({
     padding:5,
     marginTop:10,
     flexDirection:'row',
+    alignItems:'center'
   },
   employeeName:{
-    fontSize:12,
+    fontSize:13,
     padding:3,
+    fontWeight:'700',
     color:'white'
   },
   price:{
-    fontSize:11,
-    color:'#084033'
-
+    fontSize:14,
+    color:'gray'
   },
   time:{
     fontSize:11,
     color:'#084033'
-
   },
-  date:{
-    fontSize:11,
-    color:'#084033'
-
+  staff:{
+    fontSize:12,
+    alignSelf:'center',
+    alignItems:'flex-end',
+    color:'gray'
   }
-
 
 });
 

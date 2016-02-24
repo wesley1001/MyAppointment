@@ -31,7 +31,7 @@ export default class TimingList extends Component {
       <View >
         <Seperator />
         <View style={styles.timingHeading}>
-          <Text style={styles.timingLabel}>choose time on {this.props.date.toISOString().slice(0, 10)} </Text>
+          <Text style={styles.timingLabel}>choose time on {this.props.selectedDate.toISOString().slice(0, 10)} </Text>
         </View>
         <Seperator />
         {timings.isFetching ? <LoadingIndicator style={{marginTop:10}}/> : <View/>}
@@ -84,7 +84,8 @@ var styles = StyleSheet.create({
   },
   name: {
     color: 'white',
-    fontSize:14
+    fontSize:14,
+    fontWeight:'700'
   },
   price: {
     textAlign:'right',

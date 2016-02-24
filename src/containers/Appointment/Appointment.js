@@ -19,9 +19,10 @@ class Appointment extends Component {
 
   constructor(props) {
     super(props);
+
     this.state={
-      date: new Date(),
-      time: {},
+      selectedDate: new Date(),
+      selectedTime: {},
       selectedEmployee: null,
       appointmentListVisible : false
     };
@@ -39,12 +40,12 @@ class Appointment extends Component {
   }
 
   onDateChange(date) {
-    this.setState({ date: date });
+    this.setState({ selectedDate: date });
   }
 
   // fetch timings
   onTimeSelect(time) {
-    this.setState({ time: time });
+    this.setState({ selectedTime: time });
     this.setState({ appointmentListVisible : true});
   };
 
@@ -85,20 +86,19 @@ class Appointment extends Component {
     return (
       <ScrollView contentContainerStyle={{paddingTop:64}} contentInset={{bottom:64}} ref="scrollView">
 
-        <Calendar date={this.state.date} onDateChange={this.onDateChange.bind(this)} />
+        <Calendar selectedDate={this.state.selectedDate} onDateChange={this.onDateChange.bind(this)} />
 
         <TimingList timings={timings}
                     onTimeSelect={this.onTimeSelect.bind(this)}
-                    date={this.state.date}
-                    selectedTime={this.state.time}
+                    selectedDate={this.state.selectedDate}
+                    selectedTime={this.state.selectedTime}
         />
 
         {! this.state.appointmentListVisible ? <View/> :
           <AppointmentList
             company={company}
-            date={this.state.date}
             listEmployees={this.listEmployees.bind(this)}
-            selectedEmployee={this.state.selectedEmployee ? this.state.selectedEmployee.name_en : 'Any Staff'}
+            selectedEmployeeName={this.state.selectedEmployee ? this.state.selectedEmployee.name_en : 'Any'}
           />
         }
 

@@ -10,12 +10,11 @@ export default class Calendar extends Component {
   };
 
   render() {
-    const {date} = this.props;
+    const {selectedDate} = this.props;
     return (
       <CalendarPicker
-        selectedDate={date}
+        selectedDate={selectedDate}
         onDateChange={this.handleDateChange}
-        customStyle={{day: {fontSize: 13},selectedDayCircle:{backgroundColor:'blue'},controlButtonText:{fontSize:10}}}
       />
     );
   }

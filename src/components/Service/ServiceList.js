@@ -10,23 +10,18 @@ export default class ServiceList extends Component {
     return (
       <View style={styles.cellContainer}>
         <TouchableHighlight onPress={() => ''} underlayColor='transparent'>
-
           <View style={styles.cellWrapper}>
-
             <View style={styles.titleWrapper}>
               <Text style={styles.name}>
                 {service.name_en}
               </Text>
             </View>
-
             <View style={styles.priceWrapper}>
               <Text style={styles.price}>
                 {service.pivot.price ? service.pivot.price : '30'} KD
               </Text>
-
               <TouchableHighlight onPress={() => this.props.loadDateTime(service)} underlayColor='transparent'>
                 <View style={styles.bookButtonWrapper} >
-
                   <Icon
                     name='ion|calendar'
                     size={20}
@@ -40,11 +35,8 @@ export default class ServiceList extends Component {
               </TouchableHighlight>
             </View>
           </View>
-
         </TouchableHighlight>
-
         <View style={styles.separator}/>
-
       </View>
     )
   }
@@ -116,7 +108,8 @@ var styles = StyleSheet.create({
     textAlign:'right',
     fontSize:12,
     alignSelf:'center',
-    paddingLeft:3
+    paddingLeft:3,
+    fontWeight:'700'
   },
   separator: {
     height:1,
