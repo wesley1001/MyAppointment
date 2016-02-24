@@ -8,7 +8,7 @@ export default class TimingList extends Component {
 
   renderRow(time) {
     return (
-      <View style={[styles.cellContainer,this.props.selectedTime.id == time.id ? styles.activeCell:'']} key={time.id} >
+      <View style={[styles.cellContainer]} key={time.id} >
         <TouchableHighlight onPress={()=>this.props.onTimeSelect(time)} underlayColor='transparent'>
           <View style={styles.cellWrapper}>
             <View style={styles.titleWrapper}>

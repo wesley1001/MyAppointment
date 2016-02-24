@@ -11,38 +11,35 @@ export default class AppointmentList extends Component {
   logout = () => {};
 
   render() {
-    const {company,selectedTime,date} = this.props;
+    const {company,date} = this.props;
     return (
       <View style={styles.cellContainer}>
-        <TouchableHighlight onPress={() => ''} underlayColor='transparent'>
-          <View style={styles.cellWrapper}>
-            <View style={styles.leftCol}>
+        <View style={styles.cellWrapper}>
+          <View style={styles.leftCol}>
+            <Icon
+              name='ion|person'
+              size={40}
+              color={'white'}
+              style={{width:40,height:40,alignSelf:'center',fontWeight:100}}
+            />
+          </View>
+          <View style={styles.middleCol}>
+            <Text style={styles.serviceName}>{company.service.name_en}</Text>
+            <View style={styles.employeeSelectWrapper}>
+              <Text style={styles.employeeName} onPress={()=>this.props.listEmployees()}>{this.props.selectedEmployee}</Text>
               <Icon
-                name='ion|person'
-                size={40}
-                color={'white'}
-                style={{width:40,height:40,alignSelf:'center',fontWeight:100}}
+                name='ion|chevron-right'
+                size={10}
+                color={'black'}
+                style={{width:10,height:10,alignSelf:'center',fontWeight:300}}
               />
             </View>
-            <View style={styles.middleCol}>
-              <Text style={styles.serviceName}>{company.service.name_en}</Text>
-              <View style={styles.employeeSelectWrapper}>
-                <Text style={styles.employeeName} onPress={()=>this.props.listEmployees()}>{this.props.selectedEmployee}</Text>
-                <Icon
-                  name='ion|chevron-right'
-                  size={10}
-                  color={'black'}
-                  style={{width:10,height:10,alignSelf:'center',fontWeight:300}}
-                />
-              </View>
-            </View>
-            <View style={styles.rightCol}>
-              <Text style={styles.price}>{company.service.pivot.price|0} KD</Text>
-              <Text style={styles.date}>{date.toISOString().slice(0, 10)}</Text>
-              <Text style={styles.time}>{selectedTime.time_en} ({company.service.pivot.duration_en})</Text>
-            </View>
           </View>
-        </TouchableHighlight>
+          <View style={styles.rightCol}>
+            <Text style={styles.price}>{company.service.pivot.price|0} KD</Text>
+            <Text style={styles.date}>{date.toISOString().slice(0, 10)}</Text>
+          </View>
+        </View>
         <View style={styles.separatorWrapper}>
           <View style={{flex:1}}/>
           <View style={styles.separator} />
@@ -54,7 +51,9 @@ export default class AppointmentList extends Component {
 
 AppointmentList.propTypes = {
   service : PropTypes.object,
-  employees: PropTypes.array
+  employees: PropTypes.array,
+  //selectedTime:PropTypes.object
+  //date:PropTypes.string @todo:find proper propType for date
 };
 
 var styles = StyleSheet.create({

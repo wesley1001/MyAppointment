@@ -26,23 +26,16 @@ class Appointment extends Component {
       appointmentListVisible : false
     };
   }
-
-  componentWillMount() {
-    const {dispatch} = this.props;
-
-    //dispatch(fetchTiming());
-
-  }
-
   componentDidMount() {
-
+    const {dispatch} = this.props;
+    dispatch(fetchTiming());
     // set initial time
-    if(this.props.timings) {
-      this.setState({
-        time:this.props.timings.collection[0],
-        appointmentListVisible : true
-      });
-    }
+    //if(this.props.timings) {
+    //  this.setState({
+    //    time:this.props.timings.collection[0],
+    //    appointmentListVisible : true
+    //  });
+    //}
   }
 
   onDateChange(date) {
@@ -56,8 +49,8 @@ class Appointment extends Component {
   };
 
   listEmployees() {
+    this.refs.scrollView.scrollTo({x: 0,animated:true});
     this.refs.modal1.open();
-    //return Actions.employeeList();
   }
 
   onEmployeeSelect(employee){
@@ -90,36 +83,36 @@ class Appointment extends Component {
   render() {
     const {timings,employees,company} = this.props;
     return (
-      <ScrollView contentContainerStyle={{paddingTop:64}} contentInset={{bottom:64}} >
+      <ScrollView contentContainerStyle={{paddingTop:64}} contentInset={{bottom:64}} ref="scrollView">
+
         <Calendar date={this.state.date} onDateChange={this.onDateChange.bind(this)} />
+
         <TimingList timings={timings}
                     onTimeSelect={this.onTimeSelect.bind(this)}
                     date={this.state.date}
                     selectedTime={this.state.time}
         />
+
         {! this.state.appointmentListVisible ? <View/> :
-          <View>
-            <AppointmentList
-              company={company}
-              date={this.state.date}
-              selectedTime={this.state.time}
-              listEmployees={this.listEmployees.bind(this)}
-              selectedEmployee={this.state.selectedEmployee ? this.state.selectedEmployee.name_en : 'Any Staff'}
-            />
-          </View>
+          <AppointmentList
+            company={company}
+            date={this.state.date}
+            listEmployees={this.listEmployees.bind(this)}
+            selectedEmployee={this.state.selectedEmployee ? this.state.selectedEmployee.name_en : 'Any Staff'}
+          />
         }
 
         <Modal
           backdrop={true} backdropOpacity={0.8} backdropColor="black"
-          position="center"
-          style={{justifyContent:'center',alignItems:'center',height:250}}
+          position="bottom"
+          style={{justifyContent:'flex-start',height:400}}
           ref={"modal1"}
           swipeToClose={true}
           backdropContent={
             <Icon
-              name='ion|close-circled'
+              name='ion|close'
               size={20}
-              color={'red'}
+              color={'white'}
               style={{width:20,height:20,alignSelf:'flex-end',fontWeight:700,paddingTop:150,margin:10}}
             />
           }
@@ -144,10 +137,6 @@ Appointment.propTypes = {
 function mapStateToProps(state) {
   return {
     ...state,
-    //timings:state.timings,
-    //company:state.company,
-    //employees:state.company.entity.employees
-
     timings:state.timings,
     company:state.company,
     employees:state.company.entity.employees

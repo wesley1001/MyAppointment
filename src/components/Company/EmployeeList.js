@@ -8,23 +8,33 @@ export default class EmployeeList extends Component {
 
   renderRow(employee) {
     return (
-      <View>
-        <View style={styles.container}>
-          <TouchableHighlight onPress={() => this.props.onEmployeeSelect(employee)} underlayColor="transparent">
-            <View style={styles.cellWrapper}>
+      <View style={styles.cellContainer}>
+        <TouchableHighlight onPress={() => this.props.onEmployeeSelect(employee)} underlayColor="transparent">
+          <View style={styles.cellWrapper}>
+            <View style={styles.leftCol}>
               <Icon
-                name='ion|person-add'
+                name='ion|person'
                 size={24}
-                color={'gray'}
-                style={styles.followIcon}
+                color={'#e7e7e7'}
+                style={styles.personIcon}
               />
+            </View>
+            <View style={styles.middleCol}>
               <Text style={styles.title}>
                 {employee.name_en}
               </Text>
             </View>
-          </TouchableHighlight>
-          <View style={styles.separator}/>
-        </View>
+            <View style={styles.rightCol}>
+              <Icon
+                name='ion|chevron-right'
+                size={24}
+                color={'#e7e7e7'}
+                style={styles.followIcon}
+              />
+            </View>
+          </View>
+        </TouchableHighlight>
+        <View style={styles.separator} />
       </View>
     );
   }
@@ -37,40 +47,48 @@ export default class EmployeeList extends Component {
       <ListView
         dataSource={dataSource}
         renderRow={this.renderRow.bind(this)}
-        style={styles.container}
-        contentContainerStyle={{justifyContent:'flex-start',alignItems:'flex-start'}}
       />
     )
   }
 }
 
 var styles = StyleSheet.create({
-  container: {
-    flexDirection:'row',
-
-    marginTop:5,
-    marginBottom:5
+  cellContainer: {
+    paddingTop:5,
+    paddingBottom:5
   },
-  cellWrapper:{
+  cellWrapper: {
+    flex:1,
     flexDirection:'row',
-    alignItems:'flex-start'
+    justifyContent:'flex-start',
+    alignItems:'center',
+    padding:10,
+  },
+  rightCol:{
+  },
+  middleCol:{
+    flex:4,
+    paddingLeft:10
+  },
+  leftCol:{
   },
   title: {
     fontSize: 15,
-    textAlign: 'left',
-    color: '#DA552F',
-    alignSelf:'flex-start',
-    paddingLeft:10,
-    paddingRight:10
+    color: '#636D69',
   },
-  separator: {
-    height:0.5,
-    backgroundColor:'#E8E8E8'
+  personIcon: {
+    height:20,
+    width:20,
+    alignSelf:'flex-start'
   },
   followIcon: {
     height:20,
     width:20,
-    alignSelf:'flex-start'
-  }
+    alignSelf:'flex-end'
+  },
+  separator: {
+    height:0.5,
+    backgroundColor:'#f0f5f5',
+  },
 
 });
