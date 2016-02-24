@@ -93,7 +93,6 @@ class Appointment extends Component {
           company={company}
           selectedEmployee={this.state.selectedEmployee}
           listEmployees={this.listEmployees.bind(this)}
-          
         />
 
         <EmployeePicker
