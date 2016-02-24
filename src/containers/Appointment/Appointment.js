@@ -13,13 +13,11 @@ import AppointmentList from './../../components/Appointment/AppointmentList';
 import EmployeePicker from './../../components/Company/EmployeePicker';
 import LoadingIndicator from './../../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
-const Modal = require('react-native-modalbox');
 
 class Appointment extends Component {
 
   constructor(props) {
     super(props);
-
     this.state={
       selectedDate: new Date(),
       selectedTime: {},
@@ -27,6 +25,7 @@ class Appointment extends Component {
       showEmployeeListModal : false
     };
   }
+
   componentDidMount() {
     const {dispatch} = this.props;
     dispatch(fetchTiming());
@@ -41,14 +40,15 @@ class Appointment extends Component {
     this.setState({ selectedDate: date });
   }
 
-  // fetch timings
   onTimeSelect(time) {
     this.setState({ selectedTime: time });
   };
 
   onEmployeeSelect(employee){
-    this.setState({ selectedEmployee:employee });
-    this.setState({ showEmployeeListModal:false });
+    this.setState({
+      selectedEmployee:employee,
+      showEmployeeListModal:false
+    });
   }
 
   //makeAppointment() {
@@ -72,6 +72,7 @@ class Appointment extends Component {
   //}
 
   render() {
+
     const {timings,employees,company} = this.props;
     return (
       <ScrollView contentContainerStyle={{paddingTop:64}} contentInset={{bottom:49}} ref="scrollView">

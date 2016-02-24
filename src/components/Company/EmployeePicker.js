@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Component,ListView,ScrollView, TouchableHighlight, StyleSheet, Text, View,AlertIOS } from 'react-native';
 import { Icon } from 'react-native-icons';
 import LoadingIndicator from './../LoadingIndicator';
@@ -48,6 +48,3 @@ export default class EmployeePicker extends Component {
   }
 }
 
-var styles = StyleSheet.create({
-
-});
