@@ -23,8 +23,7 @@ class Appointment extends Component {
     this.state={
       selectedDate: new Date(),
       selectedTime: {},
-      selectedEmployee: null,
-      appointmentListVisible : false
+      selectedEmployee: {},
     };
   }
   componentDidMount() {
@@ -39,6 +38,11 @@ class Appointment extends Component {
     //}
   }
 
+  listEmployees() {
+    this.refs.scrollView.scrollTo({x: 0});
+    this.refs.modal1.open();
+  }
+
   onDateChange(date) {
     this.setState({ selectedDate: date });
   }
@@ -46,18 +50,11 @@ class Appointment extends Component {
   // fetch timings
   onTimeSelect(time) {
     this.setState({ selectedTime: time });
-    this.setState({ appointmentListVisible : true});
+    console.log(this.state.selectedTime);
   };
 
-  listEmployees() {
-    this.refs.scrollView.scrollTo({x: 0,animated:true});
-    this.refs.modal1.open();
-  }
-
   onEmployeeSelect(employee){
-    this.setState({
-      selectedEmployee:employee
-    });
+    this.setState({ selectedEmployee:employee });
     this.refs.modal1.close();
   }
 
@@ -86,21 +83,23 @@ class Appointment extends Component {
     return (
       <ScrollView contentContainerStyle={{paddingTop:64}} contentInset={{bottom:64}} ref="scrollView">
 
-        <Calendar selectedDate={this.state.selectedDate} onDateChange={this.onDateChange.bind(this)} />
-
-        <TimingList timings={timings}
-                    onTimeSelect={this.onTimeSelect.bind(this)}
-                    selectedDate={this.state.selectedDate}
-                    selectedTime={this.state.selectedTime}
+        <Calendar
+          selectedDate={this.state.selectedDate}
+          onDateChange={this.onDateChange.bind(this)}
         />
 
-        {! this.state.appointmentListVisible ? <View/> :
-          <AppointmentList
-            company={company}
-            listEmployees={this.listEmployees.bind(this)}
-            selectedEmployeeName={this.state.selectedEmployee ? this.state.selectedEmployee.name_en : 'Any'}
-          />
-        }
+        <TimingList
+          timings={timings}
+          selectedDate={this.state.selectedDate}
+          selectedTime={this.state.selectedTime}
+          onTimeSelect={this.onTimeSelect.bind(this)}
+        />
+
+        <AppointmentList
+          company={company}
+          selectedEmployee={this.state.selectedEmployee}
+          listEmployees={this.listEmployees.bind(this)}
+        />
 
         <Modal
           backdrop={true} backdropOpacity={0.8} backdropColor="black"

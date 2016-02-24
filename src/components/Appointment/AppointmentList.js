@@ -11,7 +11,7 @@ export default class AppointmentList extends Component {
   logout = () => {};
 
   render() {
-    const {company,selectedEmployeeName} = this.props;
+    const {company,selectedEmployee} = this.props;
     return (
       <View style={styles.cellContainer}>
         <View style={styles.cellWrapper}>
@@ -32,7 +32,7 @@ export default class AppointmentList extends Component {
             <TouchableHighlight onPress={()=>this.props.listEmployees()} underlayColor="transparent">
               <View style={styles.employeeSelectWrapper}>
                 <View style={{flex:2}}>
-                  <Text style={styles.employeeName} >{selectedEmployeeName}</Text>
+                  <Text style={styles.employeeName} >{selectedEmployee.id ? selectedEmployee.name_en : 'Any'}</Text>
                 </View>
                 <View style={{flex:1}}>
                   <Icon
