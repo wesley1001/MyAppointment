@@ -81,7 +81,7 @@ class Appointment extends Component {
   render() {
     const {timings,employees,company} = this.props;
     return (
-      <ScrollView contentContainerStyle={{paddingTop:64}} contentInset={{bottom:64}} ref="scrollView">
+      <ScrollView contentContainerStyle={{paddingTop:64}} contentInset={{bottom:49}} ref="scrollView">
 
         <Calendar
           selectedDate={this.state.selectedDate}

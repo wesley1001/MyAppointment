@@ -7,8 +7,9 @@ import Seperator from './../Seperator';
 export default class TimingList extends Component {
 
   renderRow(time) {
+    const {selectedTime} = this.props;
     return (
-      <View style={[styles.cellContainer]} key={time.id} >
+      <View style={[styles.cellContainer, selectedTime.id ?  (selectedTime.id == time.id ? styles.activeCell : '') : '']} key={time.id} >
         <TouchableHighlight onPress={()=>this.props.onTimeSelect(time)} underlayColor='transparent'>
           <View style={styles.cellWrapper}>
             <View style={styles.titleWrapper}>
