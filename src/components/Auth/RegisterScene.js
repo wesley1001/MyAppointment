@@ -2,7 +2,7 @@
 import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput} from 'react-native';
 import t from 'tcomb-form-native';
 import FormButton from './../FormButton';
-import stylesheet from '../../../assets/style/form';
+import stylesheet from '../../assets/style/form';
 const Form = t.form.Form;
 
 export default class RegisterScene extends Component {

@@ -1,5 +1,5 @@
 import {API_ROOT} from './../../utils/config'
-import { setUser } from './user';
+import { saveUserToken,getUserToken } from './../../utils/storage';
 
 import {
   LOGIN_REQUEST,
@@ -14,9 +14,10 @@ function loginRequest() {
   };
 }
 
-function loginSuccess() {
+function loginSuccess(payload) {
   return {
-    type: LOGIN_SUCCESS
+    type: LOGIN_SUCCESS,
+    entity:payload.data
   };
 }
 
@@ -30,7 +31,6 @@ function loginFailure(message) {
 export function login(credentials, cb = ()=> {
   success: false
 }) {
-  console.log(JSON.stringify(credentials));
   let url = API_ROOT + '/auth/login';
   return dispatch => {
     dispatch(loginRequest());
@@ -44,12 +44,13 @@ export function login(credentials, cb = ()=> {
           dispatch(loginFailure(json.message));
           return cb({success: false});
         } else {
-          dispatch(loginSuccess());
-          dispatch(setUser(json));
-          return cb({success: true,user:json});
+          dispatch(loginSuccess(json));
+          saveUserToken(json.data.api_token);
+          //return cb({success: true,user:json});
         }
       })
       .catch((err)=> {
+        console.log(err);
         dispatch(loginFailure(err));
         return cb({success: false});
       });

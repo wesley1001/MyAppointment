@@ -19,7 +19,7 @@ export default class TimingList extends Component {
             </View>
           </View>
         </TouchableHighlight>
-        <View style={styles.separator}/>
+        <Seperator />
       </View>
     )
   }
@@ -30,7 +30,7 @@ export default class TimingList extends Component {
     let dataSource = timings.collection ? ds.cloneWithRows(timings.collection) : ds.cloneWithRows([]);
     return (
       <View >
-        <Seperator />
+        <Seperator  />
         <View style={styles.timingHeading}>
           <Text style={styles.timingLabel}>choose time on {this.props.selectedDate.toISOString().slice(0, 10)} </Text>
         </View>
@@ -45,6 +45,8 @@ export default class TimingList extends Component {
           automaticallyAdjustContentInsets={false}
           style={styles.container}
         />
+        <Seperator style={{marginTop:10}}/>
+
       </View>
     );
   }
@@ -57,8 +59,13 @@ var styles = StyleSheet.create({
 
   },
   cellContainer:{
+    backgroundColor:'#e7e7e7',
+    height:50,
+    width:50,
+    borderRadius:25,
     margin:5,
-    backgroundColor:'#e7e7e7'
+    marginTop:10,
+    marginBottom:0
   },
   activeCell : {
     backgroundColor:'#99ddff'
@@ -86,7 +93,9 @@ var styles = StyleSheet.create({
   name: {
     color: 'white',
     fontSize:14,
-    fontWeight:'700'
+    fontWeight:'700',
+    textAlign:'center'
+
   },
   price: {
     textAlign:'right',

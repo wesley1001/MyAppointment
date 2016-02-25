@@ -63,18 +63,15 @@ AppointmentList.propTypes = {
 
 var styles = StyleSheet.create({
   container: {},
-  cellContainer:{
-    marginTop:20,
-  },
+  cellContainer:{},
   cellWrapper: {
     flexDirection:'row',
     flex:1,
-    justifyContent:'flex-start',
     alignItems:'center',
     padding:10,
   },
   rightCol:{
-    flex:2,
+    flex:2
   },
   middleCol:{
     flex:1.5,
@@ -85,9 +82,8 @@ var styles = StyleSheet.create({
     flex:1,
     backgroundColor:'#e7e7e7',
     height:60,
-    width:50,
+    width:25,
     borderRadius:30,
-    alignItems:'center',
     justifyContent:'center'
   },
   separatorWrapper:{
@@ -129,7 +125,6 @@ var styles = StyleSheet.create({
   staff:{
     fontSize:12,
     alignSelf:'center',
-    alignItems:'flex-end',
     color:'gray'
   }
 

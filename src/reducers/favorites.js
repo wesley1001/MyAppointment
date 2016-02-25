@@ -5,12 +5,12 @@ import {
 } from '../constants/ActionTypes'
 
 const initialState = {
-  entity: {},
+  collection: [],
   isFetching: false,
   error: null,
 }
 
-export default function appointments(state = initialState, action = {}) {
+export default function favorites(state = initialState, action = {}) {
   switch (action.type) {
     case APPOINTMENT_REQUEST:
       return {
@@ -22,7 +22,7 @@ export default function appointments(state = initialState, action = {}) {
       return {
         ... state,
         isFetching: false,
-        entity: action.entity,
+        collection: action.collection,
         error: null
       }
     case APPOINTMENT_FAILURE:
