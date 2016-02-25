@@ -1,4 +1,6 @@
-import {API_ROOT} from './../utils/config'
+import { API_ROOT } from './../utils/config';
+import { getUserToken } from './../utils/storage';
+
 import {
   FAVORITES_REQUEST,
   FAVORITES_SUCCESS,
@@ -7,14 +9,14 @@ import {
 
 function favoritesRequest() {
   return {
-    type: FAVORITES_REQUEST,
+    type: FAVORITES_REQUEST
   }
 }
 
 function favoritesSuccess(payload) {
   return {
     type: FAVORITES_SUCCESS,
-    collection: payload.data.favorites
+    collection: payload.data
   }
 }
 
@@ -25,17 +27,26 @@ function favoritesFailure(error) {
   }
 }
 
-export function fetchFavorites(userID) {
-  const url = API_ROOT + '/user/' + userID + '/favorites';
+// get Auth user's favorites
+export function fetchFavorites() {
+
+  // user Token
+  const token = null;
+
   return (dispatch) => {
     dispatch(favoritesRequest());
-    return fetch(url)
-      .then(response => response.json())
-      .then(json => {
-        dispatch(favoritesSuccess(json));
-      })
-      .catch((err)=> {
-        dispatch(favoritesFailure(err))
-      })
+    getUserToken().then((token) => {
+      const url = API_ROOT + `/favorites/?api_token=${token}`;
+      return fetch(url)
+        .then(response => response.json())
+        .then(json => {
+          dispatch(favoritesSuccess(json));
+        })
+        .catch((err)=> {
+          dispatch(favoritesFailure(err))
+        })
+    });
   }
+
+
 }

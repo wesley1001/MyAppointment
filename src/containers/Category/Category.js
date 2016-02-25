@@ -1,11 +1,11 @@
 'use strict';
-import React, {PropTypes} from 'react';
-import { Component, Image, StyleSheet, View } from 'react-native';
-import {connect} from '../../../node_modules/react-redux';
-import {fetchCategory} from './../../actions/Category/category';
+import React, {PropTypes}  from 'react';
+import { Component, Image, View } from 'react-native';
+import { connect } from '../../../node_modules/react-redux';
+import { fetchCategory } from './../../actions/Category/category';
+import { assets } from './../../utils/assets';
 import CompanyList from './../../components/Company/CompanyList';
 import LoadingIndicator from './../../components/LoadingIndicator';
-import {assets} from './../../utils/assets';
 const Actions = require('react-native-router-flux').Actions;
 
 class Category extends Component {
@@ -29,10 +29,10 @@ class Category extends Component {
   render() {
     const {category} = this.props;
     return (
-        <Image source={assets.bg} style={styles.container}>
-          {category.isFetching ? <LoadingIndicator /> : <View />}
-          <CompanyList companies={this.props.category.entity.companies} loadCompany={this.loadCompany.bind(this)}/>
-        </Image>
+      <Image source={assets.bg} style={{flex: 1,width: null,height: null,padding: 10}}>
+        {category.isFetching ? <LoadingIndicator /> : <View />}
+        <CompanyList companies={this.props.category.entity.companies} loadCompany={this.loadCompany.bind(this)}/>
+      </Image>
     );
   }
 }
@@ -41,15 +41,6 @@ class Category extends Component {
 Category.propTypes = {
   dispatch: PropTypes.func.isRequired
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: null,
-    height: null,
-    padding: 10,
-  }
-});
 
 function mapStateToProps(state) {
   return {

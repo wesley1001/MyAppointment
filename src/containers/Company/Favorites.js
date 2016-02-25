@@ -1,7 +1,9 @@
 'use strict';
-import React, { Component, StyleSheet, Text, View } from 'react-native';
-import {connect} from '../../../node_modules/react-redux';
-import {fetchCategories} from './../../actions/Category/categories';
+import React from 'react';
+import { Component, ScrollView, Image, View } from 'react-native';
+import { connect } from '../../../node_modules/react-redux';
+import { fetchFavorites } from './../../actions/favorites';
+import { assets } from './../../utils/assets';
 import CompanyList from './../../components/Company/CompanyList';
 import LoadingIndicator from './../../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
@@ -14,45 +16,26 @@ class Favorites extends Component {
 
   componentWillMount() {
     const {dispatch} = this.props;
-    //dispatch(fetchCompanies(this.props.data.id));
-  }
-
-  loadCompany(company) {
-    Actions.companyEntity({
-      title:company.name,
-      data: company
-    });
+    dispatch(fetchFavorites());
   }
 
   render() {
 
-    const { companies,data } = this.props;
-
-    if (companies.isFetching) {
-      return <LoadingIndicator />;
-    }
-
+    const { user } = this.props;
     return (
-      <ScrollView contentContainerStyle={[styles.container]}>
-        <CompanyList companies={data} loadCompany={this.loadCompany.bind(this)}/>
-      </ScrollView>
+      <Image source={assets.bg} style={{flex: 1,width: null,height: null,padding: 10}}>
+        {user.favorites.isFetching ? <LoadingIndicator /> : <View />}
+        <CompanyList companies={user.favorites.collection} loadCompany={()=>''}/>
+      </Image>
     );
-
   }
 }
-
-const styles = StyleSheet.create({
-  container:{
-    margin:5
-  }
-});
 
 function mapStateToProps(state) {
-  const { companies } = state
   return {
     ...state,
-    companies: companies,
+    user:state.user
   }
 }
 
-export default connect(mapStateToProps)(Favorites)
+export default connect(mapStateToProps)(Favorites);

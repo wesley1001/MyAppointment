@@ -22,7 +22,7 @@ export default class CompanyList extends Component {
 
   render() {
     const {companies} = this.props;
-    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2});
     let dataSource = companies ? ds.cloneWithRows(companies) : ds.cloneWithRows([]);
 
     return (

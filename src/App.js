@@ -8,6 +8,7 @@ import Categories from './containers/Category/Categories';
 import Category from './containers/Category/Category';
 import Company from './containers/Company/Company';
 import Appointment from './containers/Appointment/Appointment';
+import Favorites from './containers/Company/Favorites';
 import TabIcon from './components/TabIcon';
 import Map from './containers/Company/Map';
 import Settings from './components/Settings';
@@ -45,15 +46,12 @@ export default class App extends Component {
         />
         <Schema name="tab" type="switch" icon={TabIcon}  />
 
-        <Route name="auth" hideNavBar={true} >
-          <Router>
-            <Route name="login" title="Login" component={Login} isAuthenticated={this.state.isAuthenticated}/>
-            <Route name="register" component={Register} title="Register" schema="default" hideNavBar={false}/>
-          </Router>
-        </Route>
+
 
         <Route name="home">
           <Router footer={TabBar} tabBarStyle={{backgroundColor:'#99ddff'}} showNavigationBar={false}>
+            <Route name="favorites" component={Favorites} schema="tab" title="Favorites" hideNavBar={true}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"/>
+
             <Route name="main" title="Home" schema="tab" hideNavBar={false} selectedTabIcon="ion|ios-home" tabIcon="ion|ios-home-outline">
               <Router >
                 <Route name="categories" component={Categories} hideNavBar={true}/>
@@ -67,11 +65,6 @@ export default class App extends Component {
                 <Route name="services" component={Map} title="Map" />
               </Router>
             </Route>
-            <Route name="favorites" schema="tab" title="Favorites" hideNavBar={true}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline">
-              <Router>
-                <Route name="favoritesMain" component={Map} title="Map" />
-              </Router>
-            </Route>
             <Route name="appointments" schema="tab" title="Appointments" hideNavBar={true}  selectedTabIcon="ion|ios-alarm" tabIcon="ion|ios-alarm-outline">
               <Router>
                 <Route name="appointmentsMain" component={Map} title="Map" />
@@ -82,7 +75,12 @@ export default class App extends Component {
           </Router>
         </Route>
 
-
+        <Route name="auth" hideNavBar={true} >
+          <Router>
+            <Route name="login" title="Login" component={Login} isAuthenticated={this.state.isAuthenticated}/>
+            <Route name="register" component={Register} title="Register" schema="default" hideNavBar={false}/>
+          </Router>
+        </Route>
 
       </Router>
     )
