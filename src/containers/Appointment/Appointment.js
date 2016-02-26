@@ -72,10 +72,6 @@ class Appointment extends Component {
     dispatch(invalidateCreatedAppointment);
     Actions.pop();
   }
-  //makeAppointment() {
-  //AlertIOS.alert('confirm your booking ? ', null, [{text: 'Yes', onPress:()=>{this.handleConfirm(timing)}},{text:'No'}]);
-  //}
-
 
   handleConfirm() {
     const {dispatch,user} = this.props;

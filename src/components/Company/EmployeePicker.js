@@ -22,6 +22,7 @@ export default class EmployeePicker extends Component {
     const {employees,onEmployeeSelect} = this.props;
 
     return(
+
       <Modal
         backdrop={true} backdropOpacity={0.8} backdropColor="black"
         position="bottom"

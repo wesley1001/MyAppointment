@@ -8,6 +8,7 @@ import {
   CREATE_APPOINTMENT_REQUEST,
   CREATE_APPOINTMENT_SUCCESS,
   CREATE_APPOINTMENT_FAILURE,
+  CREATE_APPOINTMENT_INVALIDATE
 } from '../constants/ActionTypes';
 
 function appointmentRequest() {
@@ -67,7 +68,6 @@ export function createAppointment(date,time,employee) {
           api_token:token
         };
 
-        //var url = API_ROOT +`/appointments/create/?api_token=${token}`;
         var url = API_ROOT +`/appointments/create/`;
         return fetch(url, {
           method: 'POST',
@@ -102,5 +102,7 @@ export function fetchAppointments() {
 }
 
 export function invalidateCreatedAppointment() {
-  return (dispatch) => dispatch({type:'CREATE_APPOINTMENT_INVALIDATE'});
+  return (dispatch) => {
+    dispatch({type: CREATE_APPOINTMENT_INVALIDATE});
+  }
 }

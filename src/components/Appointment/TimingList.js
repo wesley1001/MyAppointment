@@ -30,6 +30,8 @@ export default class TimingList extends Component {
     let dataSource = timings.collection ? ds.cloneWithRows(timings.collection) : ds.cloneWithRows([]);
     return (
       <View >
+        <Seperator />
+
         {timings.isFetching ? <LoadingIndicator style={{marginTop:10}}/> : <View/>}
         <ListView
           horizontal={true}
@@ -40,7 +42,6 @@ export default class TimingList extends Component {
           automaticallyAdjustContentInsets={false}
           style={styles.container}
         />
-        <Seperator style={{marginTop:10}}/>
 
       </View>
     );
@@ -51,7 +52,7 @@ export default class TimingList extends Component {
 var styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFD',
-
+    marginBottom:20
   },
   cellContainer:{
     backgroundColor:'#e7e7e7',

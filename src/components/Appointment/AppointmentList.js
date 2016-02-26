@@ -16,10 +16,6 @@ export default class AppointmentList extends Component {
       <View style={styles.cellContainer}>
 
         <Seperator  />
-        <View style={styles.timingHeading}>
-          <Text style={styles.timingLabel}>choose time on {this.props.selectedDate.toISOString().slice(0, 10)} </Text>
-        </View>
-        <Seperator />
 
         <View style={styles.cellWrapper}>
           <View style={styles.leftCol}>

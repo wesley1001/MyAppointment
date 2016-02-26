@@ -18,7 +18,7 @@ export default class ServiceList extends Component {
             </View>
             <View style={styles.priceWrapper}>
               <Text style={styles.price}>
-                {service.pivot.price ? service.pivot.price : '30'} KD
+                {service.pivot.price ? service.pivot.price|0 : '-'} KD
               </Text>
               <TouchableHighlight onPress={() => this.props.loadDateTime(service)} underlayColor='transparent'>
                 <View style={styles.bookButtonWrapper} >
