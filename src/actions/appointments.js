@@ -5,9 +5,9 @@ import {
   APPOINTMENTS_REQUEST,
   APPOINTMENTS_SUCCESS,
   APPOINTMENTS_FAILURE,
-  MAKE_APPOINTMENT_REQUEST,
-  MAKE_APPOINTMENT_SUCCESS,
-  MAKE_APPOINTMENT_FAILURE,
+  CREATE_APPOINTMENT_REQUEST,
+  CREATE_APPOINTMENT_SUCCESS,
+  CREATE_APPOINTMENT_FAILURE,
 } from '../constants/ActionTypes';
 
 function appointmentRequest() {
@@ -30,15 +30,31 @@ function appointmentFailure(error) {
   }
 }
 
+function createAppointmentRequest() {
+  return {
+    type: CREATE_APPOINTMENT_REQUEST
+  }
+}
+
+function createAppointmentSuccess() {
+  return {
+    type: CREATE_APPOINTMENT_SUCCESS
+  }
+}
+
+function createAppointmentFailure(error) {
+  return {
+    type: CREATE_APPOINTMENT_FAILURE,
+    error: error
+  }
+}
+
+
 export function createAppointment(date,time,employee) {
-
-  //
-
 
   return (dispatch,state) => {
 
-
-    dispatch({type:'CREATE_APPOINTMENT_REQUEST'});
+    dispatch(createAppointmentRequest());
 
     return getUserToken()
       .then((token) => {
@@ -60,14 +76,14 @@ export function createAppointment(date,time,employee) {
           .then(response => response.json())
           .then(json => {
             if (json.success) {
-              dispatch(appointmentSuccess(json))
+              dispatch(createAppointmentSuccess());
             } else {
               const error = new Error(json.message);
-              dispatch(appointmentFailure(error.message));
+              dispatch(createAppointmentFailure(error.message));
               throw error;
             }
           })
-      }).catch((err)=> dispatch(appointmentFailure(err)));
+      }).catch((err)=> dispatch(createAppointmentFailure(err)));
 
   }
 }
@@ -83,4 +99,8 @@ export function fetchAppointments() {
         .catch((err)=>dispatch(appointmentFailure(err)))
     });
   }
+}
+
+export function invalidateCreatedAppointment() {
+  return (dispatch) => dispatch({type:'CREATE_APPOINTMENT_INVALIDATE'});
 }

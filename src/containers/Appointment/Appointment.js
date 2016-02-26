@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 import { Component,ScrollView,AlertIOS,View,Text } from 'react-native';
 import { connect } from '../../../node_modules/react-redux';
 import { fetchTiming } from './../../actions/timings';
-import { createAppointment } from './../../actions/appointments';
+import { createAppointment,invalidateCreatedAppointment } from './../../actions/appointments';
 import { Icon } from 'react-native-icons';
 import ServiceItem from './../../components/Service/ServiceItem';
 import Calendar from './../../components/Appointment/Calendar';
@@ -66,24 +66,29 @@ class Appointment extends Component {
     this.setState({showAppointmentConfirmModal:false});
   }
 
+
+  inValidateAppointment() {
+    const {dispatch} = this.props;
+    dispatch(invalidateCreatedAppointment);
+    Actions.pop();
+  }
   //makeAppointment() {
   //AlertIOS.alert('confirm your booking ? ', null, [{text: 'Yes', onPress:()=>{this.handleConfirm(timing)}},{text:'No'}]);
   //}
 
 
   handleConfirm() {
-    const {dispatch} = this.props;
+    const {dispatch,user} = this.props;
 
     Promise.all([
       dispatch(createAppointment(this.state.selectedDate,this.state.selectedTime,this.state.selectedEmployee))
-    ]).then(()=>console.log('success')).catch(()=>console.log('error'));
-    //AlertIOS.alert('Booking Confirmed on '+this.state.date.toISOString().slice(0, 10)+' at '+timing.time, null, [{text: 'OK'}]);
-    //Actions.pop();
+    ]).then(()=>console.log('success'))
+      .catch(()=>console.log('error'));
   }
 
   render() {
 
-    const {timings,employees,company} = this.props;
+    const {timings,employees,company,user} = this.props;
     return (
       <ScrollView contentContainerStyle={{paddingTop:64}} contentInset={{bottom:49}} ref="scrollView">
 
@@ -121,6 +126,8 @@ class Appointment extends Component {
           onClosed={this.onAppointmentConfirmModalListClosed.bind(this)}
           showAppointmentConfirmModal={this.state.showAppointmentConfirmModal}
           onAppointmentConfirm={this.handleConfirm.bind(this)}
+          inValidateAppointment={this.inValidateAppointment.bind(this)}
+          user={user}
         />
 
       </ScrollView>
@@ -131,7 +138,8 @@ class Appointment extends Component {
 Appointment.propTypes = {
   timings : PropTypes.object,
   employees: PropTypes.array,
-  company: PropTypes.object
+  company: PropTypes.object,
+  user:PropTypes.object
 };
 
 function mapStateToProps(state) {
@@ -139,7 +147,8 @@ function mapStateToProps(state) {
     ...state,
     timings:state.timings,
     company:state.company,
-    employees:state.company.entity.employees
+    employees:state.company.entity.employees,
+    user:state.user
   }
 }
 

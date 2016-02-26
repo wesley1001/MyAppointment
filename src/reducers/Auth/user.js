@@ -5,6 +5,10 @@ import {
   APPOINTMENTS_REQUEST,
   APPOINTMENTS_SUCCESS,
   APPOINTMENTS_FAILURE,
+  CREATE_APPOINTMENT_REQUEST,
+  CREATE_APPOINTMENT_SUCCESS,
+  CREATE_APPOINTMENT_FAILURE,
+  CREATE_APPOINTMENT_INVALIDATE,
   FAVORITES_REQUEST,
   FAVORITES_SUCCESS,
   FAVORITES_FAILURE,
@@ -23,6 +27,11 @@ const InitialState= Record({
   appointments:new (Record({
     isFetching:false,
     collection:[],
+    error:null
+  })),
+  appointment:new (Record({
+    isCreating:false,
+    created:false,
     error:null
   }))
 });
@@ -48,6 +57,26 @@ export default function user(state = initialState, action = {}) {
       return state
         .setIn(['appointments', 'isFetching'], false)
         .setIn(['appointments', 'error'], action.error);
+    case CREATE_APPOINTMENT_REQUEST:
+      return state
+        .setIn(['appointment', 'isCreating'], true)
+        .setIn(['appointment', 'created'], false)
+        .setIn(['appointment', 'error'], null);
+    case CREATE_APPOINTMENT_SUCCESS:
+      return state
+        .setIn(['appointment', 'isCreating'], false)
+        .setIn(['appointment', 'created'], true)
+        .setIn(['appointment', 'error'], null);
+    case CREATE_APPOINTMENT_FAILURE:
+      return state
+        .setIn(['appointment', 'isCreating'], false)
+        .setIn(['appointment', 'created'], false)
+        .setIn(['appointment', 'error'], action.error);
+    case CREATE_APPOINTMENT_INVALIDATE:
+      return state
+        .setIn(['appointment', 'isCreating'], false)
+        .setIn(['appointment', 'created'], false)
+        .setIn(['appointment', 'error'], false);
     case FAVORITES_REQUEST:
       return state
         .setIn(['favorites', 'isFetching'], true)
