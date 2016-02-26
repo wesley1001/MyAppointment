@@ -30,6 +30,7 @@ class Appointment extends Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
+    dispatch(invalidateCreatedAppointment());
     dispatch(fetchTiming());
   }
 
@@ -69,7 +70,7 @@ class Appointment extends Component {
 
   inValidateAppointment() {
     const {dispatch} = this.props;
-    dispatch(invalidateCreatedAppointment);
+    dispatch(invalidateCreatedAppointment());
     Actions.pop();
   }
 
