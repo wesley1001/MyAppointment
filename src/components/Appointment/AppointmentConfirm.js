@@ -6,18 +6,17 @@ import { Icon } from 'react-native-icons';
 import LoadingIndicator from './../LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
 const Modal = require('react-native-modalbox');
-import EmployeeList from './EmployeeList';
 
-export default class EmployeePicker extends Component {
+export default class AppointmentConfirm extends Component {
 
   componentWillReceiveProps(nextProps) {
 
-    if(nextProps.showEmployeeListModal) {
-      console.log('emp modal visible');
-      this.refs.employeeListModal.open();
+    if(nextProps.showAppointmentConfirmModal) {
+      this.refs.appointmentConfirmModal.open();
+      console.log('app modal visible');
     } else {
-      console.log('emp modal not visible');
-      this.refs.employeeListModal.close();
+      console.log('app modal not visible');
+      this.refs.appointmentConfirmModal.close();
     }
 
   }
@@ -30,7 +29,7 @@ export default class EmployeePicker extends Component {
         backdrop={true} backdropOpacity={0.8} backdropColor="black"
         position="bottom"
         style={{justifyContent:'flex-start',height:400}}
-        ref={"employeeListModal"}
+        ref={"appointmentConfirmModal"}
         swipeToClose={true}
         onClosed={this.props.onClosed}
         backdropContent={
@@ -42,10 +41,9 @@ export default class EmployeePicker extends Component {
             />
           }
       >
-        <EmployeeList
-          employees={employees}
-          onEmployeeSelect={onEmployeeSelect}
-        />
+        <Text>Almost Done !</Text>
+        <Text>You Wanted a Keratin at 5:05 PM At Lusso Salon & Spa On February 26th,2016</Text>
+        <Text>Book It</Text>
       </Modal>
     )
   }

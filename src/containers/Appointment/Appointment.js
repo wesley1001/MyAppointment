@@ -10,6 +10,7 @@ import ServiceItem from './../../components/Service/ServiceItem';
 import Calendar from './../../components/Appointment/Calendar';
 import TimingList from './../../components/Appointment/TimingList';
 import AppointmentList from './../../components/Appointment/AppointmentList';
+import AppointmentConfirm from './../../components/Appointment/AppointmentConfirm';
 import EmployeePicker from './../../components/Company/EmployeePicker';
 import LoadingIndicator from './../../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
@@ -22,7 +23,8 @@ class Appointment extends Component {
       selectedDate: new Date(),
       selectedTime: {},
       selectedEmployee: {},
-      showEmployeeListModal : false
+      showEmployeeListModal : false,
+      showAppointmentConfirmModal : false,
     };
   }
 
@@ -41,7 +43,13 @@ class Appointment extends Component {
   }
 
   onTimeSelect(time) {
-    this.setState({ selectedTime: time });
+    this.refs.scrollView.scrollTo({x: 0});
+
+    this.setState({
+      selectedTime: time,
+      showAppointmentConfirmModal:true
+    });
+    console.log(this.state.showAppointmentConfirmModal);
   };
 
   onEmployeeSelect(employee){
@@ -49,6 +57,16 @@ class Appointment extends Component {
       selectedEmployee:employee,
       showEmployeeListModal:false
     });
+  }
+
+  onEmployeeListModalClosed() {
+    console.log('emp modal closed');
+    this.setState({showEmployeeListModal:false});
+  }
+
+  onAppointmentConfirmModalListClosed() {
+    console.log('app modal closed');
+    this.setState({showAppointmentConfirmModal:false});
   }
 
   //makeAppointment() {
@@ -82,6 +100,13 @@ class Appointment extends Component {
           onDateChange={this.onDateChange.bind(this)}
         />
 
+        <AppointmentList
+          company={company}
+          selectedEmployee={this.state.selectedEmployee}
+          listEmployees={this.listEmployees.bind(this)}
+          selectedDate={this.state.selectedDate}
+        />
+
         <TimingList
           timings={timings}
           selectedDate={this.state.selectedDate}
@@ -89,16 +114,18 @@ class Appointment extends Component {
           onTimeSelect={this.onTimeSelect.bind(this)}
         />
 
-        <AppointmentList
-          company={company}
-          selectedEmployee={this.state.selectedEmployee}
-          listEmployees={this.listEmployees.bind(this)}
-        />
-
         <EmployeePicker
           employees={employees}
           onEmployeeSelect={this.onEmployeeSelect.bind(this)}
-          isVisible={this.state.showEmployeeListModal}
+          onClosed={this.onEmployeeListModalClosed.bind(this)}
+          showEmployeeListModal={this.state.showEmployeeListModal}
+        />
+
+        <AppointmentConfirm
+          employees={employees}
+          onEmployeeSelect={this.onEmployeeSelect.bind(this)}
+          onClosed={this.onAppointmentConfirmModalListClosed.bind(this)}
+          showAppointmentConfirmModal={this.state.showAppointmentConfirmModal}
         />
 
       </ScrollView>

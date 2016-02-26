@@ -1,33 +1,36 @@
-import {API_ROOT} from './../utils/config';
+import { API_ROOT } from './../utils/config';
+import { getUserToken } from './../utils/storage';
+
 import {
-  APPOINTMENT_REQUEST,
-  APPOINTMENT_SUCCESS,
-  APPOINTMENT_FAILURE,
+  APPOINTMENTS_REQUEST,
+  APPOINTMENTS_SUCCESS,
+  APPOINTMENTS_FAILURE,
+  MAKE_APPOINTMENT_REQUEST,
+  MAKE_APPOINTMENT_SUCCESS,
+  MAKE_APPOINTMENT_FAILURE,
 } from '../constants/ActionTypes';
 
 function appointmentRequest() {
   return {
-    type: APPOINTMENT_REQUEST
+    type: APPOINTMENTS_REQUEST
   }
 }
 
 function appointmentSuccess(payload) {
   return {
-    type: APPOINTMENT_SUCCESS,
-    entity: payload.data
+    type: APPOINTMENTS_SUCCESS,
+    collection: payload.data
   }
 }
 
 function appointmentFailure(error) {
   return {
-    type: APPOINTMENT_FAILURE,
+    type: APPOINTMENTS_FAILURE,
     error: error
   }
 }
 
-export function createAppointment(date,userID,appointmentID,cb = ()=> {
-  success: false
-}) {
+export function createAppointment(date,userID,appointmentID) {
 
   var url = API_ROOT +'/appointment/make';
 
@@ -47,16 +50,29 @@ export function createAppointment(date,userID,appointmentID,cb = ()=> {
       .then(json => {
         if(json.success) {
           dispatch(appointmentSuccess(json));
-          return cb({success: true});
         } else {
           dispatch(appointmentFailure(json.message));
-          return cb = () => {cb.success = false}
         }
       })
       .catch((err)=> {
         dispatch(appointmentFailure(err));
-        return cb({success: false});
-
       })
+  }
+}
+
+export function fetchAppointments() {
+  return (dispatch) => {
+    dispatch(appointmentRequest());
+    getUserToken().then((token) => {
+      const url = API_ROOT + `/appointments/?api_token=${token}`;
+      return fetch(url)
+        .then(response => response.json())
+        .then(json => {
+          dispatch(appointmentSuccess(json));
+        })
+        .catch((err)=> {
+          dispatch(appointmentFailure(err))
+        })
+    });
   }
 }

@@ -30,11 +30,6 @@ export default class TimingList extends Component {
     let dataSource = timings.collection ? ds.cloneWithRows(timings.collection) : ds.cloneWithRows([]);
     return (
       <View >
-        <Seperator  />
-        <View style={styles.timingHeading}>
-          <Text style={styles.timingLabel}>choose time on {this.props.selectedDate.toISOString().slice(0, 10)} </Text>
-        </View>
-        <Seperator />
         {timings.isFetching ? <LoadingIndicator style={{marginTop:10}}/> : <View/>}
         <ListView
           horizontal={true}
@@ -127,16 +122,6 @@ var styles = StyleSheet.create({
   calendarIcon :{
     height:20,
     width:20
-  },
-  timingHeading: {
-    justifyContent:'center',
-    alignItems:'center',
-    paddingTop:10,
-    paddingBottom:10
-  },
-  timingLabel:{
-    fontSize:15,
-    color:'purple'
   },
 
 

@@ -50,7 +50,6 @@ export default class App extends Component {
 
         <Route name="home">
           <Router footer={TabBar} tabBarStyle={{backgroundColor:'#99ddff'}} showNavigationBar={false}>
-            <Route name="favorites" component={Favorites} schema="tab" title="Favorites" hideNavBar={true}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"/>
 
             <Route name="main" title="Home" schema="tab" hideNavBar={false} selectedTabIcon="ion|ios-home" tabIcon="ion|ios-home-outline">
               <Router >
@@ -65,11 +64,9 @@ export default class App extends Component {
                 <Route name="services" component={Map} title="Map" />
               </Router>
             </Route>
-            <Route name="appointments" schema="tab" title="Appointments" hideNavBar={true}  selectedTabIcon="ion|ios-alarm" tabIcon="ion|ios-alarm-outline">
-              <Router>
-                <Route name="appointmentsMain" component={Map} title="Map" />
-              </Router>
-            </Route>
+            <Route name="favorites" component={Favorites} schema="tab" title="Favorites" hideNavBar={true}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"/>
+            <Route name="appointments" schema="tab" title="Appointments" component={Appointment} hideNavBar={true}  selectedTabIcon="ion|ios-alarm" tabIcon="ion|ios-alarm-outline"/>
+
 
             <Route name="settings" schema="tab" title="Settings" component={Settings} selectedTabIcon="ion|ios-gear" tabIcon="ion|ios-gear-outline" />
           </Router>

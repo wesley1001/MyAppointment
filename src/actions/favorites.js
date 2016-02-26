@@ -29,10 +29,6 @@ function favoritesFailure(error) {
 
 // get Auth user's favorites
 export function fetchFavorites() {
-
-  // user Token
-  const token = null;
-
   return (dispatch) => {
     dispatch(favoritesRequest());
     getUserToken().then((token) => {
@@ -47,6 +43,4 @@ export function fetchFavorites() {
         })
     });
   }
-
-
 }

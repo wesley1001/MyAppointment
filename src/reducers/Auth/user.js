@@ -2,9 +2,9 @@ import {Record} from 'immutable';
 
 import {
   SET_USER,
-  APPOINTMENT_REQUEST,
-  APPOINTMENT_SUCCESS,
-  APPOINTMENT_FAILURE,
+  APPOINTMENTS_REQUEST,
+  APPOINTMENTS_SUCCESS,
+  APPOINTMENTS_FAILURE,
   FAVORITES_REQUEST,
   FAVORITES_SUCCESS,
   FAVORITES_FAILURE,
@@ -35,16 +35,16 @@ export default function user(state = initialState, action = {}) {
       return state
         .set('entity',action.entity)
         .set('isAuthenticated',true);
-    case APPOINTMENT_REQUEST:
+    case APPOINTMENTS_REQUEST:
       return state
         .setIn(['appointments', 'isFetching'], true)
         .setIn(['appointments', 'error'], null);
-    case APPOINTMENT_SUCCESS:
+    case APPOINTMENTS_SUCCESS:
       return state
         .setIn(['appointments', 'isFetching'], false)
         .setIn(['appointments', 'error'], null)
         .setIn(['appointments', 'collection'], action.collection);
-    case APPOINTMENT_FAILURE:
+    case APPOINTMENTS_FAILURE:
       return state
         .setIn(['appointments', 'isFetching'], false)
         .setIn(['appointments', 'error'], action.error);

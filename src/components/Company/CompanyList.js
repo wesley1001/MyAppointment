@@ -52,10 +52,13 @@ var styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: 'white',
     opacity: 0.4,
+    flexWrap:'wrap'
   },
   name: {
     color: 'black',
-    fontSize: 30
+    fontSize: 20,
+    textAlign:'left',
+    flexWrap:'wrap'
   },
   description: {
     color: 'black',

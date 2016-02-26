@@ -14,6 +14,13 @@ export default class AppointmentList extends Component {
     const {company,selectedEmployee} = this.props;
     return (
       <View style={styles.cellContainer}>
+
+        <Seperator  />
+        <View style={styles.timingHeading}>
+          <Text style={styles.timingLabel}>choose time on {this.props.selectedDate.toISOString().slice(0, 10)} </Text>
+        </View>
+        <Seperator />
+
         <View style={styles.cellWrapper}>
           <View style={styles.leftCol}>
             <Icon
@@ -126,7 +133,18 @@ var styles = StyleSheet.create({
     fontSize:12,
     alignSelf:'center',
     color:'gray'
-  }
+  },
+  timingHeading: {
+    justifyContent:'center',
+    alignItems:'center',
+    paddingTop:10,
+    paddingBottom:10
+  },
+  timingLabel:{
+    fontSize:15,
+    color:'purple'
+  },
+
 
 });
 
