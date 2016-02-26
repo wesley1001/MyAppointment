@@ -11,15 +11,11 @@ import EmployeeList from './EmployeeList';
 export default class EmployeePicker extends Component {
 
   componentWillReceiveProps(nextProps) {
-
     if(nextProps.showEmployeeListModal) {
-      console.log('emp modal visible');
       this.refs.employeeListModal.open();
     } else {
-      console.log('emp modal not visible');
       this.refs.employeeListModal.close();
     }
-
   }
 
   render() {

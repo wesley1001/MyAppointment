@@ -10,15 +10,11 @@ const Modal = require('react-native-modalbox');
 export default class AppointmentConfirm extends Component {
 
   componentWillReceiveProps(nextProps) {
-
     if(nextProps.showAppointmentConfirmModal) {
       this.refs.appointmentConfirmModal.open();
-      console.log('app modal visible');
     } else {
-      console.log('app modal not visible');
       this.refs.appointmentConfirmModal.close();
     }
-
   }
 
   render() {

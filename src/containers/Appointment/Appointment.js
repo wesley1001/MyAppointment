@@ -60,12 +60,10 @@ class Appointment extends Component {
   }
 
   onEmployeeListModalClosed() {
-    console.log('emp modal closed');
     this.setState({showEmployeeListModal:false});
   }
 
   onAppointmentConfirmModalListClosed() {
-    console.log('app modal closed');
     this.setState({showAppointmentConfirmModal:false});
   }
 
