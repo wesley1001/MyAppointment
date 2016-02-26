@@ -35,7 +35,8 @@ class Categories extends Component {
         width:null,
         height:null,
         paddingTop:100,
-        paddingBottom:100
+        paddingBottom:100,
+        flexWrap:'wrap'
       }}
       >
         {categories.isFetching ? <LoadingIndicator  /> : <View/>}

@@ -1,6 +1,8 @@
 'use strict';
 
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView } from 'react-native';
+import React from 'react';
+import { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView } from 'react-native';
+import { Icon } from 'react-native-icons';
 
 export default class CompanyList extends Component {
 
@@ -8,11 +10,27 @@ export default class CompanyList extends Component {
     return (
       <View style={styles.container}>
         <TouchableHighlight onPress={() => this.props.loadCompany(company)} underlayColor="transparent">
-          <View style={{flexDirection:'row'}}>
+          <View style={{justifyContent:'center',alignItems:'center'}}>
             <Image style={styles.thumbnail} source={{uri:company.image}}/>
-            <View style={{flexDirection:'column'}} >
-              <Text style={styles.name}> {company.name_en}</Text>
-              <Text style={styles.description}> {company.description_en}</Text>
+            <View style={{flexDirection:'column',marginLeft:10,justifyContent:'center',alignItems:'center'}} >
+              <Text style={styles.name} numberOfLines={5}> {company.name_en}</Text>
+              <View style={{flexDirection:'row',marginTop:5}}>
+                <Icon
+                  name='ion|location'
+                  size={20}
+                  color={'#99ddff'}
+                  style={styles.followIcon}
+                />
+                <Text style={styles.city}>{company.city_en},{company.address_en}</Text>
+              </View>
+              <Icon
+                name='ion|android-favorite-outline'
+                size={30}
+                color={'red'}
+                style={styles.heartIcon}
+                j
+              />
+
             </View>
           </View>
         </TouchableHighlight>
@@ -44,31 +62,47 @@ export default class CompanyList extends Component {
 var styles = StyleSheet.create({
 
   container: {
-    padding: 5,
-    paddingTop: 10,
-    paddingBottom: 10,
-    margin: 3,
-    marginTop: 10,
     marginBottom: 10,
+    paddingTop:10,
+    paddingBottom:10,
     backgroundColor: 'white',
-    opacity: 0.4,
-    flexWrap:'wrap'
+    opacity: 0.6,
+    shadowColor: "red",
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    }
   },
   name: {
-    color: 'black',
-    fontSize: 20,
+    color: 'turquoise',
     textAlign:'left',
-    flexWrap:'wrap'
+    fontWeight:'700',
+    fontSize:16
+
   },
   description: {
     color: 'black',
     fontSize: 15,
-    paddingLeft:5
   },
   thumbnail: {
-    width: 80,
-    height: 80,
-    borderRadius: 40
+    width: 100,
+    height: 100,
+    borderRadius: 50
   },
+  city:{
+    color:'gray',
+    alignSelf:'center'
+
+  },
+  followIcon: {
+    height:20,
+    width:20
+  },
+  heartIcon:{
+    height:30,
+    width:30,
+  }
 
 });
