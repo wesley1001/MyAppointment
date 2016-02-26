@@ -30,33 +30,45 @@ function appointmentFailure(error) {
   }
 }
 
-export function createAppointment(date,userID,appointmentID) {
+export function createAppointment(date,time,employee) {
 
-  var url = API_ROOT +'/appointment/make';
+  //
 
-  let params = {
-    date: date.toISOString().slice(0, 10),
-    user_id: userID,
-    timing_id: appointmentID
-  };
 
-  return (dispatch) => {
-    dispatch(appointmentRequest());
-    return fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(params)
-    })
-      .then(response => response.json())
-      .then(json => {
-        if(json.success) {
-          dispatch(appointmentSuccess(json));
-        } else {
-          dispatch(appointmentFailure(json.message));
-        }
-      })
-      .catch((err)=> {
-        dispatch(appointmentFailure(err));
-      })
+  return (dispatch,state) => {
+
+
+    dispatch({type:'CREATE_APPOINTMENT_REQUEST'});
+
+    return getUserToken()
+      .then((token) => {
+        let params = {
+          date:date.toISOString().slice(0, 10),
+          timing_id:time.id,
+          employee_id:employee.id,
+          company_id:state().company.id,
+          service_id:state().company.service.id,
+          api_token:token
+        };
+
+        //var url = API_ROOT +`/appointments/create/?api_token=${token}`;
+        var url = API_ROOT +`/appointments/create/`;
+        return fetch(url, {
+          method: 'POST',
+          body: JSON.stringify(params)
+        })
+          .then(response => response.json())
+          .then(json => {
+            if (json.success) {
+              dispatch(appointmentSuccess(json))
+            } else {
+              const error = new Error(json.message);
+              dispatch(appointmentFailure(error.message));
+              throw error;
+            }
+          })
+      }).catch((err)=> dispatch(appointmentFailure(err)));
+
   }
 }
 
@@ -67,12 +79,8 @@ export function fetchAppointments() {
       const url = API_ROOT + `/appointments/?api_token=${token}`;
       return fetch(url)
         .then(response => response.json())
-        .then(json => {
-          dispatch(appointmentSuccess(json));
-        })
-        .catch((err)=> {
-          dispatch(appointmentFailure(err))
-        })
+        .then(json =>  dispatch(appointmentSuccess(json)))
+        .catch((err)=>dispatch(appointmentFailure(err)))
     });
   }
 }

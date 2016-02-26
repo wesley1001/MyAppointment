@@ -1,4 +1,4 @@
-import {API_ROOT} from './../../utils/config'
+import {API_ROOT} from './../../utils/config';
 import {
   CATEGORIES_REQUEST,
   CATEGORIES_SUCCESS,
@@ -27,16 +27,11 @@ function categoriesFailure(error) {
 
 export function fetchCategories() {
   const url = API_ROOT + '/categories';
-
-  return (dispatch) => {
+  return function (dispatch) {
     dispatch(categoriesRequest());
     return fetch(url)
       .then(response => response.json())
-      .then(json => {
-        dispatch(categoriesSuccess(json))
-      })
-      .catch((err)=> {
-        dispatch(categoriesFailure(err))
-      })
-  }
+      .then(response => dispatch(categoriesSuccess(response)))
+      .catch(error => dispatch(categoriesFailure(error)))
+  };
 }

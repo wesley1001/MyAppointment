@@ -49,7 +49,6 @@ class Appointment extends Component {
       selectedTime: time,
       showAppointmentConfirmModal:true
     });
-    console.log(this.state.showAppointmentConfirmModal);
   };
 
   onEmployeeSelect(employee){
@@ -72,20 +71,15 @@ class Appointment extends Component {
   //}
 
 
-  //handleConfirm(timing) {
-  //  const date = this.state.date;
-  //  const {dispatch} = this.props;
-  //  let user = {}; //@todo : get from reducer
-  //  user.id=1;
-  //  dispatch(createAppointment(date,user.id,timing.id, (cb) => {
-  //    if(cb.success) {
-  //      AlertIOS.alert('Booking Confirmed on '+this.state.date.toISOString().slice(0, 10)+' at '+timing.time, null, [{text: 'OK'}]);
-  //      Actions.pop();
-  //    } else {
-  //      AlertIOS.alert('Booking Failed ? try again ', null, [{text: 'OK'}]);
-  //    }
-  //  }));
-  //}
+  handleConfirm() {
+    const {dispatch} = this.props;
+
+    Promise.all([
+      dispatch(createAppointment(this.state.selectedDate,this.state.selectedTime,this.state.selectedEmployee))
+    ]).then(()=>console.log('success')).catch(()=>console.log('error'));
+    //AlertIOS.alert('Booking Confirmed on '+this.state.date.toISOString().slice(0, 10)+' at '+timing.time, null, [{text: 'OK'}]);
+    //Actions.pop();
+  }
 
   render() {
 
@@ -120,10 +114,13 @@ class Appointment extends Component {
         />
 
         <AppointmentConfirm
-          employees={employees}
-          onEmployeeSelect={this.onEmployeeSelect.bind(this)}
+          company={company}
+          selectedEmployee={this.state.selectedEmployee}
+          selectedTime={this.state.selectedTime}
+          selectedDate={this.state.selectedDate}
           onClosed={this.onAppointmentConfirmModalListClosed.bind(this)}
           showAppointmentConfirmModal={this.state.showAppointmentConfirmModal}
+          onAppointmentConfirm={this.handleConfirm.bind(this)}
         />
 
       </ScrollView>

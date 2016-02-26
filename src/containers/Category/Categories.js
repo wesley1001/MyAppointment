@@ -39,7 +39,7 @@ class Categories extends Component {
       }}
       >
         {categories.isFetching ? <LoadingIndicator  /> : <View/>}
-      <CategoryList categories={categories.collection} loadCategory={this.loadCategory}/>
+        <CategoryList categories={categories.collection} loadCategory={this.loadCategory}/>
       </Image>
     );
   }
