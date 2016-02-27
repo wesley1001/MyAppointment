@@ -23,14 +23,15 @@ export default class CompanyList extends Component {
                 />
                 <Text style={styles.city}>{company.city_en},{company.address_en}</Text>
               </View>
-              <Icon
-                name='ion|android-favorite-outline'
-                size={30}
-                color={'red'}
-                style={styles.heartIcon}
-                j
-              />
-
+              <TouchableHighlight onPress={() => this.props.favoriteCompany(company)} underlayColor="transparent">
+                <Icon
+                  name='ion|android-favorite-outline'
+                  size={30}
+                  color={'red'}
+                  style={styles.heartIcon}
+                  j
+                />
+              </TouchableHighlight>
             </View>
           </View>
         </TouchableHighlight>
@@ -66,7 +67,7 @@ var styles = StyleSheet.create({
     paddingTop:10,
     paddingBottom:10,
     backgroundColor: 'white',
-    opacity: 0.6,
+    opacity: 0.7,
     shadowColor: "red",
     shadowOpacity: 0.4,
     shadowRadius: 4,

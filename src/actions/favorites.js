@@ -44,3 +44,47 @@ export function fetchFavorites() {
     });
   }
 }
+
+// get Auth user's favorites
+export function favoriteCompany(company) {
+  return (dispatch) => {
+    getUserToken().then((token) => {
+      const url = API_ROOT + `/companies/${company.id}/favorite`;
+      return fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({
+          api_token:token
+        })
+      })
+        .then(response => response.json())
+        .then(json => {
+          console.log('success');
+        })
+        .catch((err)=> {
+          console.log('error',err);
+        })
+    });
+  }
+}
+
+// get Auth user's favorites
+export function unFavoriteCompany(company) {
+  return (dispatch) => {
+    getUserToken().then((token) => {
+      const url = API_ROOT + `/companies/${company.id}/unfavorite`;
+      return fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({
+          api_token:token
+        })
+      })
+        .then(response => response.json())
+        .then(json => {
+          console.log('success');
+        })
+        .catch((err)=> {
+          console.log('error',err);
+        })
+    });
+  }
+}
