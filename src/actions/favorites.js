@@ -49,13 +49,8 @@ export function fetchFavorites() {
 export function favoriteCompany(company) {
   return (dispatch) => {
     getUserToken().then((token) => {
-      const url = API_ROOT + `/companies/${company.id}/favorite`;
-      return fetch(url, {
-        method: 'POST',
-        body: JSON.stringify({
-          api_token:token
-        })
-      })
+      const url = API_ROOT + `/companies/${company.id}/favorite/?api_token=${token}`;
+      return fetch(url)
         .then(response => response.json())
         .then(json => {
           console.log('success');
@@ -71,13 +66,8 @@ export function favoriteCompany(company) {
 export function unFavoriteCompany(company) {
   return (dispatch) => {
     getUserToken().then((token) => {
-      const url = API_ROOT + `/companies/${company.id}/unfavorite`;
-      return fetch(url, {
-        method: 'POST',
-        body: JSON.stringify({
-          api_token:token
-        })
-      })
+      const url = API_ROOT + `/companies/${company.id}/unfavorite/?api_token=${token}`;
+      return fetch(url)
         .then(response => response.json())
         .then(json => {
           console.log('success');

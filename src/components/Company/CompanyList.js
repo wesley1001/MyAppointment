@@ -1,15 +1,16 @@
 'use strict';
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView } from 'react-native';
 import { Icon } from 'react-native-icons';
 
 export default class CompanyList extends Component {
 
   renderRow(company) {
+    const {loadCompany,favoriteCompany} = this.props;
     return (
       <View style={styles.container}>
-        <TouchableHighlight onPress={() => this.props.loadCompany(company)} underlayColor="transparent">
+        <TouchableHighlight onPress={() => loadCompany(company)} underlayColor="transparent">
           <View style={{justifyContent:'center',alignItems:'center'}}>
             <Image style={styles.thumbnail} source={{uri:company.image}}/>
             <View style={{flexDirection:'column',marginLeft:10,justifyContent:'center',alignItems:'center'}} >
@@ -23,7 +24,7 @@ export default class CompanyList extends Component {
                 />
                 <Text style={styles.city}>{company.city_en},{company.address_en}</Text>
               </View>
-              <TouchableHighlight onPress={() => this.props.favoriteCompany(company)} underlayColor="transparent">
+              <TouchableHighlight onPress={() => favoriteCompany(company)} underlayColor="transparent">
                 <Icon
                   name='ion|android-favorite-outline'
                   size={30}
@@ -53,12 +54,17 @@ export default class CompanyList extends Component {
         style={{paddingTop:64}}
         automaticallyAdjustContentInsets={false}
         ref='listView'
-
       />
     )
 
   }
 }
+
+CompanyList.propTypes = ({
+  loadCompany:PropTypes.func.isRequired,
+  companies:PropTypes.array.isRequired,
+  favoriteCompany:PropTypes.func.isRequired,
+});
 
 var styles = StyleSheet.create({
 

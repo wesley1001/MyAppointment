@@ -2,7 +2,7 @@
 import React from 'react';
 import { Component, ScrollView, Image, View } from 'react-native';
 import { connect } from '../../../node_modules/react-redux';
-import { fetchFavorites } from './../../actions/favorites';
+import { fetchFavorites,favoriteCompany } from './../../actions/favorites';
 import { assets } from './../../utils/assets';
 import CompanyList from './../../components/Company/CompanyList';
 import LoadingIndicator from './../../components/LoadingIndicator';
@@ -35,6 +35,11 @@ class Favorites extends Component {
     });
   }
 
+  favoriteCompany(company) {
+    const {dispatch} = this.props;
+    dispatch(favoriteCompany(company));
+  }
+
   render() {
     const { user } = this.props;
     return (
@@ -43,6 +48,7 @@ class Favorites extends Component {
         <CompanyList
           companies={user.favorites.collection}
           loadCompany={this.loadCompany.bind(this)}
+          favoriteCompany={this.favoriteCompany.bind(this)}
         />
       </Image>
     );
