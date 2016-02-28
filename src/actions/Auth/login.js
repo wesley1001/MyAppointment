@@ -74,8 +74,6 @@ export function loginUserByToken() {
   }
 }
 
-
-
 export function onLoginFormFieldChange(field,value) {
   return {
     type: ON_LOGIN_FORM_FIELD_CHANGE,

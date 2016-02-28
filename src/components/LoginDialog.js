@@ -33,7 +33,7 @@ export default class LoginDialog extends Component {
           </Text>
           <Button
             style={styles.button}
-            onPress={()=>Actions.home()}
+            onPress={()=>Actions.main()}
             textStyle={{fontSize: 18, color:'white'}}
           >
             Sign up

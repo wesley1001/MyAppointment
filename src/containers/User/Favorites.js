@@ -26,17 +26,24 @@ class Favorites extends Component {
         dispatch(fetchFavorites());
       }
     }
+  }
 
+  loadCompany(company) {
+    Actions.companyEntity({
+      title:company.name,
+      id: company.id
+    });
   }
 
   render() {
-    console.log('render fav');
-
     const { user } = this.props;
     return (
       <Image source={assets.bg} style={{flex: 1,width: null,height: null,padding: 10,flexWrap:'wrap'}}>
         {user.favorites.isFetching ? <LoadingIndicator /> : <View />}
-        <CompanyList companies={user.favorites.collection} loadCompany={()=>''}/>
+        <CompanyList
+          companies={user.favorites.collection}
+          loadCompany={this.loadCompany.bind(this)}
+        />
       </Image>
     );
   }
