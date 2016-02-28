@@ -19,6 +19,8 @@ class Appointment extends Component {
 
   constructor(props) {
     super(props);
+
+
     this.state={
       selectedDate: new Date(),
       selectedTime: {},
@@ -26,6 +28,16 @@ class Appointment extends Component {
       showEmployeeListModal : false,
       showAppointmentConfirmModal : false,
     };
+  }
+
+  componentWillMount() {
+    if(this.props.auth) {
+      if(!this.props.user.isAuthenticated) {
+        Actions.loginDialog({
+          dialogText:'Please Login to view and manage your Favorites'
+        });
+      }
+    }
   }
 
   componentDidMount() {
@@ -133,10 +145,10 @@ class Appointment extends Component {
 }
 
 Appointment.propTypes = {
-  timings : PropTypes.object,
-  employees: PropTypes.array,
-  company: PropTypes.object,
-  user:PropTypes.object
+  timings : PropTypes.object.isRequired,
+  employees: PropTypes.array.isRequired,
+  company: PropTypes.object.isRequired,
+  user:PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

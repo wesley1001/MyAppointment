@@ -11,6 +11,13 @@ class Root extends Component {
     //CodePush.sync();
   }
 
+  componentDidMount() {
+    // first get the user storage key
+    // if found authenticate the user
+    // set isAuthenticated to true
+    // if storage key not found, set isAuthenticated to false
+  }
+
   render() {
     return (
       <Provider store={configureStore()}>

@@ -2,30 +2,30 @@
 import React from 'react';
 import { Component, Navigator, StatusBarIOS } from 'react-native';
 import { Router, Route, Schema, Animations, TabBar } from 'react-native-router-flux';
+import { loginUserByToken } from './actions/Auth/login';
+import { connect } from 'react-redux';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
 import Categories from './containers/Category/Categories';
 import Category from './containers/Category/Category';
 import Company from './containers/Company/Company';
 import Appointment from './containers/Appointment/Appointment';
-import Favorites from './containers/Company/Favorites';
 import TabIcon from './components/TabIcon';
 import Map from './containers/Company/Map';
 import Settings from './components/Settings';
+import LoginDialog from './components/LoginDialog';
+import Favorites from './containers/User/Favorites';
+import Appointments from './containers/User/Appointments';
 
-export default class App extends Component {
+
+class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      isAuthenticated:true
-    }
   }
 
   componentDidMount() {
-    this.setState({
-      isAuthenticated:true
-    });
+    this.props.dispatch(loginUserByToken());
   }
 
   componentWillMount() {
@@ -46,17 +46,15 @@ export default class App extends Component {
         />
         <Schema name="tab" type="switch" icon={TabIcon}  />
 
-
-
         <Route name="home">
           <Router footer={TabBar} tabBarStyle={{backgroundColor:'#99ddff'}} showNavigationBar={false}>
 
             <Route name="main" title="Home" schema="tab" hideNavBar={false} selectedTabIcon="ion|ios-home" tabIcon="ion|ios-home-outline">
               <Router >
-                <Route name="categories" component={Categories} hideNavBar={true}/>
-                <Route name="categoryEntity" component={Category} />
-                <Route name="companyEntity" component={Company} />
-                <Route name="appointmentContainer" component={Appointment}  />
+                <Route name="categories" component={Categories} hideNavBar={true} title=""/>
+                <Route name="categoryEntity" component={Category} title=""/>
+                <Route name="companyEntity" component={Company} title=""/>
+                <Route auth={true} name="appointmentContainer" component={Appointment} title=""  />
               </Router>
             </Route>
             <Route name="browse" schema="tab" title="Browse" hideNavBar={true}  selectedTabIcon="ion|ios-location" tabIcon="ion|ios-location-outline">
@@ -64,23 +62,33 @@ export default class App extends Component {
                 <Route name="services" component={Map} title="Map" />
               </Router>
             </Route>
-            <Route name="favorites" component={Favorites} schema="tab" title="Favorites" hideNavBar={true}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"/>
-            <Route name="appointments" schema="tab" title="Appointments" component={Appointment} hideNavBar={true}  selectedTabIcon="ion|ios-alarm" tabIcon="ion|ios-alarm-outline"/>
-
-
+            <Route auth={true} name="favorites" component={Favorites} schema="tab" title="Favorites" hideNavBar={true}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"/>
+            <Route auth={true} name="appointments" schema="tab" title="Appointments" component={Appointments} hideNavBar={true}  selectedTabIcon="ion|ios-alarm" tabIcon="ion|ios-alarm-outline"/>
             <Route name="settings" schema="tab" title="Settings" component={Settings} selectedTabIcon="ion|ios-gear" tabIcon="ion|ios-gear-outline" />
           </Router>
         </Route>
 
         <Route name="auth" hideNavBar={true} >
           <Router>
-            <Route name="login" title="Login" component={Login} isAuthenticated={this.state.isAuthenticated}/>
+            <Route name="login" title="Login" component={Login} />
             <Route name="register" component={Register} title="Register" schema="default" hideNavBar={false}/>
           </Router>
         </Route>
+
+        <Route name="loginDialog" schema="modal" hideNavBar={true}  component={LoginDialog} />
 
       </Router>
     )
   }
 }
+
+
+function mapStateToProps(state) {
+  return {
+    ...state,
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(App);
 

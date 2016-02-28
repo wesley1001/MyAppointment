@@ -67,7 +67,6 @@ export function createAppointment(date,time,employee) {
           service_id:state().company.service.id,
           api_token:token
         };
-
         var url = API_ROOT +`/appointments/create/`;
         return fetch(url, {
           method: 'POST',
@@ -89,6 +88,7 @@ export function createAppointment(date,time,employee) {
 }
 
 export function fetchAppointments() {
+  console.log('fetching appointments');
   return (dispatch) => {
     dispatch(appointmentRequest());
     getUserToken().then((token) => {

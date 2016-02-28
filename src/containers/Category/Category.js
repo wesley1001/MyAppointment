@@ -1,7 +1,7 @@
 'use strict';
 import React, {PropTypes}  from 'react';
 import { Component, Image, View } from 'react-native';
-import { connect } from '../../../node_modules/react-redux';
+import { connect } from 'react-redux';
 import { fetchCategory } from './../../actions/Category/category';
 import { favoriteCompany } from './../../actions/favorites';
 import { assets } from './../../utils/assets';

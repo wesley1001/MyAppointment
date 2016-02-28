@@ -12,15 +12,24 @@ const createStoreWithMiddleware = applyMiddleware(
 export default function configureStore(initialState) {
   return createStore(
     rootReducer,
+    initialState,
     applyMiddleware(thunkMiddleware,logger)
   );
-
-  //return createStoreWithMiddleware(rootReducer,initialState);
 }
 
-//const configureStore = createStore(
-//  rootReducer,
-//  applyMiddleware(thunkMiddleware,logger)
-//);
+// old version
 //
-//export default configureStore;
+//import { createStore, applyMiddleware, combineReducers } from 'redux';
+//import thunkMiddleware from 'redux-thunk';
+//import createLogger from 'redux-logger';
+//import rootReducer from '../reducers/index';
+//const logger = createLogger();
+//
+//const createStoreWithMiddleware = applyMiddleware(
+//  thunkMiddleware,
+//  logger
+//)(createStore);
+//
+//export default function configureStore(initialState) {
+//  return createStoreWithMiddleware(rootReducer,initialState);
+//}

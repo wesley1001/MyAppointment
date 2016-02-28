@@ -1,5 +1,5 @@
 import {API_ROOT} from './../../utils/config'
-import { saveUserToken,getUserToken } from './../../utils/storage';
+import { setUserToken,getUserToken } from './../../utils/storage';
 
 import {
   LOGIN_REQUEST,
@@ -28,10 +28,8 @@ function loginFailure(message) {
   };
 }
 
-export function login(credentials, cb = ()=> {
-  success: false
-}) {
-  let url = API_ROOT + '/auth/login';
+export function login(credentials) {
+  const url = API_ROOT + '/auth/login';
   return dispatch => {
     dispatch(loginRequest());
     return fetch(url, {
@@ -40,22 +38,42 @@ export function login(credentials, cb = ()=> {
     })
       .then(response => response.json())
       .then(json => {
-        if (json.success == false) {
-          dispatch(loginFailure(json.message));
-          return cb({success: false});
-        } else {
+        if (json.success) {
           dispatch(loginSuccess(json));
-          saveUserToken(json.data.api_token);
-          //return cb({success: true,user:json});
+          setUserToken(json.data.api_token);
+        } else {
+          dispatch(loginFailure(json.message));
         }
       })
-      .catch((err)=> {
-        console.log(err);
-        dispatch(loginFailure(err));
-        return cb({success: false});
-      });
-  };
+      .catch((err)=> dispatch(loginFailure(err)));
+  }
 }
+
+export function loginUserByToken() {
+  return (dispatch) => {
+    dispatch(loginRequest());
+    getUserToken()
+      .then((token) => {
+        const url = API_ROOT + `/auth/login/token/`;
+        return fetch(url, {
+          method: 'POST',
+          body: JSON.stringify({
+            api_token:token
+          })
+        })
+          .then(response => response.json())
+          .then(json => {
+            if (json.success) {
+              dispatch(loginSuccess(json));
+            } else {
+              dispatch(loginFailure(json.message));
+            }
+          })
+      })
+      .catch((err)=> dispatch(loginFailure(err)));
+  }
+}
+
 
 
 export function onLoginFormFieldChange(field,value) {

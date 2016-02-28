@@ -1,11 +1,10 @@
 'use strict'
-import React from 'react';
-import { Component, StyleSheet, Text, View, Image, TouchableHighlight, TextInput } from 'react-native';
+import React, { Component, StyleSheet, Text, View, Image, TouchableHighlight, TextInput } from 'react-native';
 import { assets } from './../../utils/assets';
 import FormButton from './../FormButton';
-import stylesheet from './../../assets/style/form';
+//import stylesheet from './../../assets/style/form';
 import LoadingIndicator from './../../components/LoadingIndicator';
-import t from 'tcomb-form-native';
+import t from 'tcomb-form-native/lib';
 const Form = t.form.Form;
 
 export default class LoginScene extends Component {
@@ -24,7 +23,7 @@ export default class LoginScene extends Component {
 
   render() {
 
-    Form.stylesheet = stylesheet;
+    //Form.stylesheet = stylesheet;
 
     const {login} = this.props;
 
