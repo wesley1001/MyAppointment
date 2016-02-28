@@ -2,7 +2,7 @@
 import React from 'react';
 import { Component, ScrollView, Image, View } from 'react-native';
 import { connect } from '../../../node_modules/react-redux';
-import { fetchAppointments } from './../../actions/appointments';
+import { fetchAppointments,cancelAppointment } from './../../actions/appointments';
 import { assets } from './../../utils/assets';
 import CompanyList from './../../components/Company/CompanyList';
 import ConfirmedAppointmentList from './../../components/Appointment/ConfirmedAppointmentList';
@@ -26,9 +26,12 @@ class Appointments extends Component {
         dispatch(fetchAppointments());
       }
     }
-
     //<AppointmentList companies={user.favorites.collection} loadCompany={()=>''}/>
+  }
 
+  cancelAppointment(appointment) {
+    console.log('cancelling appointment');
+    this.props.dispatch(cancelAppointment(appointment.id));
   }
 
   render() {
@@ -37,7 +40,7 @@ class Appointments extends Component {
     return (
       <Image source={assets.bg} style={{flex: 1,width: null,height: null,padding: 10,paddingTop:64,flexWrap:'wrap'}}>
         {user.favorites.isFetching ? <LoadingIndicator /> : <View />}
-        <ConfirmedAppointmentList />
+        <ConfirmedAppointmentList user={user} cancelAppointment={this.cancelAppointment.bind(this)} />
       </Image>
     );
   }

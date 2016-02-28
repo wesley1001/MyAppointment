@@ -101,6 +101,21 @@ export function fetchAppointments() {
   }
 }
 
+export function cancelAppointment() {
+  console.log('cancelling appointment');
+  return (dispatch) => {
+    dispatch(appointmentRequest());
+    getUserToken().then((token) => {
+      const url = API_ROOT + `/appointments/?api_token=${token}`;
+      return fetch(url)
+        .then(response => response.json())
+        .then(json =>  dispatch(appointmentSuccess(json)))
+        .catch((err)=>dispatch(appointmentFailure(err)))
+    });
+  }
+}
+
+
 export function invalidateCreatedAppointment() {
   return (dispatch) => {
     dispatch({type: CREATE_APPOINTMENT_INVALIDATE});

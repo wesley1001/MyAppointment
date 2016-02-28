@@ -1,6 +1,6 @@
 'use strict';
 import React, {PropTypes} from 'react';
-import { Component, TouchableHighlight, StyleSheet, Text, View } from 'react-native';
+import { Component, TouchableHighlight, ListView, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-icons';
 import LoadingIndicator from './../../components/LoadingIndicator';
 import Seperator from './../Seperator';
@@ -8,8 +8,7 @@ const Actions = require('react-native-router-flux').Actions;
 
 export default class ConfirmedAppointmentList extends Component {
 
-  render() {
-    const { listEmployees } = this.props;
+  renderRow(appointment) {
     return (
       <View style={styles.cellContainer}>
         <View style={styles.cellWrapper}>
@@ -82,7 +81,28 @@ export default class ConfirmedAppointmentList extends Component {
         </View>
       </View>
     );
+
   }
+
+  render() {
+    const {appointments} = this.props;
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2});
+    let dataSource = appointments ? ds.cloneWithRows(appointments) : ds.cloneWithRows([]);
+
+    return (
+      <ListView
+        contentContainerStyle={styles.container}
+        dataSource={dataSource}
+        renderRow={this.renderRow.bind(this)}
+        contentInset={{bottom:49}}
+        style={{paddingTop:64}}
+        automaticallyAdjustContentInsets={false}
+        ref='listView'
+      />
+    )
+  }
+
+
 }
 
 ConfirmedAppointmentList.propTypes = {
@@ -188,5 +208,3 @@ var styles = StyleSheet.create({
   },
 
 });
-
-
