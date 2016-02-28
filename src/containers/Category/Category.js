@@ -35,7 +35,7 @@ class Category extends Component {
   render() {
     const {category} = this.props;
     return (
-      <Image source={assets.bg} style={{flex: 1,width: null,height: null,padding: 10}}>
+      <Image source={assets.bg} style={{flex: 1,width: null,height: null,paddingTop: 10}}>
         {category.isFetching ? <LoadingIndicator /> : <View />}
         <CompanyList
           companies={category.entity.companies}

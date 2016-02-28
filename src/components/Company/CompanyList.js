@@ -68,6 +68,9 @@ CompanyList.propTypes = ({
 
 var styles = StyleSheet.create({
 
+  list:{
+    padding:10
+  },
   container: {
     marginBottom: 10,
     paddingTop:10,

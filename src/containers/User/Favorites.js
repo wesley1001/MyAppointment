@@ -43,7 +43,7 @@ class Favorites extends Component {
   render() {
     const { user } = this.props;
     return (
-      <Image source={assets.bg} style={{flex: 1,width: null,height: null,padding: 10,flexWrap:'wrap'}}>
+      <Image source={assets.spabg} style={{flex: 1,width: null,height: null,paddingTop: 10}}>
         {user.favorites.isFetching ? <LoadingIndicator /> : <View />}
         <CompanyList
           companies={user.favorites.collection}

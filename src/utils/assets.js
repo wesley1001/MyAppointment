@@ -4,5 +4,6 @@ export const assets = {
   bg:require('./../assets/img/bg.png'),
   bghome:require('./../assets/img/bghome.png'),
   logo:require('./../assets/img/logo.png'),
-  lotus:require('./../assets/img/lotus.png')
+  lotus:require('./../assets/img/lotus.png'),
+  spabg:require('./../assets/img/spa.jpg'),
 };

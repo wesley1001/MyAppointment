@@ -1,36 +1,35 @@
+import {Record} from 'immutable';
+
 import {
   CATEGORIES_REQUEST,
   CATEGORIES_SUCCESS,
   CATEGORIES_FAILURE,
 } from '../../constants/ActionTypes'
 
-const initialState = {
+const InitialState = Record({
   collection: [],
   isFetching: false,
   error: null
-}
+});
+
+const initialState = new InitialState;
 
 export default function categories(state = initialState, action = {}) {
   switch (action.type) {
     case CATEGORIES_REQUEST:
-      return {
-        ... state,
-        isFetching: true,
-        error: null
-      }
+      return state
+        .set('isFetching',true)
+        .set('error',null);
+
     case CATEGORIES_SUCCESS:
-      return {
-        ... state,
-        isFetching: false,
-        collection: action.collection,
-        error: null
-      }
+      return state
+        .set('isFetching',false)
+        .set('collection',action.collection)
+        .set('error',null);
     case CATEGORIES_FAILURE:
-      return {
-        ...state,
-        isFetching: false,
-        error: action.error
-      }
+      return state
+        .set('isFetching',false)
+        .set('error',action.error);
     default:
       return state
   }
