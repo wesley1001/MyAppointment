@@ -49,7 +49,7 @@ class App extends Component {
         <Route name="home">
           <Router footer={TabBar} tabBarStyle={{backgroundColor:'#99ddff'}} showNavigationBar={false}>
             <Route name="main" title="Home" schema="tab" hideNavBar={false} selectedTabIcon="ion|ios-home" tabIcon="ion|ios-home-outline">
-              <Router>
+              <Router >
                 <Route name="categories" component={Categories} hideNavBar={true} title=""/>
                 <Route name="categoryEntity" component={Category} title=""/>
                 <Route name="companyEntity" component={Company} title=""/>
@@ -73,9 +73,7 @@ class App extends Component {
             <Route name="register" component={Register} title="Register" schema="default" hideNavBar={false}/>
           </Router>
         </Route>
-
         <Route name="loginDialog" schema="modal" hideNavBar={true}  component={LoginDialog} />
-
       </Router>
     )
   }

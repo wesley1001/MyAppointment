@@ -5,6 +5,7 @@ import { connect } from '../../../node_modules/react-redux';
 import { fetchAppointments } from './../../actions/appointments';
 import { assets } from './../../utils/assets';
 import CompanyList from './../../components/Company/CompanyList';
+import ConfirmedAppointmentList from './../../components/Appointment/ConfirmedAppointmentList';
 import LoadingIndicator from './../../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
 
@@ -34,8 +35,9 @@ class Appointments extends Component {
     console.log('from render');
     const { user } = this.props;
     return (
-      <Image source={assets.bg} style={{flex: 1,width: null,height: null,padding: 10,flexWrap:'wrap'}}>
+      <Image source={assets.bg} style={{flex: 1,width: null,height: null,padding: 10,paddingTop:64,flexWrap:'wrap'}}>
         {user.favorites.isFetching ? <LoadingIndicator /> : <View />}
+        <ConfirmedAppointmentList />
       </Image>
     );
   }
