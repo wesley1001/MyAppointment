@@ -8,7 +8,8 @@ import {
   CREATE_APPOINTMENT_REQUEST,
   CREATE_APPOINTMENT_SUCCESS,
   CREATE_APPOINTMENT_FAILURE,
-  CREATE_APPOINTMENT_INVALIDATE
+  CREATE_APPOINTMENT_INVALIDATE,
+  DELETE_APPOINTMENT
 } from '../constants/ActionTypes';
 
 function appointmentRequest() {
@@ -83,7 +84,6 @@ export function createAppointment(date,time,employee) {
             }
           })
       }).catch((err)=> dispatch(createAppointmentFailure(err)));
-
   }
 }
 
@@ -100,20 +100,21 @@ export function fetchAppointments() {
   }
 }
 
-export function cancelAppointment() {
-  console.log('cancelling appointment');
+export function cancelAppointment(id) {
+  //console.log('cancelling appointment',id);
   return (dispatch) => {
-    dispatch(appointmentRequest());
+    //dispatch(appointmentRequest());
     getUserToken().then((token) => {
-      const url = API_ROOT + `/appointments/?api_token=${token}`;
-      return fetch(url)
+      const url = API_ROOT + `/appointments/cancel/?api_token=${token}`;
+      return fetch(url,{
+        method:'POST',
+        id:id
+      })
         .then(response => response.json())
-        .then(json =>  dispatch(appointmentSuccess(json)))
-        .catch((err)=>dispatch(appointmentFailure(err)))
-    });
+        .then(json => dispatch({type:DELETE_APPOINTMENT,id:id}))
+    }).catch((err)=> console.log(err));
   }
 }
-
 
 export function invalidateCreatedAppointment() {
   return (dispatch) => {

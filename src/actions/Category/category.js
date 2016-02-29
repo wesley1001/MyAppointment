@@ -1,4 +1,6 @@
 import {API_ROOT} from './../../utils/config';
+import { getUserToken } from './../../utils/storage';
+
 import {
   CATEGORY_REQUEST,
   CATEGORY_SUCCESS,
@@ -26,16 +28,18 @@ function categoryFailure(error) {
 }
 
 export function fetchCategory(categoryID) {
-  const url = API_ROOT + '/categories/' + categoryID;
   return (dispatch) => {
     dispatch(categoryRequest());
-    return fetch(url)
-      .then(response => response.json())
-      .then(json => {
-        dispatch(categorySuccess(json))
+    getUserToken().then((token) => {
+        const url = API_ROOT + `/categories/${categoryID}/?api_token=${token}`;
+        return fetch(url)
+          .then(response => response.json())
+          .then(json => {
+            dispatch(categorySuccess(json))
+          })
       })
       .catch((err)=> {
         dispatch(categoryFailure(err))
-      })
+      });
   }
 }

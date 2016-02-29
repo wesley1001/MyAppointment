@@ -59,7 +59,7 @@ export default class ConfirmedAppointmentList extends Component {
               </View>
 
               <View style={styles.cancelWrapper}>
-                <TouchableHighlight onPress={()=>cancelAppointment()} underlayColor="transparent">
+                <TouchableHighlight onPress={()=>this.props.cancelAppointment(appointment)} underlayColor="transparent">
 
                   <View >
                     <Text style={styles.price}>{company.services[0].pivot.price |0} KD</Text>

@@ -38,9 +38,9 @@ class Category extends Component {
       <Image source={assets.bg} style={{flex: 1,width: null,height: null,paddingTop: 10}}>
         {category.isFetching ? <LoadingIndicator /> : <View />}
         <CompanyList
-          companies={category.entity.companies}
           loadCompany={this.loadCompany.bind(this)}
           favoriteCompany={this.favoriteCompany.bind(this)}
+          companies={category.entity.companies}
         />
       </Image>
     );

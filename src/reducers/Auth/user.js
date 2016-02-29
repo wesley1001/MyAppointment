@@ -12,6 +12,7 @@ import {
   FAVORITES_REQUEST,
   FAVORITES_SUCCESS,
   FAVORITES_FAILURE,
+  DELETE_APPOINTMENT,
   LOGIN_SUCCESS
 } from '../../constants/ActionTypes';
 
@@ -77,6 +78,9 @@ export default function user(state = initialState, action = {}) {
         .setIn(['appointment', 'isCreating'], false)
         .setIn(['appointment', 'created'], false)
         .setIn(['appointment', 'error'], false);
+    case DELETE_APPOINTMENT:
+      return state
+        .setIn(['appointments','collection'],state.appointments.collection.filter((appointment) => appointment.id != action.id));
     case FAVORITES_REQUEST:
       return state
         .setIn(['favorites', 'isFetching'], true)
