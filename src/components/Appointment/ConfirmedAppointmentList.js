@@ -44,7 +44,7 @@ export default class ConfirmedAppointmentList extends Component {
                 color={'purple'}
                 style={{width:15,height:15,alignSelf:'center'}}
               />
-              <Text style={styles.location}>{company.location}</Text>
+              <Text style={styles.location}>{company.city_en}</Text>
             </View>
             <View style={{flexDirection:'row'}}>
               <View style={styles.middleCol}>
