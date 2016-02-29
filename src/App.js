@@ -25,6 +25,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+
     this.props.dispatch(loginUserByToken());
   }
 

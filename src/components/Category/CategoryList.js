@@ -1,6 +1,7 @@
 'use strict';
 
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView } from 'react-native';
+import React, { PropTypes } from 'react';
+import { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView } from 'react-native';
 
 export default class CategoryList extends Component {
   //
@@ -35,6 +36,10 @@ export default class CategoryList extends Component {
 
   }
 }
+
+CategoryList.propTypes = ({
+  companies : PropTypes.array.isRequired
+});
 
 var styles = StyleSheet.create({
   list: {

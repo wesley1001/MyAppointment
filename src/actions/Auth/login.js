@@ -29,6 +29,7 @@ function loginFailure(message) {
 }
 
 export function login(credentials) {
+  console.log(credentials);
   const url = API_ROOT + '/auth/login';
   return dispatch => {
     dispatch(loginRequest());

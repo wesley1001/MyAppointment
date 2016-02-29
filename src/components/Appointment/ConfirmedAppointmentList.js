@@ -9,6 +9,8 @@ const Actions = require('react-native-router-flux').Actions;
 export default class ConfirmedAppointmentList extends Component {
 
   renderRow(appointment) {
+    const { cancelAppointment } = this.props.cancelAppointment;
+    const {company,employee,timing} = appointment;
     return (
       <View style={styles.cellContainer}>
         <View style={styles.cellWrapper}>
@@ -30,11 +32,11 @@ export default class ConfirmedAppointmentList extends Component {
                 color={'#999999'}
                 style={{width:20,height:20,alignSelf:'center',fontWeight:100}}
               />
-              <Text style={{ paddingLeft:5,color:'#999999',fontWeight:'500',fontSize:13}}>9:00pm</Text>
+              <Text style={{ paddingLeft:5,color:'#999999',fontWeight:'500',fontSize:13}}>{timing.time_en}</Text>
             </View>
           </View>
           <View style={styles.rightCol}>
-            <Text style={styles.company}>Company name</Text>
+            <Text style={styles.company}>{company.name_en}</Text>
             <View style={{flexDirection:'row',alignItems:'center',paddingBottom:5}}>
               <Icon
                 name='ion|location'
@@ -42,24 +44,25 @@ export default class ConfirmedAppointmentList extends Component {
                 color={'purple'}
                 style={{width:15,height:15,alignSelf:'center'}}
               />
-              <Text style={styles.location}>Salmiya</Text>
+              <Text style={styles.location}>{company.location}</Text>
             </View>
             <View style={{flexDirection:'row'}}>
               <View style={styles.middleCol}>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                   <Text style={styles.service}>
-                    Hair cut
+                    {company.services[0].name_en}
                   </Text>
-                  <Text style={styles.duration}>(30min)</Text>
+                  <Text style={styles.duration}>({company.services[0].pivot.duration_en |0} min)</Text>
                 </View>
-                <Text style={styles.employee}>with faisal</Text>
+                {employee ? <Text style={styles.employee}>with {employee.name_en}</Text>  : <Text/>}
+
               </View>
 
               <View style={styles.cancelWrapper}>
-                <TouchableHighlight onPress={()=>listEmployees()} underlayColor="transparent">
+                <TouchableHighlight onPress={()=>cancelAppointment()} underlayColor="transparent">
 
                   <View >
-                    <Text style={styles.price}>29 KD</Text>
+                    <Text style={styles.price}>{company.services[0].pivot.price |0} KD</Text>
                     <View style={styles.employeeSelectWrapper}>
                       <View style={{flex:2}}>
                         <Text style={styles.employeeName} >cancel</Text>
@@ -87,7 +90,7 @@ export default class ConfirmedAppointmentList extends Component {
   render() {
     const {appointments} = this.props;
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2});
-    let dataSource = appointments ? ds.cloneWithRows(appointments) : ds.cloneWithRows([]);
+    let dataSource = appointments.collection ? ds.cloneWithRows(appointments.collection) : ds.cloneWithRows([]);
 
     return (
       <ListView
@@ -101,14 +104,11 @@ export default class ConfirmedAppointmentList extends Component {
       />
     )
   }
-
-
 }
 
 ConfirmedAppointmentList.propTypes = {
-  //service : PropTypes.object,
-  //employees: PropTypes.array,
-  //selectedTime:PropTypes.object
+  appointments:PropTypes.object.isRequired,
+  cancelAppointment:PropTypes.func.isRequired
 };
 
 var styles = StyleSheet.create({
@@ -116,6 +116,7 @@ var styles = StyleSheet.create({
   cellContainer:{
     backgroundColor:'white',
     opacity:0.6,
+    marginBottom:10
   },
   cellWrapper: {
     flexDirection:'row',

@@ -8,10 +8,8 @@ const Actions = require('react-native-router-flux').Actions;
 
 export default class AppointmentList extends Component {
 
-  logout = () => {};
-
   render() {
-    const {company,selectedEmployee} = this.props;
+    const {company,selectedEmployee,listEmployees} = this.props;
     return (
       <View style={styles.cellContainer}>
 
@@ -32,7 +30,7 @@ export default class AppointmentList extends Component {
           </View>
           <View style={styles.rightCol}>
             <Text style={styles.staff}>Pick a Staff</Text>
-            <TouchableHighlight onPress={()=>this.props.listEmployees()} underlayColor="transparent">
+            <TouchableHighlight onPress={()=>listEmployees()} underlayColor="transparent">
               <View style={styles.employeeSelectWrapper}>
                 <View style={{flex:2}}>
                   <Text style={styles.employeeName} >{selectedEmployee.id ? selectedEmployee.name_en : 'Any'}</Text>
@@ -59,9 +57,9 @@ export default class AppointmentList extends Component {
 }
 
 AppointmentList.propTypes = {
-  service : PropTypes.object,
-  employees: PropTypes.array,
-  //selectedTime:PropTypes.object
+  company : PropTypes.object.isRequired,
+  employeeName: PropTypes.string,
+  listEmployees: PropTypes.func.isRequired
 };
 
 var styles = StyleSheet.create({

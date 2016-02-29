@@ -19,28 +19,26 @@ class Appointments extends Component {
     if(this.props.auth) {
       if(!this.props.user.isAuthenticated) {
         Actions.loginDialog({
-          dialogText:'Please Login to view and manage your Favorites'
+          dialogText:'Please login to manage your Appointments'
         });
       } else {
         const {dispatch} = this.props;
         dispatch(fetchAppointments());
       }
     }
-    //<AppointmentList companies={user.favorites.collection} loadCompany={()=>''}/>
   }
 
   cancelAppointment(appointment) {
-    console.log('cancelling appointment');
     this.props.dispatch(cancelAppointment(appointment.id));
   }
 
   render() {
-    console.log('from render');
     const { user } = this.props;
+
     return (
       <Image source={assets.bg} style={{flex: 1,width: null,height: null,padding: 10,paddingTop:64,flexWrap:'wrap'}}>
-        {user.favorites.isFetching ? <LoadingIndicator /> : <View />}
-        <ConfirmedAppointmentList user={user} cancelAppointment={this.cancelAppointment.bind(this)} />
+        {user.appointments.isFetching ? <LoadingIndicator /> : <View />}
+        <ConfirmedAppointmentList appointments={user.appointments} cancelAppointment={this.cancelAppointment.bind(this)} />
       </Image>
     );
   }

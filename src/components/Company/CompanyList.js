@@ -104,7 +104,6 @@ var styles = StyleSheet.create({
   city:{
     color:'gray',
     alignSelf:'center'
-
   },
   followIcon: {
     height:20,

@@ -18,6 +18,7 @@ function appointmentRequest() {
 }
 
 function appointmentSuccess(payload) {
+  console.log(payload.data);
   return {
     type: APPOINTMENTS_SUCCESS,
     collection: payload.data
@@ -63,11 +64,10 @@ export function createAppointment(date,time,employee) {
           date:date.toISOString().slice(0, 10),
           timing_id:time.id,
           employee_id:employee.id,
-          company_id:state().company.id,
-          service_id:state().company.service.id,
-          api_token:token
+          company_id:state().company.entity.id,
+          service_id:state().company.service.id
         };
-        var url = API_ROOT +`/appointments/create/`;
+        var url = API_ROOT +`/appointments/create/?api_token=${token}`;
         return fetch(url, {
           method: 'POST',
           body: JSON.stringify(params)
@@ -78,7 +78,7 @@ export function createAppointment(date,time,employee) {
               dispatch(createAppointmentSuccess());
             } else {
               const error = new Error(json.message);
-              dispatch(createAppointmentFailure(error.message));
+              //dispatch(createAppointmentFailure(error.message));
               throw error;
             }
           })
@@ -88,7 +88,6 @@ export function createAppointment(date,time,employee) {
 }
 
 export function fetchAppointments() {
-  console.log('fetching appointments');
   return (dispatch) => {
     dispatch(appointmentRequest());
     getUserToken().then((token) => {
