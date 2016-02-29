@@ -16,15 +16,10 @@ class Appointments extends Component {
   }
 
   componentWillMount() {
-    if(this.props.auth) {
-      if(!this.props.user.isAuthenticated) {
-        Actions.loginDialog({
-          dialogText:'Please login to manage your Appointments'
-        });
-      } else {
-        const {dispatch} = this.props;
-        dispatch(fetchAppointments());
-      }
+    if(!this.props.user.isAuthenticated) {
+      Actions.loginDialog({ dialogText:'Please login to manage your Appointments'});
+    } else {
+      this.props.dispatch(fetchAppointments());
     }
   }
 

@@ -6,6 +6,9 @@ import { Icon } from 'react-native-icons';
 
 export default class CompanyList extends Component {
 
+  handleFavorites(company) {
+    this.props.favoriteCompany(company)
+  }
   renderRow(company) {
     const {loadCompany} = this.props;
     return (
@@ -24,13 +27,13 @@ export default class CompanyList extends Component {
                 />
                 <Text style={styles.city}>{company.city_en},{company.address_en}</Text>
               </View>
-              <TouchableHighlight onPress={() => this.props.favoriteCompany(company)} underlayColor="transparent">
+              <TouchableHighlight onPress={() => this.handleFavorites(company)} underlayColor="transparent">
                 <Icon
                   name={company.isFavorited ? 'ion|android-favorite' : 'ion|android-favorite-outline'}
                   size={30}
                   color={'red'}
                   style={styles.heartIcon}
-                  j
+                  ref="favoriteIcon"
                 />
               </TouchableHighlight>
             </View>

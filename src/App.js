@@ -50,11 +50,11 @@ class App extends Component {
         <Route name="home">
           <Router footer={TabBar} tabBarStyle={{backgroundColor:'#99ddff'}} showNavigationBar={false}>
             <Route name="main" title="Home" schema="tab" hideNavBar={false} selectedTabIcon="ion|ios-home" tabIcon="ion|ios-home-outline">
-              <Router >
+              <Router name="mainRouter">
                 <Route name="categories" component={Categories} hideNavBar={true} title=""/>
                 <Route name="categoryEntity" component={Category} title=""/>
                 <Route name="companyEntity" component={Company} title=""/>
-                <Route auth={true} name="appointmentContainer" component={Appointment} title=""  />
+                <Route name="appointmentContainer" component={Appointment} title=""  />
               </Router>
             </Route>
             <Route name="browse" schema="tab" title="Browse" hideNavBar={true}  selectedTabIcon="ion|ios-location" tabIcon="ion|ios-location-outline">
@@ -62,8 +62,13 @@ class App extends Component {
                 <Route name="services" component={Map} title="Map" />
               </Router>
             </Route>
-            <Route auth={true} name="favorites" component={Favorites} schema="tab" title="Favorites" hideNavBar={true}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"/>
-            <Route auth={true} name="appointments" schema="tab" title="Appointments" component={Appointments} hideNavBar={true}  selectedTabIcon="ion|ios-alarm" tabIcon="ion|ios-alarm-outline"/>
+
+            <Route name="favorites" schema="tab" title="Favorites" hideNavBar={true}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline">
+              <Router>
+                <Route name="favoritesMain" component={Favorites} />
+              </Router>
+            </Route>
+            <Route name="appointments" schema="tab" title="Appointments" component={Appointments} hideNavBar={true}  selectedTabIcon="ion|ios-alarm" tabIcon="ion|ios-alarm-outline"/>
             <Route name="settings" schema="tab" title="Settings" component={Settings} selectedTabIcon="ion|ios-gear" tabIcon="ion|ios-gear-outline" />
           </Router>
         </Route>

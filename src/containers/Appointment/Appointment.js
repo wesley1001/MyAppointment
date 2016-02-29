@@ -20,7 +20,6 @@ class Appointment extends Component {
   constructor(props) {
     super(props);
 
-
     this.state={
       selectedDate: new Date(),
       selectedTime: {},
@@ -31,12 +30,8 @@ class Appointment extends Component {
   }
 
   componentWillMount() {
-    if(this.props.auth) {
-      if(!this.props.user.isAuthenticated) {
-        Actions.loginDialog({
-          dialogText:'Please Login to view and manage your Favorites'
-        });
-      }
+    if(!this.props.user.isAuthenticated) {
+      Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'});
     }
   }
 
