@@ -63,11 +63,7 @@ class App extends Component {
               </Router>
             </Route>
 
-            <Route name="favorites" schema="tab" title="Favorites" hideNavBar={true}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline">
-              <Router>
-                <Route name="favoritesMain" component={Favorites} />
-              </Router>
-            </Route>
+            <Route name="favorites" schema="tab" name="favorites" component={Favorites} selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"/>
             <Route name="appointments" schema="tab" title="Appointments" component={Appointments} hideNavBar={true}  selectedTabIcon="ion|ios-alarm" tabIcon="ion|ios-alarm-outline"/>
             <Route name="settings" schema="tab" title="Settings" component={Settings} selectedTabIcon="ion|ios-gear" tabIcon="ion|ios-gear-outline" />
           </Router>

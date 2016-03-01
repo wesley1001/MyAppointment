@@ -13,6 +13,7 @@ import {
   FAVORITES_SUCCESS,
   FAVORITES_FAILURE,
   DELETE_APPOINTMENT,
+  UNFAVORITE_COMPANY,
   LOGIN_SUCCESS
 } from '../../constants/ActionTypes';
 
@@ -94,6 +95,9 @@ export default function user(state = initialState, action = {}) {
       return state
         .setIn(['favorites', 'isFetching'], false)
         .setIn(['favorites', 'error'], action.error);
+    case UNFAVORITE_COMPANY:
+      return state
+        .setIn(['favorites','collection'],state.favorites.collection.filter((favorite) => favorite.id != action.id));
     default:
       return state;
   }

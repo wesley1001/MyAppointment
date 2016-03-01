@@ -33,7 +33,7 @@ export default class CompanyList extends Component {
                   size={30}
                   color={'red'}
                   style={styles.heartIcon}
-                  ref="favoriteIcon"
+                  ref={"favoriteIcon" + company.id}
                 />
               </TouchableHighlight>
             </View>

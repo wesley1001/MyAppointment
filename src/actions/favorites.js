@@ -5,6 +5,7 @@ import {
   FAVORITES_REQUEST,
   FAVORITES_SUCCESS,
   FAVORITES_FAILURE,
+  UNFAVORITE_COMPANY
 } from '../constants/ActionTypes'
 
 function favoritesRequest() {
@@ -70,6 +71,7 @@ export function unFavoriteCompany(company) {
       return fetch(url)
         .then(response => response.json())
         .then(json => {
+          dispatch({type:UNFAVORITE_COMPANY,id:company.id})
           console.log('success');
         })
         .catch((err)=> {

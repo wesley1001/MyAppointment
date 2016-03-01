@@ -3,7 +3,7 @@ import React, {PropTypes}  from 'react';
 import { Component, Image, View } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchCategory } from './../../actions/Category/category';
-import { favoriteCompany } from './../../actions/favorites';
+import { favoriteCompany,unFavoriteCompany } from './../../actions/favorites';
 import { assets } from './../../utils/assets';
 import CompanyList from './../../components/Company/CompanyList';
 import LoadingIndicator from './../../components/LoadingIndicator';
@@ -29,7 +29,17 @@ class Category extends Component {
 
   favoriteCompany(company) {
     const {dispatch} = this.props;
-    dispatch(favoriteCompany(company));
+    if(company.isFavorited) {
+      dispatch(unFavoriteCompany(company));
+      //@todo:: normalize the reducers
+      dispatch(fetchCategory(this.props.id));
+
+    } else {
+      dispatch(favoriteCompany(company));
+      //@todo:: normalize the reducers
+      dispatch(fetchCategory(this.props.id));
+
+    }
   }
 
   render() {

@@ -1,8 +1,8 @@
 'use strict';
 import React from 'react';
-import { Component, ScrollView, Image, View } from 'react-native';
+import { Component, ScrollView, Image, View,RefreshControl } from 'react-native';
 import { connect } from '../../../node_modules/react-redux';
-import { fetchFavorites,favoriteCompany } from './../../actions/favorites';
+import { fetchFavorites,favoriteCompany,unFavoriteCompany } from './../../actions/favorites';
 import { assets } from './../../utils/assets';
 import CompanyList from './../../components/Company/CompanyList';
 import LoadingIndicator from './../../components/LoadingIndicator';
@@ -12,6 +12,10 @@ class Favorites extends Component {
 
   constructor(props) {
     super(props);
+    this.state={
+      isRefreshing:false
+    }
+    this.onRefresh = this.onRefresh.bind(this);
   }
 
   componentWillMount() {
@@ -29,21 +33,47 @@ class Favorites extends Component {
     });
   }
 
-  favoriteCompany(company) {
+  unFavoriteCompany(company) {
     const {dispatch} = this.props;
-    dispatch(favoriteCompany(company));
+    //if(company.isFavorited) {
+    dispatch(unFavoriteCompany(company));
+    //@todo:: normalize the reducers
+    //dispatch(fetchCategory(this.props.id));
+  }
+
+  onRefresh() {
+    this.setState({isRefreshing: true});
+    Promise.all([
+      this.props.dispatch(fetchFavorites())
+    ]).then((val)=>this.setState({isRefreshing: false}));
   }
 
   render() {
     const { user } = this.props;
     return (
+
       <Image source={assets.nail} style={{flex: 1,width: null,height: null,paddingTop: 10}}>
-        {user.favorites.isFetching ? <LoadingIndicator /> : <View />}
-        <CompanyList
-          companies={user.favorites.collection}
-          loadCompany={this.loadCompany.bind(this)}
-          favoriteCompany={this.favoriteCompany.bind(this)}
-        />
+        <ScrollView
+          refreshControl={
+          <RefreshControl
+            refreshing={this.state.isRefreshing}
+            onRefresh={this.onRefresh}
+            tintColor="white"
+            title="Loading..."
+            colors={['#ff0000', '#00ff00', '#0000ff']}
+            progressBackgroundColor="#ffff00"
+          />
+        }
+        >
+
+          {user.favorites.isFetching ? <LoadingIndicator /> : <View />}
+          <CompanyList
+            companies={user.favorites.collection}
+            loadCompany={this.loadCompany.bind(this)}
+            favoriteCompany={this.unFavoriteCompany.bind(this)}
+          />
+        </ScrollView>
+
       </Image>
     );
   }
