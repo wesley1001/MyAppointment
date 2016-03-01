@@ -9,8 +9,9 @@ const Actions = require('react-native-router-flux').Actions;
 export default class ConfirmedAppointmentList extends Component {
 
   renderRow(appointment) {
-    const { cancelAppointment } = this.props.cancelAppointment;
     const {company,employee,timing} = appointment;
+    const appointmentDate = new Date(appointment.date);
+    const month = appointmentDate.toLocaleString('en-us', { month: "short" });
     return (
       <View style={styles.cellContainer}>
         <View style={styles.cellWrapper}>
@@ -22,9 +23,9 @@ export default class ConfirmedAppointmentList extends Component {
                 color={'red'}
                 style={{width:20,height:20,alignSelf:'center',fontWeight:100}}
               />
-              <Text style={styles.month}>July</Text>
+              <Text style={styles.month}>{month}</Text>
             </View>
-            <Text style={styles.day}>5</Text>
+            <Text style={styles.day}>{appointmentDate.getDay()}</Text>
             <View style={{flexDirection:'row',alignItems:'center'}}>
               <Icon
                 name='ion|clock'
