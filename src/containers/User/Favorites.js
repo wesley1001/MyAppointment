@@ -43,9 +43,8 @@ class Favorites extends Component {
 
   onRefresh() {
     this.setState({isRefreshing: true});
-    Promise.all([
       this.props.dispatch(fetchFavorites())
-    ]).then((val)=>this.setState({isRefreshing: false}));
+      .then((val)=>this.setState({isRefreshing: false}));
   }
 
   render() {

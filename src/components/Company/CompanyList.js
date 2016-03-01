@@ -7,6 +7,7 @@ import { Icon } from 'react-native-icons';
 export default class CompanyList extends Component {
 
   handleFavorites(company) {
+    //this.refs.favoriteIcon+company.id.name('ion|person');
     this.props.favoriteCompany(company)
   }
   renderRow(company) {
