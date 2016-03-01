@@ -25,7 +25,12 @@ export default class Login extends Component {
   handleLogin() {
     const {dispatch} = this.props;
     const credentials = this.state.credentials;
-    dispatch(login(credentials));
+    Promise.all([
+      dispatch(login(credentials))
+    ]).then((val)=>{
+      Actions.home();
+    })
+    .catch((err)=>{console.log(err)});
   }
 
   handleRegisterRoute() {

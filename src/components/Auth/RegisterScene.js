@@ -17,7 +17,7 @@ export default class RegisterScene extends Component {
 
   render() {
 
-    //Form.stylesheet = stylesheet;
+    Form.stylesheet = stylesheet;
 
     const {register} = this.props;
 

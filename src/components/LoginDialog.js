@@ -22,7 +22,7 @@ export default class LoginDialog extends Component {
           </Text>
           <Button
             style={styles.button}
-            onPress={()=>Actions.auth()}
+            onPress={()=>Actions.login()}
             textStyle={{fontSize: 18, color:'white'}}
           >
             Login
@@ -32,7 +32,7 @@ export default class LoginDialog extends Component {
           </Text>
           <Button
             style={styles.button}
-            onPress={()=>Actions.main()}
+            onPress={()=>Actions.register()}
             textStyle={{fontSize: 18, color:'white'}}
           >
             Sign up

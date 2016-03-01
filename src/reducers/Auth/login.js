@@ -2,7 +2,8 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  ON_LOGIN_FORM_FIELD_CHANGE
+  ON_LOGIN_FORM_FIELD_CHANGE,
+  LOGOUT_USER
 } from '../../constants/ActionTypes';
 
 import {Record} from 'immutable';
@@ -34,26 +35,16 @@ export default function login(state = initialState, action = {}) {
   switch (action.type) {
     case LOGIN_REQUEST:
       return state.setIn(['isFetching'], true).setIn(['isLoggedIn'], false).setIn(['error'], null);
-
     case LOGIN_SUCCESS:
       return state.setIn(['isFetching'], false).setIn(['isLoggedIn'], true).setIn(['error'], null);
-
     case LOGIN_FAILURE:
       return state.setIn(['isFetching'], false).setIn(['isLoggedIn'], false).setIn(['error'], action.error);
-
     case ON_LOGIN_FORM_FIELD_CHANGE:
-    {
       const {field, value} = action.payload;
-
       let nextState = state.setIn(['form', 'fields', field], value).setIn(['form', 'error'], null);
-
       return validate(rules(nextState, action));
-    }
-    case Actions.onPush:
-    {
-      console.log('pushed login route');
-    }
-
+    case LOGOUT_USER:
+      return state.setIn(['isFetching'], false).setIn(['isLoggedIn'], false).setIn(['error'], null);
     default:
       return state;
   }

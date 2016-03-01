@@ -12,7 +12,7 @@ import Company from './containers/Company/Company';
 import Appointment from './containers/Appointment/Appointment';
 import TabIcon from './components/TabIcon';
 import Map from './containers/Company/Map';
-import Settings from './components/Settings';
+import Settings from './containers/Settings';
 import LoginDialog from './components/LoginDialog';
 import Favorites from './containers/User/Favorites';
 import Appointments from './containers/User/Appointments';
@@ -62,19 +62,13 @@ class App extends Component {
                 <Route name="services" component={Map} title="Map" />
               </Router>
             </Route>
-
             <Route name="favorites" schema="tab" name="favorites" component={Favorites} selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"/>
             <Route name="appointments" schema="tab" title="Appointments" component={Appointments} hideNavBar={true}  selectedTabIcon="ion|ios-alarm" tabIcon="ion|ios-alarm-outline"/>
             <Route name="settings" schema="tab" title="Settings" component={Settings} selectedTabIcon="ion|ios-gear" tabIcon="ion|ios-gear-outline" />
           </Router>
         </Route>
-
-        <Route name="auth" hideNavBar={true} >
-          <Router>
-            <Route name="login" title="Login" component={Login} />
-            <Route name="register" component={Register} title="Register" schema="default" hideNavBar={false}/>
-          </Router>
-        </Route>
+        <Route name="login" title="Login" component={Login} hideNavBar={true} />
+        <Route name="register" component={Register} title="Register" schema="default" hideNavBar={true}/>
         <Route name="loginDialog" schema="modal" hideNavBar={true}  component={LoginDialog} />
       </Router>
     )

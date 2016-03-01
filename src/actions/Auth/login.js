@@ -1,10 +1,11 @@
 import {API_ROOT} from './../../utils/config'
-import { setUserToken,getUserToken } from './../../utils/storage';
+import { setUserToken,getUserToken,API_TOKEN,forgetItem } from './../../utils/storage';
 
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT_USER,
   ON_LOGIN_FORM_FIELD_CHANGE
 } from '../../constants/ActionTypes';
 
@@ -80,4 +81,12 @@ export function onLoginFormFieldChange(field,value) {
     type: ON_LOGIN_FORM_FIELD_CHANGE,
     payload: {field: field, value: value}
   };
+}
+
+export function logoutUser() {
+  console.log('loggin out');
+  forgetItem(API_TOKEN);
+  return (dispatch) => {
+    dispatch({type:LOGOUT_USER})
+  }
 }

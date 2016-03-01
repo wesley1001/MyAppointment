@@ -3,15 +3,21 @@
 import React, { Component,ListView,ScrollView, TouchableHighlight, StyleSheet, Text, View,AlertIOS } from 'react-native';
 import LoadingIndicator from './../components/LoadingIndicator';
 import { Icon } from 'react-native-icons';
+import { logoutUser } from './../actions/Auth/login';
 const Actions = require('react-native-router-flux').Actions;
+import { connect } from 'react-redux';
 
-export default class Settings extends Component {
+class Settings extends Component {
 
 
+  performLogout() {
+    this.props.dispatch(logoutUser());
+    Actions.home();
+  }
   // fetch timings
   //@todo: perform logout
   logout = () => {
-    AlertIOS.alert('Are you sure you want to logout ?  ', null, [{text: 'Yes', onPress:()=>{return Actions.home()}},{text:'No'}]);
+    AlertIOS.alert('Are you sure you want to logout ?  ', null, [{text: 'Yes', onPress:()=>{this.performLogout()}},{text:'No'}]);
   };
 
   render() {
@@ -133,3 +139,11 @@ var styles = StyleSheet.create({
 
 
 });
+
+function mapStateToProps(state) {
+  return {
+    ...state
+  }
+}
+
+export default connect(mapStateToProps)(Settings);

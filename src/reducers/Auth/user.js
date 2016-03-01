@@ -14,7 +14,8 @@ import {
   FAVORITES_FAILURE,
   DELETE_APPOINTMENT,
   UNFAVORITE_COMPANY,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  LOGOUT_USER
 } from '../../constants/ActionTypes';
 
 const InitialState= Record({
@@ -98,6 +99,12 @@ export default function user(state = initialState, action = {}) {
     case UNFAVORITE_COMPANY:
       return state
         .setIn(['favorites','collection'],state.favorites.collection.filter((favorite) => favorite.id != action.id));
+    case LOGOUT_USER:
+      return state
+        .set('entity',{})
+        .set('isAuthenticated',false)
+        .setIn(['favorites','collection'],[])
+        .setIn(['appointments','collection'],[]);
     default:
       return state;
   }
