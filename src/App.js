@@ -45,7 +45,7 @@ class App extends Component {
                 barButtonTextStyle={{ fontSize:15, color:'white',alignSelf:'center',fontFamily:'Menlo-Bold' }}
                 backIcon={{tintColor:'white',backgroundColor:'white',fontFamily:'Menlo-Bold'}}
         />
-        <Schema name="tab" type="switch" icon={TabIcon}  />
+        <Schema name="tab" type="switch" icon={TabIcon}/>
 
         <Route name="home">
           <Router footer={TabBar} tabBarStyle={{backgroundColor:'#99ddff'}} showNavigationBar={false}>

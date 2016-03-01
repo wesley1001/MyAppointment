@@ -28,18 +28,23 @@ class Category extends Component {
   }
 
   favoriteCompany(company) {
-    const {dispatch} = this.props;
-    if(company.isFavorited) {
-      dispatch(unFavoriteCompany(company));
-      //@todo:: normalize the reducers
-      dispatch(fetchCategory(this.props.id));
 
+    if(!this.props.user.isAuthenticated) {
+      Actions.loginDialog({dialogText:'Please login to add to favorites'});
     } else {
-      dispatch(favoriteCompany(company));
-      //@todo:: normalize the reducers
-      dispatch(fetchCategory(this.props.id));
+      const {dispatch} = this.props;
+      if(company.isFavorited) {
+        dispatch(unFavoriteCompany(company));
+        //@todo:: normalize the reducers
+        dispatch(fetchCategory(this.props.id));
 
+      } else {
+        dispatch(favoriteCompany(company));
+        //@todo:: normalize the reducers
+        dispatch(fetchCategory(this.props.id));
+      }
     }
+
   }
 
   render() {

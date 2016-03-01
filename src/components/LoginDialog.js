@@ -28,15 +28,16 @@ export default class LoginDialog extends Component {
             Login
           </Button>
           <Text style={styles.orText}>
-            OR
+            Don't have an account ?
           </Text>
           <Button
             style={styles.button}
             onPress={()=>Actions.register()}
             textStyle={{fontSize: 18, color:'white'}}
           >
-            Sign up
+            Sign up now !
           </Button>
+          <Text style={styles.minFeatureText} onPress={()=>Actions.pop()}>Browse the site with limited features</Text>
 
         </View>
       </Image>
@@ -70,7 +71,11 @@ const styles = StyleSheet.create({
     padding:10,
   },
   orText:{
-    paddingBottom:10
+    paddingBottom:10,
+    paddingTop:20
+  },
+  minFeatureText:{
+    paddingTop:20
   },
   button: {
     backgroundColor: '#5BC3BE',
