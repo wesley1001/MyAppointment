@@ -65,7 +65,6 @@ class Favorites extends Component {
           />
         }
         >
-
           {user.favorites.isFetching ? <LoadingIndicator /> : <View />}
           <CompanyList
             companies={user.favorites.collection}

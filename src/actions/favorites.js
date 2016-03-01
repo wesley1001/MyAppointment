@@ -39,10 +39,9 @@ export function fetchFavorites() {
         .then(json => {
           dispatch(favoritesSuccess(json));
         })
-        .catch((err)=> {
-          dispatch(favoritesFailure(err))
-        })
-    });
+    }).catch((err)=> {
+      dispatch(favoritesFailure(err))
+    })
   }
 }
 

@@ -13,6 +13,10 @@ const Actions = require('react-native-router-flux').Actions;
 
 export default class LoginDialog extends Component {
 
+  componentWillReceiveProps(nextProps) {
+    console.log('next props ',nextProps);
+  }
+
   render() {
     return (
       <Image source={assets.bg} style={styles.container}>

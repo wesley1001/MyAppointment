@@ -25,7 +25,7 @@ class Appointment extends Component {
       selectedTime: {},
       selectedEmployee: {},
       showEmployeeListModal : false,
-      showAppointmentConfirmModal : false,
+      showAppointmentConfirmModal : false
     };
   }
 
@@ -82,11 +82,8 @@ class Appointment extends Component {
   }
 
   handleConfirm() {
-    const {dispatch,user} = this.props;
-
-    Promise.all([
-      dispatch(createAppointment(this.state.selectedDate,this.state.selectedTime,this.state.selectedEmployee))
-    ]).then(()=>console.log('success'))
+    this.props.dispatch(createAppointment(this.state.selectedDate,this.state.selectedTime,this.state.selectedEmployee))
+      .then(()=>console.log('success'))
       .catch(()=>console.log('error'));
   }
 

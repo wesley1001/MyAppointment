@@ -25,12 +25,16 @@ export default class Login extends Component {
   handleLogin() {
     const {dispatch} = this.props;
     const credentials = this.state.credentials;
-    Promise.all([
-      dispatch(login(credentials))
-    ]).then((val)=>{
-      Actions.home();
-    })
-    .catch((err)=>{console.log(err)});
+
+    dispatch(login(credentials))
+      .then((success)=> {
+        if(success) {
+          Actions.home();
+        } else {
+          alert('Wrong Credentials, Try again');
+        }
+      })
+      .catch(()=>{alert('network error')});
   }
 
   handleRegisterRoute() {

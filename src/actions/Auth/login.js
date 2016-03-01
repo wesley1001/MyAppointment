@@ -30,7 +30,6 @@ function loginFailure(message) {
 }
 
 export function login(credentials) {
-  console.log(credentials);
   const url = API_ROOT + '/auth/login';
   return dispatch => {
     dispatch(loginRequest());
@@ -43,8 +42,10 @@ export function login(credentials) {
         if (json.success) {
           dispatch(loginSuccess(json));
           setUserToken(json.data.api_token);
+          return true;
         } else {
           dispatch(loginFailure(json.message));
+          return false;
         }
       })
       .catch((err)=> dispatch(loginFailure(err)));

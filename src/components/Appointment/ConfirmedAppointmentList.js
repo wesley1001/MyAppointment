@@ -53,7 +53,6 @@ export default class ConfirmedAppointmentList extends Component {
                   <Text style={styles.service}>
                     {company.services[0].name_en}
                   </Text>
-                  <Text style={styles.duration}>({company.services[0].pivot.duration_en |0} min)</Text>
                 </View>
                 {employee ? <Text style={styles.employee}>with {employee.name_en}</Text>  : <Text/>}
 
