@@ -42,7 +42,7 @@ export default class ConfirmedAppointmentList extends Component {
               <Icon
                 name='ion|location'
                 size={15}
-                color={'purple'}
+                color={'gray'}
                 style={{width:15,height:15,alignSelf:'center'}}
               />
               <Text style={styles.location}>{company.city_en}</Text>
@@ -58,14 +58,14 @@ export default class ConfirmedAppointmentList extends Component {
 
               </View>
 
-              <View style={styles.cancelWrapper}>
+              <View style={styles.cancelContainer}>
                 <TouchableHighlight onPress={()=>this.props.cancelAppointment(appointment)} underlayColor="transparent">
 
                   <View >
                     <Text style={styles.price}>{company.services[0].pivot.price |0} KD</Text>
-                    <View style={styles.employeeSelectWrapper}>
+                    <View style={styles.cancelWrapper}>
                       <View style={{flex:2}}>
-                        <Text style={styles.employeeName} >cancel</Text>
+                        <Text style={styles.cancel} >cancel</Text>
                       </View>
                       <View style={{flex:1}}>
                         <Icon
@@ -127,7 +127,7 @@ var styles = StyleSheet.create({
   rightCol:{
     flex:2,
   },
-  cancelWrapper:{
+  cancelContainer:{
     flex:1,
     alignSelf:'center'
   },
@@ -146,30 +146,25 @@ var styles = StyleSheet.create({
     paddingBottom:5
   },
   location: {
-    color:'purple',
-    fontWeight:'500',
     fontSize:13,
+    color:'black'
   },
   service: {
     fontSize:16,
     color:'#6ed3cf',
-    fontWeight:'500',
     paddingBottom:5
   },
   duration: {
     fontSize:10,
     color:'#06000a',
-    fontWeight:'500',
     paddingLeft:5
   },
   employee:{
     fontSize:13,
-    fontWeight:'700',
     color:'#c43235'
   },
   price: {
     fontSize:20,
-    color:'#677077',
     fontWeight:'700',
     textAlign:'center',
     paddingBottom:5
@@ -192,18 +187,17 @@ var styles = StyleSheet.create({
     alignSelf:'center',
     color:'gray'
   },
-  employeeSelectWrapper: {
+  cancelWrapper: {
     backgroundColor:'red',
     paddingTop:5,
     paddingBottom:5,
     flexDirection:'row',
     alignItems:'center'
   },
-  employeeName:{
+  cancel:{
     fontSize:13,
     paddingTop:3,
     paddingBottom:3,
-    fontWeight:'700',
     color:'white',
     textAlign:'center'
   },
