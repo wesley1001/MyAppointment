@@ -1,8 +1,9 @@
 'use strict';
-import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput} from 'react-native';
-import t from 'tcomb-form-native';
+import React from 'react';
+import { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput } from 'react-native';
 import FormButton from './../FormButton';
-import stylesheet from '../../assets/style/form';
+import stylesheet from './../../assets/style/form';
+import t from 'tcomb-form-native';
 const Form = t.form.Form;
 
 export default class RegisterScene extends Component {
@@ -94,7 +95,7 @@ export default class RegisterScene extends Component {
               options={options}
               value={this.props.fields}
               onChange={this.props.onChange}
-          />
+        />
 
         <FormButton
           onPress={this.handleRegister.bind(this)}
@@ -104,7 +105,7 @@ export default class RegisterScene extends Component {
           onPress={this.handleLoginRoutePress.bind(this)}
           style={styles.center}
           underlayColor='transparent'
-          >
+        >
           <Text style={[styles.label,styles.textUnderline, styles.mTop20]}>have an account ? Login </Text>
         </TouchableHighlight>
 

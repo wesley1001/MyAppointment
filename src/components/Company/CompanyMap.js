@@ -1,11 +1,6 @@
 'use strict';
-import React from 'react-native';
-
-const {
-  Component,
-  StyleSheet,
-  MapView,
-  } = React;
+import React, { PropTypes } from 'react';
+import { Component,StyleSheet,MapView } from 'react-native';
 
 export default class CompanyMap extends Component {
 
@@ -57,7 +52,9 @@ export default class CompanyMap extends Component {
   }
 }
 
-CompanyMap.propTypes = {};
+CompanyMap.propTypes = {
+  pin:PropTypes.object.isRequired
+};
 
 let styles = StyleSheet.create({
   mapContainer: {

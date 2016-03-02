@@ -1,5 +1,4 @@
 'use strict';
-
 import React, { PropTypes } from 'react';
 import { Component,ListView,ScrollView, TouchableHighlight, StyleSheet, Text, View,AlertIOS } from 'react-native';
 import { Icon } from 'react-native-icons';
@@ -20,9 +19,7 @@ export default class EmployeePicker extends Component {
 
   render() {
     const {employees,onEmployeeSelect} = this.props;
-
     return(
-
       <Modal
         backdrop={true} backdropOpacity={0.8} backdropColor="black"
         position="bottom"
@@ -47,4 +44,10 @@ export default class EmployeePicker extends Component {
     )
   }
 }
+
+EmployeePicker.propTypes = {
+  employees:PropTypes.array.isRequired,
+  onEmployeeSelect:PropTypes.func.isRequired
+};
+
 

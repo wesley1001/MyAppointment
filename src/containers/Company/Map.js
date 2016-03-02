@@ -1,14 +1,6 @@
-var React = require('react-native');
-var {
-  StyleSheet,
-  PropTypes,
-  View,
-  Text,
-  Dimensions,
-  TouchableOpacity,
-  } = React;
-
-var MapView = require('react-native-maps');
+import React, { PropTypes } from 'react-native';
+import { Component, StyleSheet,PropTypes,View,Text, Dimensions,TouchableOpacity } from 'react-native';
+import MapView from 'react-native-maps';
 
 var { width, height } = Dimensions.get('window');
 
@@ -18,29 +10,34 @@ const LONGITUDE = 47.9667;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-var Map = React.createClass({
-  getInitialState() {
-    return {
+export default class Map extends  Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       region: {
         latitude: LATITUDE,
         longitude: LONGITUDE,
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
-      },
-    };
-  },
+      }
+    }
+    this.onRegionChange = this.onRegionChange.bind(this);
+    this.jumpRandom = this.jumpRandom.bind(this);
+    this.animateRandom = this.animateRandom.bind(this);
+    this.randomRegion = this.randomRegion.bind(this);
+  }
 
   onRegionChange(region) {
     this.setState({ region });
-  },
+  }
 
   jumpRandom() {
     this.setState({ region: this.randomRegion() });
-  },
+  }
 
   animateRandom() {
     this.refs.map.animateToRegion(this.randomRegion());
-  },
+  }
 
   randomRegion() {
     var { region } = this.state;
@@ -49,7 +46,7 @@ var Map = React.createClass({
       latitude: region.latitude + (Math.random() - 0.5) * region.latitudeDelta / 2,
       longitude: region.longitude + (Math.random() - 0.5) * region.longitudeDelta / 2,
     };
-  },
+  }
 
   render() {
     return (
@@ -76,8 +73,8 @@ var Map = React.createClass({
         </View>
       </View>
     );
-  },
-});
+  }
+}
 
 var styles = StyleSheet.create({
   container: {
@@ -118,5 +115,3 @@ var styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
 });
-
-module.exports = Map;

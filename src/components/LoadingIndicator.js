@@ -1,4 +1,5 @@
-import React, { Component,StyleSheet,ActivityIndicatorIOS,View} from 'react-native'
+import React from 'react';
+import { Component,ActivityIndicatorIOS,View } from 'react-native'
 
 export default class LoadingIndicator extends Component {
   render() {

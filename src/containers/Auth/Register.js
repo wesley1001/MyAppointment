@@ -1,10 +1,10 @@
 'use strict';
-import React, { Component, View, ScrollView,StyleSheet } from 'react-native';
-import LoadingIndicator from './../../components/LoadingIndicator';
+import React from 'react';
+import { Component, View, ScrollView } from 'react-native';
 import { connect } from '../../../node_modules/react-redux';
-import {signup,onRegisterFormFieldChange} from '../../actions/Auth/register';
+import { signup,onRegisterFormFieldChange } from '../../actions/Auth/register';
 import RegisterScene from './../../components/Auth/RegisterScene';
-
+import LoadingIndicator from './../../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
 
 class Register extends Component {
@@ -56,7 +56,7 @@ class Register extends Component {
 
     return (
 
-      <ScrollView style={styles.container}>
+      <ScrollView style={{padding:10,paddingTop: 64}}>
 
         {register.isFetching ? <LoadingIndicator style={{ marginTop:10}} /> : <View />}
 
@@ -73,14 +73,6 @@ class Register extends Component {
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-    paddingTop: 64
-  }
-});
-
 
 function mapStateToProps(state) {
   const { register } = state;

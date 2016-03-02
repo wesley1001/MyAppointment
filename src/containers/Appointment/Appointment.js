@@ -1,12 +1,10 @@
 'use strict';
-
 import React, { PropTypes } from 'react';
 import { Component,ScrollView,AlertIOS,View,Text } from 'react-native';
 import { connect } from '../../../node_modules/react-redux';
 import { fetchTiming } from './../../actions/timings';
 import { createAppointment,invalidateCreatedAppointment } from './../../actions/appointments';
 import { Icon } from 'react-native-icons';
-import ServiceItem from './../../components/Service/ServiceItem';
 import Calendar from './../../components/Appointment/Calendar';
 import TimingList from './../../components/Appointment/TimingList';
 import AppointmentList from './../../components/Appointment/AppointmentList';
@@ -19,7 +17,6 @@ class Appointment extends Component {
 
   constructor(props) {
     super(props);
-
     this.state={
       selectedDate: new Date(),
       selectedTime: {},

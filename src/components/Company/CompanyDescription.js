@@ -1,6 +1,5 @@
 'use strict';
-import React from 'react';
-
+import React, { PropTypes } from 'react';
 import { Component,StyleSheet,View,Text } from 'react-native';
 
 export default class CompanyDescription extends Component {
@@ -14,6 +13,12 @@ export default class CompanyDescription extends Component {
     );
   }
 }
+
+CompanyDescription.propTypes = {
+  company:PropTypes.object.isRequired,
+  services:PropTypes.array.isRequired,
+  loadDateTime:PropTypes.func.isRequired
+};
 
 let styles = StyleSheet.create({
   container: {

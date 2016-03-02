@@ -1,6 +1,5 @@
 'use strict';
-
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Component, View, Text, TouchableHighlight, StyleSheet,ListView } from 'react-native';
 import { Icon } from 'react-native-icons';
 
@@ -92,3 +91,8 @@ var styles = StyleSheet.create({
   },
 
 });
+
+EmployeeList.propTypes = {
+  employees:PropTypes.array.isRequired,
+  onEmployeeSelect:PropTypes.func.isRequired
+};

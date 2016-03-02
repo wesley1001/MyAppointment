@@ -1,10 +1,9 @@
 'use strict';
 
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView} from 'react-native';
-
+import React from 'react-native';
+import { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView} from 'react-native';
 import { Icon } from 'react-native-icons';
-var CalendarPicker = require('react-native-calendar-picker');
-
+const CalendarPicker = require('react-native-calendar-picker');
 
 export default class ServiceItem extends Component {
 
@@ -13,13 +12,10 @@ export default class ServiceItem extends Component {
       <View style={styles.container}>
       </View>
     );
-
   }
 
   render() {
-
     const {service} = this.props;
-
     if (service.id && service.id > 0) {
       return this.renderContent(service);
     }
@@ -31,10 +27,6 @@ export default class ServiceItem extends Component {
 var styles = StyleSheet.create({
   container: {
   },
-
   selectedDate: {
-
   }
-
-
 });

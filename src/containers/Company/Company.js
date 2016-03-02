@@ -1,5 +1,4 @@
 'use strict';
-
 import React, { PropTypes } from 'react';
 import { Component, View, ScrollView, SegmentedControlIOS } from 'react-native';
 import { connect } from '../../../node_modules/react-redux';

@@ -1,5 +1,4 @@
 'use strict';
-
 import React, { PropTypes } from 'react';
 import { Component,ListView,ScrollView, TouchableHighlight, StyleSheet, Text, View,AlertIOS } from 'react-native';
 import { Icon } from 'react-native-icons';
@@ -103,4 +102,16 @@ export default class AppointmentConfirm extends Component {
     )
   }
 }
+
+AppointmentConfirm.propTypes = {
+  company:PropTypes.object.isRequired,
+  selectedEmployee:PropTypes.object.isRequired,
+  selectedTime:PropTypes.object.isRequired,
+  selectedDate:PropTypes.string.isRequired,
+  onClosed:PropTypes.func.isRequired,
+  showAppointmentConfirmModal:PropTypes.func.isRequired,
+  onAppointmentConfirm:PropTypes.func.isRequired,
+  inValidateAppointment:PropTypes.func.isRequired,
+  user:PropTypes.object.isRequired
+};
 

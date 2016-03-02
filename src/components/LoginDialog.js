@@ -1,14 +1,7 @@
-import React,{
-  PropTypes,
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  Component
-} from 'react-native';
-
-import Button from 'apsl-react-native-button';
+import React, { PropTypes } from 'react';
+import { StyleSheet,View,Text,Image,Component } from 'react-native';
 import { assets } from './../utils/assets';
+import Button from 'apsl-react-native-button';
 const Actions = require('react-native-router-flux').Actions;
 
 export default class LoginDialog extends Component {

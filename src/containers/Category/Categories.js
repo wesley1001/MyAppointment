@@ -1,5 +1,5 @@
 'use strict';
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import { Component, View, Image, ScrollView } from 'react-native';
 import { connect } from '../../../node_modules/react-redux';
 import { fetchCategories } from './../../actions/Category/categories';

@@ -101,9 +101,8 @@ export function fetchAppointments() {
 }
 
 export function cancelAppointment(id) {
-  //console.log('cancelling appointment',id);
+  console.log(id);
   return (dispatch) => {
-    //dispatch(appointmentRequest());
     getUserToken().then((token) => {
       const url = API_ROOT + `/appointments/cancel/?api_token=${token}`;
       return fetch(url,{

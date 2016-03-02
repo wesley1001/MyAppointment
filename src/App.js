@@ -10,13 +10,12 @@ import Categories from './containers/Category/Categories';
 import Category from './containers/Category/Category';
 import Company from './containers/Company/Company';
 import Appointment from './containers/Appointment/Appointment';
-import TabIcon from './components/TabIcon';
 import Map from './containers/Company/Map';
 import Settings from './containers/Settings';
-import LoginDialog from './components/LoginDialog';
 import Favorites from './containers/User/Favorites';
 import Appointments from './containers/User/Appointments';
-
+import TabIcon from './components/TabIcon';
+import LoginDialog from './components/LoginDialog';
 
 class App extends Component {
 
@@ -25,7 +24,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-
     this.props.dispatch(loginUserByToken());
   }
 

@@ -1,5 +1,5 @@
 'use strict';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Component,ListView,TouchableHighlight,StyleSheet,Text,View,AlertIOS } from 'react-native';
 import LoadingIndicator from './../LoadingIndicator';
 import Seperator from './../Seperator';
@@ -48,6 +48,13 @@ export default class TimingList extends Component {
   }
 
 }
+
+TimingList.propTypes = {
+  timings:PropTypes.object.isRequired,
+  selectedDate:PropTypes.string.isRequired,
+  selectedTime:PropTypes.string.isRequired,
+  onTimeSelect:PropTypes.func.isRequired
+};
 
 var styles = StyleSheet.create({
   container: {
