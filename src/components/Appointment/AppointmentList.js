@@ -60,7 +60,6 @@ AppointmentList.propTypes = {
   company : PropTypes.object.isRequired,
   employeeName: PropTypes.string,
   listEmployees: PropTypes.func.isRequired,
-  selectedDate:PropTypes.string.isRequired
 };
 
 var styles = StyleSheet.create({

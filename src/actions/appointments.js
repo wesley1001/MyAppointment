@@ -8,7 +8,7 @@ import {
   CREATE_APPOINTMENT_REQUEST,
   CREATE_APPOINTMENT_SUCCESS,
   CREATE_APPOINTMENT_FAILURE,
-  CREATE_APPOINTMENT_INVALIDATE,
+  INVALIDATE_APPOINTMENT,
   DELETE_APPOINTMENT
 } from '../constants/ActionTypes';
 
@@ -117,6 +117,6 @@ export function cancelAppointment(id) {
 
 export function invalidateCreatedAppointment() {
   return (dispatch) => {
-    dispatch({type: CREATE_APPOINTMENT_INVALIDATE});
+    dispatch({type: INVALIDATE_APPOINTMENT});
   }
 }

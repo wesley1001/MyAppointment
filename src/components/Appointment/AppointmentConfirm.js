@@ -107,9 +107,9 @@ AppointmentConfirm.propTypes = {
   company:PropTypes.object.isRequired,
   selectedEmployee:PropTypes.object.isRequired,
   selectedTime:PropTypes.object.isRequired,
-  selectedDate:PropTypes.string.isRequired,
+  //selectedDate:PropTypes.string.isRequired,
   onClosed:PropTypes.func.isRequired,
-  showAppointmentConfirmModal:PropTypes.func.isRequired,
+  showAppointmentConfirmModal:PropTypes.bool.isRequired,
   onAppointmentConfirm:PropTypes.func.isRequired,
   inValidateAppointment:PropTypes.func.isRequired,
   user:PropTypes.object.isRequired

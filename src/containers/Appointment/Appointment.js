@@ -99,12 +99,10 @@ class Appointment extends Component {
           company={company}
           selectedEmployee={this.state.selectedEmployee}
           listEmployees={this.listEmployees.bind(this)}
-          selectedDate={this.state.selectedDate}
         />
 
         <TimingList
           timings={timings}
-          selectedDate={this.state.selectedDate}
           selectedTime={this.state.selectedTime}
           onTimeSelect={this.onTimeSelect.bind(this)}
         />

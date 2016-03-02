@@ -8,7 +8,7 @@ import {
   CREATE_APPOINTMENT_REQUEST,
   CREATE_APPOINTMENT_SUCCESS,
   CREATE_APPOINTMENT_FAILURE,
-  CREATE_APPOINTMENT_INVALIDATE,
+  INVALIDATE_APPOINTMENT,
   FAVORITES_REQUEST,
   FAVORITES_SUCCESS,
   FAVORITES_FAILURE,
@@ -75,7 +75,7 @@ export default function user(state = initialState, action = {}) {
         .setIn(['appointment', 'isCreating'], false)
         .setIn(['appointment', 'created'], false)
         .setIn(['appointment', 'error'], action.error);
-    case CREATE_APPOINTMENT_INVALIDATE:
+    case INVALIDATE_APPOINTMENT:
       return state
         .setIn(['appointment', 'isCreating'], false)
         .setIn(['appointment', 'created'], false)

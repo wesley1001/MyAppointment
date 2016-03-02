@@ -22,5 +22,5 @@ export default class Calendar extends Component {
 }
 Calendar.propTypes = {
   onDateChange:PropTypes.func.isRequired,
-  selectedDate:PropTypes.string.isRequired
+  //selectedDate:PropTypes.string.isRequired
 }

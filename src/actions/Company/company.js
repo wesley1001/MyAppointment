@@ -27,7 +27,7 @@ function companyFailure(error) {
 }
 
 export function fetchCompany(companyID) {
-  const url = API_ROOT + '/companies/' + companyID;
+  const url = `${API_ROOT}/companies/${companyID}/show`;
   return (dispatch) => {
     dispatch(companyRequest());
     return fetch(url)
