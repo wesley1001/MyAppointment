@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react-native';
-import { Component, StyleSheet,PropTypes,View,Text, Dimensions,TouchableOpacity } from 'react-native';
+import { Component,StyleSheet,View,Text,Dimensions,TouchableOpacity } from 'react-native';
 import MapView from 'react-native-maps';
 
 var { width, height } = Dimensions.get('window');

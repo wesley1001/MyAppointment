@@ -40,13 +40,9 @@ export function fetchService(serviceID) {
   }
 }
 
-
 export function fetchTiming(date,companyID,serviceID) {
   let parsedDate = date.toISOString().slice(0, 10);
-
   var url = API_ROOT +'/timings/?company=' + companyID + '&service=' + serviceID + '&date=' + parsedDate;
-
-  console.log(url);
   return (dispatch) => {
     dispatch(serviceRequest());
     return fetch(url)

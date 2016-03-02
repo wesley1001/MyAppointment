@@ -18,7 +18,7 @@ export default class TabIcon extends Component {
 }
 
 TabIcon.propTypes = {
-  selected:PropTypes.string,
+  //selected:PropTypes.func,
   selectedTabIcon:PropTypes.string.isRequired,
   tabIcon:PropTypes.string.isRequired
 }

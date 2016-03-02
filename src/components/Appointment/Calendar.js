@@ -1,5 +1,5 @@
 'use strict';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Component, StyleSheet, Text, View } from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 

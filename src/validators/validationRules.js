@@ -32,7 +32,6 @@ const nameConstraints = {
  * ## password validation rule
  * read the message... ;)
  */
-//const passwordPattern =  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,12}$/;
 const passwordPattern = /^[a-zA-Z0-9]{6,12}$/;
 const passwordConstraints = {
   password: {

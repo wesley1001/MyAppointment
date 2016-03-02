@@ -85,7 +85,6 @@ export function onLoginFormFieldChange(field,value) {
 }
 
 export function logoutUser() {
-  console.log('loggin out');
   forgetItem(API_TOKEN);
   return (dispatch) => {
     dispatch({type:LOGOUT_USER})

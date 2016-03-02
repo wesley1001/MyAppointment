@@ -42,7 +42,6 @@ export function fetchCompany(companyID) {
 }
 
 export function setCompanyService(service) {
-  console.log('set service',service);
   return (dispatch) => dispatch({
     type:SET_COMPANY_SERVICE,
     entity:service

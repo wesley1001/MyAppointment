@@ -52,12 +52,8 @@ export function favoriteCompany(company) {
       const url = API_ROOT + `/companies/${company.id}/favorite/?api_token=${token}`;
       return fetch(url)
         .then(response => response.json())
-        .then(json => {
-          console.log('success');
-        })
-        .catch((err)=> {
-          console.log('error',err);
-        })
+        .then(json => {})
+        .catch((err)=> {console.log('error',err);})
     });
   }
 }
@@ -71,11 +67,8 @@ export function unFavoriteCompany(company) {
         .then(response => response.json())
         .then(json => {
           dispatch({type:UNFAVORITE_COMPANY,id:company.id})
-          console.log('success');
         })
-        .catch((err)=> {
-          console.log('error',err);
-        })
+        .catch((err)=> {console.log('error',err);})
     });
   }
 }
