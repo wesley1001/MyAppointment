@@ -68,12 +68,16 @@ export function createAppointment(date,time,employee) {
           company_id:state().company.entity.id,
           service_id:state().company.service.id
         };
+        console.log(params);
         let url = API_ROOT +`/appointments/create/?api_token=${token}`;
         return fetch(url, {
           method: 'POST',
           body: JSON.stringify(params)
         })
-          .then(response => response.json())
+          .then(response => {
+            console.log(response);
+            response.json()
+          })
           .then(json => {
             if (json.success) {
               dispatch(createAppointmentSuccess());

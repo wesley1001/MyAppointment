@@ -77,7 +77,7 @@ export default class LoginScene extends Component {
         <FormButton
           //isDisabled={!login.form.isValid || login.isFetching}
           onPress={this.handleLogin.bind(this)}
-          buttonText='الدخول'
+          buttonText='Login'
         />
 
         <TouchableHighlight onPress={this.handleRegisterRoutePress.bind(this)} underlayColor='transparent'

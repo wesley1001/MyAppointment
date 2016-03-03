@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react-native';
-import { Component,StyleSheet,View,Text,Dimensions,TouchableOpacity } from 'react-native';
+import { Component,StyleSheet,View,Text,Dimensions,TouchableOpacity,Linking } from 'react-native';
 import { connect } from './../../../node_modules/react-redux';
 import { fetchCompanyMarkers } from './../../actions/Company/companies';
 import CompanyMapsMarker from './../../components/Company/CompanyMapsMarker';
@@ -10,13 +10,17 @@ class Map extends  Component {
 
     super(props);
 
+    const { width, height } = Dimensions.get('window');
+    const ASPECT_RATIO = width / height;
+    const LATITUDE = 29.3667;
+    const LONGITUDE = 47.9667;
     const LATITUDE_DELTA = 1.5;
-    const LONGITUDE_DELTA = LATITUDE_DELTA * (Dimensions.get('window').width / Dimensions.get('window').height);
+    const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
     this.state = {
       region: {
-        latitude: 29.3667,
-        longitude: 47.9667,
+        latitude: LATITUDE,
+        longitude: LONGITUDE,
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA
       }
@@ -33,11 +37,32 @@ class Map extends  Component {
     this.setState({ region });
   }
 
+  followLocation(company) {
+    console.log(company);
+    //let url = `http://maps.apple.com/?ll=${company.latitude},${company.longitude}`;
+    //LinkingIOS.canOpenUrl(url).then((val)=>console.log(val)).catch((err)=>console.log('err',err));
+    //let url = `geo:${parseFloat(company.latitude)},${parseFloat(company.longitude)}`;
+    let url = `comgooglemaps://?center=${parseFloat(company.latitude)},${parseFloat(company.longitude)}&zoom=14&views=traffic`;
+    Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        console.log('Don\'t know how to open URI: ' + url);
+      }
+    });
+
+    //let url = `geo:${parseFloat(company.latitude)},${parseFloat(company.longitude)}`;
+    //Linking.openUrl(url);
+  }
+
   render() {
+    const { companies } = this.props;
     return (
       <CompanyMapsMarker
         region={this.state.region}
         onRegionChange={this.onRegionChange.bind(this)}
+        companies={companies}
+        followLocation={this.followLocation.bind(this)}
       />
     );
   }
@@ -46,7 +71,7 @@ class Map extends  Component {
 function mapStateToProps(state) {
   return {
     ...state,
-    company: state.company
+    companies: state.companies
   }
 }
 
