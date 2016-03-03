@@ -40,19 +40,12 @@ class Map extends  Component {
   followLocation(company) {
     console.log(company);
     //let url = `http://maps.apple.com/?ll=${company.latitude},${company.longitude}`;
-    //LinkingIOS.canOpenUrl(url).then((val)=>console.log(val)).catch((err)=>console.log('err',err));
-    //let url = `geo:${parseFloat(company.latitude)},${parseFloat(company.longitude)}`;
     let url = `comgooglemaps://?center=${parseFloat(company.latitude)},${parseFloat(company.longitude)}&zoom=14&views=traffic`;
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
         Linking.openURL(url);
-      } else {
-        console.log('Don\'t know how to open URI: ' + url);
-      }
+      } else {console.log('Don\'t know how to open URI: ' + url);}
     });
-
-    //let url = `geo:${parseFloat(company.latitude)},${parseFloat(company.longitude)}`;
-    //Linking.openUrl(url);
   }
 
   render() {

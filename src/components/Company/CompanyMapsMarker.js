@@ -37,7 +37,7 @@ export default class CompanyMapsMarker extends Component {
                   <Text>{company.name_en}</Text>
                   <TouchableOpacity underlayColor="transparent" onPress={()=>this.props.followLocation(company)}>
                     <Text style={styles.getDirectionText}>
-                      Click here to get direction
+                      Click here to get direction (google maps)
                     </Text>
                   </TouchableOpacity>
                 </View>
