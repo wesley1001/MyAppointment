@@ -68,8 +68,7 @@ export function createAppointment(date,time,employee) {
           company_id:state().company.entity.id,
           service_id:state().company.service.id
         };
-        console.log(params);
-        let url = API_ROOT +`/appointments/create/?api_token=${token}`;
+        let url = API_ROOT +`/appointments/make?api_token=${token}`;
         return fetch(url, {
           method: 'POST',
           body: JSON.stringify(params)
@@ -104,21 +103,35 @@ export function fetchAppointments() {
   }
 }
 
-export function cancelAppointment(id) {
-  console.log(id);
-  return (dispatch) => {
-    getUserToken().then((token) => {
-      const url = API_ROOT + `/appointments/cancel/?api_token=${token}`;
-      return fetch(url,{
-        method:'POST',
-        id:id
-      })
-        .then(response => response.json())
-        .then(json => dispatch({type:DELETE_APPOINTMENT,id:id}))
-    }).catch((err)=> console.log(err));
+function deleteAppointment(id){
+  return {
+    type: DELETE_APPOINTMENT,
+    id: id
   }
 }
 
+export function cancelAppointment(id) {
+  return (dispatch) => {
+    dispatch(deleteAppointment(id));
+    getUserToken().then((token) => {
+      let params = {
+        id:id
+      };
+      const url = API_ROOT + `/appointments/cancel?api_token=${token}`;
+      return fetch(url, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(params)
+      })
+        .then(response => response.json())
+        .then(json => console.log(json))
+        .catch((err)=>console.log(err))
+    });
+  }
+}
 export function invalidateCreatedAppointment() {
   return (dispatch) => {
     dispatch({type: INVALIDATE_APPOINTMENT});

@@ -57,7 +57,7 @@ export function loginUserByToken() {
     dispatch(loginRequest());
     getUserToken()
       .then((token) => {
-        const url = API_ROOT + `/auth/login/token/`;
+        const url = API_ROOT + `/auth/login/token`;
         return fetch(url, {
           method: 'POST',
           body: JSON.stringify({

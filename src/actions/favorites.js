@@ -47,8 +47,8 @@ export function fetchFavorites() {
 
 // get Auth user's favorites
 export function favoriteCompany(company) {
-  return (dispatch) => {
-    getUserToken().then((token) => {
+  return dispatch => {
+    return getUserToken().then((token) => {
       const url = API_ROOT + `/companies/${company.id}/favorite/?api_token=${token}`;
       return fetch(url)
         .then(response => response.json())
@@ -60,8 +60,8 @@ export function favoriteCompany(company) {
 
 // get Auth user's favorites
 export function unFavoriteCompany(company) {
-  return (dispatch) => {
-    getUserToken().then((token) => {
+  return dispatch => {
+    return getUserToken().then((token) => {
       const url = API_ROOT + `/companies/${company.id}/unfavorite/?api_token=${token}`;
       return fetch(url)
         .then(response => response.json())
