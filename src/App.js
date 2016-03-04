@@ -5,7 +5,6 @@ import { Router, Route, Schema, Animations, TabBar } from 'react-native-router-f
 import { loginUserByToken } from './actions/Auth/login';
 import { fetchFavorites } from './actions/favorites';
 import { fetchAppointments } from './actions/appointments';
-
 import { connect } from 'react-redux';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
