@@ -8,7 +8,7 @@
   "dependencies": {
     "apsl-react-native-button": "^2.4.2",
     "immutable": "^3.7.6",
-    "lodash": "^4.5.1",
+    "lodash": "^4.6.1",
     "react-native": "^0.21.0",
     "react-native-calendar-picker": "^1.0.1",
     "react-native-code-push": "1.7.3-beta",
@@ -20,7 +20,7 @@
     "react-redux": "^4.4.0",
     "redux": "^3.3.1",
     "redux-logger": "^2.6.1",
-    "redux-storage": "^3.0.1",
+    "redux-storage": "^4.0.0",
     "redux-thunk": "^1.0.3",
     "tcomb-form-native": "^0.4.0",
     "validate.js": "^0.9.0"
