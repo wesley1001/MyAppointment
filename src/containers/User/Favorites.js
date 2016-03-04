@@ -20,9 +20,10 @@ class Favorites extends Component {
 
   componentWillMount() {
     if(!this.props.user.isAuthenticated) {
-      Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'});
+      //setTimeout(() => Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'}), 0);
+      Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'})
     } else {
-      this.props.dispatch(fetchFavorites());
+      //this.props.dispatch(fetchFavorites());
     }
   }
 
@@ -79,7 +80,6 @@ class Favorites extends Component {
 
 function mapStateToProps(state) {
   return {
-    ...state,
     user:state.user
   }
 }

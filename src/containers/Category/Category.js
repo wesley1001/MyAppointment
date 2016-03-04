@@ -34,10 +34,16 @@ class Category extends Component {
     } else {
       const {dispatch} = this.props;
       if(company.isFavorited) {
-        dispatch(unFavoriteCompany(company)).then(()=>dispatch(fetchCategory(this.props.id)));
+        dispatch(unFavoriteCompany(company));
+        //dispatch(unFavoriteCompany(company)).then(()=> {
+          //dispatch(fetchCategory(this.props.id))
+        //});
         //@todo:: normalize the reducers
       } else {
-        dispatch(favoriteCompany(company)).then(()=>dispatch(fetchCategory(this.props.id)));
+        dispatch(favoriteCompany(company));
+        //dispatch(favoriteCompany(company)).then(()=>{
+          //dispatch(fetchCategory(this.props.id))
+        //});
       }
     }
 

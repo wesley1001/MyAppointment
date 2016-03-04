@@ -3,10 +3,14 @@ import React from 'react';
 import { Component, Navigator, StatusBarIOS } from 'react-native';
 import { Router, Route, Schema, Animations, TabBar } from 'react-native-router-flux';
 import { loginUserByToken } from './actions/Auth/login';
+import { fetchFavorites } from './actions/favorites';
+import { fetchAppointments } from './actions/appointments';
+
 import { connect } from 'react-redux';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
 import Categories from './containers/Category/Categories';
+import Test from './containers/Category/Test';
 import Category from './containers/Category/Category';
 import Company from './containers/Company/Company';
 import Appointment from './containers/Appointment/Appointment';
@@ -24,7 +28,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(loginUserByToken());
+    const {dispatch} = this.props;
+    dispatch(loginUserByToken()).then((success)=>{
+      if(success) {
+        dispatch(fetchFavorites());
+        //dispatch(fetchAppointments());
+      }
+
+    });
   }
 
   componentWillMount() {

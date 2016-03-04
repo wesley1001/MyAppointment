@@ -1,4 +1,4 @@
-import {Record} from 'immutable';
+import {Record,List} from 'immutable';
 
 import {
   SET_USER,
@@ -14,8 +14,10 @@ import {
   FAVORITES_FAILURE,
   DELETE_APPOINTMENT,
   UNFAVORITE_COMPANY,
+  FAVORITE_COMPANY,
   LOGIN_SUCCESS,
-  LOGOUT_USER
+  LOGOUT_USER,
+
 } from '../../constants/ActionTypes';
 
 const InitialState= Record({
@@ -29,7 +31,7 @@ const InitialState= Record({
   })),
   appointments:new (Record({
     isFetching:false,
-    collection:[],
+    collection:List(),
     error:null
   })),
   appointment:new (Record({
@@ -96,6 +98,9 @@ export default function user(state = initialState, action = {}) {
       return state
         .setIn(['favorites', 'isFetching'], false)
         .setIn(['favorites', 'error'], action.error);
+    case 'FAVORITE_COMPANY':
+      return state
+        .setIn(['favorites','collection'],state.favorites.collection.concat(Object.assign({},action.entity,{isFavorited:true})));
     case UNFAVORITE_COMPANY:
       return state
         .setIn(['favorites','collection'],state.favorites.collection.filter((favorite) => favorite.id != action.id));
@@ -107,5 +112,7 @@ export default function user(state = initialState, action = {}) {
         .setIn(['appointments','collection'],[]);
     default:
       return state;
+
+
   }
 }

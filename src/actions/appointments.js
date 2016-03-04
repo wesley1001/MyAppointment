@@ -74,7 +74,6 @@ export function createAppointment(date,time,employee) {
           body: JSON.stringify(params)
         })
           .then(response => {
-            console.log(response);
             response.json()
           })
           .then(json => {

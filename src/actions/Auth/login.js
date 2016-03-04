@@ -55,7 +55,7 @@ export function login(credentials) {
 export function loginUserByToken() {
   return (dispatch) => {
     dispatch(loginRequest());
-    getUserToken()
+    return getUserToken()
       .then((token) => {
         const url = API_ROOT + `/auth/login/token`;
         return fetch(url, {
@@ -68,12 +68,17 @@ export function loginUserByToken() {
           .then(json => {
             if (json.success) {
               dispatch(loginSuccess(json));
+              return true;
             } else {
               dispatch(loginFailure(json.message));
+              return false;
             }
           })
       })
-      .catch((err)=> dispatch(loginFailure(err)));
+      .catch((err)=> {
+        dispatch(loginFailure(err));
+        return false;
+      });
   }
 }
 
