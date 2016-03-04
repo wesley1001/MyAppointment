@@ -36,10 +36,7 @@ class Favorites extends Component {
 
   unFavoriteCompany(company) {
     const {dispatch} = this.props;
-    //if(company.isFavorited) {
     dispatch(unFavoriteCompany(company));
-    //@todo:: normalize the reducers
-    //dispatch(fetchCategory(this.props.id));
   }
 
   onRefresh() {
@@ -80,6 +77,7 @@ class Favorites extends Component {
 
 function mapStateToProps(state) {
   return {
+    ...state,
     user:state.user
   }
 }

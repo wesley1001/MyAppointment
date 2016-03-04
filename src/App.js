@@ -34,7 +34,6 @@ class App extends Component {
         dispatch(fetchFavorites());
         //dispatch(fetchAppointments());
       }
-
     });
   }
 
