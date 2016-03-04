@@ -26,7 +26,7 @@ const InitialState= Record({
   entity: new (Record({})),
   favorites:new (Record({
     isFetching:false,
-    collection:[],
+    collection:List(),
     error:null
   })),
   appointments:new (Record({
@@ -98,12 +98,12 @@ export default function user(state = initialState, action = {}) {
       return state
         .setIn(['favorites', 'isFetching'], false)
         .setIn(['favorites', 'error'], action.error);
-    case 'FAVORITE_COMPANY':
+    case FAVORITE_COMPANY:
       return state
         .setIn(['favorites','collection'],state.favorites.collection.concat(Object.assign({},action.entity,{isFavorited:true})));
     case UNFAVORITE_COMPANY:
       return state
-        .setIn(['favorites','collection'],state.favorites.collection.filter((favorite) => favorite.id != action.id));
+        .setIn(['favorites','collection'],state.favorites.collection.filter((favorite) => favorite.id != action.entity.id));
     case LOGOUT_USER:
       return state
         .set('entity',{})
