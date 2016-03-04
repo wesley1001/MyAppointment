@@ -27,7 +27,7 @@ function categoriesFailure(error) {
 
 export function fetchCategories() {
   const url = API_ROOT + '/categories';
-  return function (dispatch) {
+  return function (dispatch,getState) {
     dispatch(categoriesRequest());
     return fetch(url)
       .then(response => response.json())

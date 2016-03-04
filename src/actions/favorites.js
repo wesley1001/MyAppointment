@@ -49,7 +49,10 @@ export function fetchFavorites() {
 // get Auth user's favorites
 export function favoriteCompany(company) {
 
-  return (dispatch) => {
+  // @todo: replace this with immutable func
+  company.isFavorited=true;
+
+  return (dispatch,getState) => {
 
     // update the reducer without waiting for the server, for instant rendering
     // if the api request failed, remove the item from array
@@ -76,6 +79,7 @@ export function favoriteCompany(company) {
 export function unFavoriteCompany(company) {
   return (dispatch) => {
 
+    // @todo: replace this with immutable func
     company.isFavorited=false;
 
     // update the reducer without waiting for the server, for instant rendering
@@ -88,11 +92,11 @@ export function unFavoriteCompany(company) {
         .then(response => response.json())
         .then(json => {
           if(!json.success) {
-            //dispatch(favoriteCompany(company));
+            dispatch(favoriteCompany(company));
           }
         })
         .catch((err)=> {
-          //dispatch(favoriteCompany(company));
+          dispatch(favoriteCompany(company));
         })
         ;
     });

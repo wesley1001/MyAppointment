@@ -1,17 +1,18 @@
-import {Record} from 'immutable';
+import {Record,List} from 'immutable';
 
 import {
   CATEGORY_REQUEST,
   CATEGORY_SUCCESS,
   CATEGORY_FAILURE,
+  FAVORITE_COMPANY,
   UNFAVORITE_COMPANY
 } from '../../constants/ActionTypes';
 
 const InitialState = Record({
-  entity:{
-    companies:[]
-  },
   isFetching: false,
+  entity:new (Record({
+    companies:[]
+  })),
   error: null
 });
 
@@ -32,25 +33,10 @@ export default function category(state = initialState, action = {}) {
       return state
         .set('isFetching',false)
         .set('error',action.error);
+    case FAVORITE_COMPANY:
+      return state;
     case UNFAVORITE_COMPANY:
-      //return state
-      //  .setIn(['entity','companies'],null);
-
-      //return state.setIn(['entity','companies'],[]);
-    //return state.entity.companies.update(state.entity.companies.findIndex(function(item){
-    //  return item.get('id' === action.id);
-    //}), function(item){
-    //  return item.set('isFavorited',false);
-    //});
-
-    //list = list.update(
-    //  list.findIndex(function(item) {
-    //    return item.get("name") === "third";
-    //  }), function(item) {
-    //    return item.set("count", 4);
-    //  }
-    //);
-
+      return state;
     default:
       return state
   }
