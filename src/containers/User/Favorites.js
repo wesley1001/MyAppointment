@@ -14,17 +14,20 @@ class Favorites extends Component {
     super(props);
     this.state={
       isRefreshing:false
-    }
+    };
     this.onRefresh = this.onRefresh.bind(this);
   }
 
   componentWillMount() {
     if(!this.props.userReducer.isAuthenticated) {
-      //setTimeout(() => Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'}), 0);
       Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'})
     } else {
-      this.props.dispatch(fetchFavorites());
+      //this.props.dispatch(fetchFavorites());
     }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return nextProps.userReducer.isAuthenticated !== this.props.userReducer.isAuthenticated;
   }
 
   loadCompany(company) {
