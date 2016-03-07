@@ -22,7 +22,7 @@ class Categories extends Component {
   loadCategory(category) {
     Actions.categoryEntity({
       title:category.name,
-      id:category.id
+      categoryProp:category
       //data: category
     });
   }
@@ -47,9 +47,9 @@ class Categories extends Component {
 }
 
 function mapStateToProps(state) {
-  const { entities } = state;
+  const { entities,api } = state;
   return {
-    api: state.api,
+    api,
     categories:entities.categories
   }
 }

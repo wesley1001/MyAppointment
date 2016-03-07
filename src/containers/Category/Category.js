@@ -17,8 +17,12 @@ class Category extends Component {
 
   componentWillMount() {
     const {dispatch} = this.props;
-    dispatch(fetchCategory(this.props.id));
+    dispatch(fetchCategory(this.props.categoryProp.id));
   }
+
+  //componentWillUpdate(nextProps,nextState) {
+  // return nextProps.companies !== this.props.companies ;
+  //}
 
   loadCompany(company) {
     Actions.companyEntity({
@@ -50,14 +54,14 @@ class Category extends Component {
   }
 
   render() {
-    const {category} = this.props;
+    const {categoryProp,api,companies,categories} = this.props;
     return (
       <Image source={assets.bg} style={{flex: 1,width: null,height: null,paddingTop: 10}}>
-        {category.isFetching ? <LoadingIndicator /> : <View />}
+        {api.isFetching ? <LoadingIndicator /> : <View />}
         <CompanyList
           loadCompany={this.loadCompany.bind(this)}
           favoriteCompany={this.favoriteCompany.bind(this)}
-          companies={category.entity.companies}
+          companies={categories[categoryProp.id].companies ? categories[categoryProp.id].companies.map((i) => companies[i]) : []}
         />
       </Image>
     );
@@ -66,13 +70,16 @@ class Category extends Component {
 
 
 Category.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  categoryProp:PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
+  const { entities,api } = state;
   return {
-    ...state,
-    category: state.category
+    api,
+    categories:entities.categories,
+    companies:entities.companies ? entities.companies : {}
   }
 }
 
