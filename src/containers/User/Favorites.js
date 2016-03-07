@@ -78,7 +78,7 @@ class Favorites extends Component {
 
 function mapStateToProps(state) {
   const {entities } = state;
-  let userID = state.userReducer.entity.id;
+  let userID = state.userReducer.authUserID;
   return {
     userReducer:state.userReducer,
     favorites: entities.users[userID] ?

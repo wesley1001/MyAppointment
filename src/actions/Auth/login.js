@@ -1,5 +1,7 @@
 import {API_ROOT} from './../../utils/config'
 import { setUserToken,getUserToken,API_TOKEN,forgetItem } from './../../utils/storage';
+import { Schemas } from './../../constants/Schema';
+import { normalize } from 'normalizr';
 
 import {
   LOGIN_REQUEST,
@@ -16,9 +18,11 @@ function loginRequest() {
 }
 
 function loginSuccess(payload) {
+  console.log('pau',payload);
   return {
     type: LOGIN_SUCCESS,
-    entity:payload.data
+    userID:payload.userID,
+    entities:payload.normalized.entities
   };
 }
 
@@ -40,7 +44,8 @@ export function login(credentials) {
       .then(response => response.json())
       .then(json => {
         if (json.success) {
-          dispatch(loginSuccess(json));
+          const normalized = normalize(json.data,Schemas.USER);
+          dispatch(loginSuccess({normalized:normalized,userID:json.data.id}));
           setUserToken(json.data.api_token);
           return true;
         } else {
@@ -67,7 +72,8 @@ export function loginUserByToken() {
           .then(response => response.json())
           .then(json => {
             if (json.success) {
-              dispatch(loginSuccess(json));
+              const normalized = normalize(json.data,Schemas.USER);
+              dispatch(loginSuccess({normalized:normalized,userID:json.data.id}));
               return true;
             } else {
               dispatch(loginFailure(json.message));

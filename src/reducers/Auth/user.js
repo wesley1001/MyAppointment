@@ -22,16 +22,14 @@ import {
 
 const InitialState= Record({
   isAuthenticated :false,
+  authUserID:null, // authenticated user ID
   isFetching:false,
-  entity: new (Record({})),
   favorites:new (Record({
     isFetching:false,
-    //collection:[],
     error:null
   })),
   appointments:new (Record({
     isFetching:false,
-    //collection:[],
     error:null
   })),
   appointment:new (Record({
@@ -47,7 +45,7 @@ export default function userReducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return state
-        .set('entity',action.entity)
+        .set('authUserID',action.userID)
         .set('isAuthenticated',true);
     case APPOINTMENTS_REQUEST:
       return state
