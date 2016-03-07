@@ -2,7 +2,6 @@ import {
   COMPANY_REQUEST,
   COMPANY_SUCCESS,
   COMPANY_FAILURE,
-  SET_COMPANY_SERVICE
 } from '../../constants/ActionTypes'
 
 const initialState = {
@@ -12,7 +11,7 @@ const initialState = {
   service:{}
 }
 
-export default function company(state = initialState, action = {}) {
+export default function companyReducer(state = initialState, action = {}) {
   switch (action.type) {
     case COMPANY_REQUEST:
       return {
@@ -32,12 +31,6 @@ export default function company(state = initialState, action = {}) {
         ...state,
         isFetching: false,
         error: action.error
-      };
-    case SET_COMPANY_SERVICE:
-      return {
-        ... state,
-        service: action.entity,
-        error: null
       };
     default:
       return state;

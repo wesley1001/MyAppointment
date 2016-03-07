@@ -14,7 +14,7 @@ const InitialState = Record({
 
 const initialState = new InitialState;
 
-export default function companies(state = initialState, action = {}) {
+export default function companiesReducer(state = initialState, action = {}) {
   switch (action.type) {
     case COMPANIES_REQUEST:
       return state

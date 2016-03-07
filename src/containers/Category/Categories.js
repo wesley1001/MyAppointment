@@ -28,7 +28,7 @@ class Categories extends Component {
   }
 
   render() {
-    const { categories,api } = this.props;
+    const { categories,categoriesReducer } = this.props;
     return (
       <Image source={assets.lotus} style={{
         flex: 1,
@@ -39,7 +39,7 @@ class Categories extends Component {
         flexWrap:'wrap'
       }}
       >
-        {api.isFetching ? <LoadingIndicator  /> : <View/>}
+        {categoriesReducer.isFetching ? <LoadingIndicator  /> : <View/>}
         <CategoryList categories={categories} loadCategory={this.loadCategory}/>
       </Image>
     );
@@ -47,9 +47,9 @@ class Categories extends Component {
 }
 
 function mapStateToProps(state) {
-  const { entities,api } = state;
+  const { entities,categoriesReducer } = state;
   return {
-    api,
+    categoriesReducer,
     categories:entities.categories
   }
 }

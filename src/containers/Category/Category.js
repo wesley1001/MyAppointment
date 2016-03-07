@@ -54,10 +54,10 @@ class Category extends Component {
   }
 
   render() {
-    const {categoryProp,api,companies,categories} = this.props;
+    const {categoryProp,categoryReducer,companies,categories} = this.props;
     return (
       <Image source={assets.bg} style={{flex: 1,width: null,height: null,paddingTop: 10}}>
-        {api.isFetching ? <LoadingIndicator /> : <View />}
+        {categoryReducer.isFetching ? <LoadingIndicator /> : <View />}
         <CompanyList
           loadCompany={this.loadCompany.bind(this)}
           favoriteCompany={this.favoriteCompany.bind(this)}
@@ -75,11 +75,11 @@ Category.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const { entities,api } = state;
+  const { entities,categoryReducer } = state;
   return {
-    api,
+    categoryReducer,
     categories:entities.categories,
-    companies:entities.companies ? entities.companies : {}
+    companies:entities.companies
   }
 }
 
