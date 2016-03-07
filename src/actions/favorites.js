@@ -1,6 +1,7 @@
 import { API_ROOT } from './../utils/config';
 import { getUserToken } from './../utils/storage';
-
+import { Schemas } from './../constants/Schema';
+import { normalize } from 'normalizr';
 import {
   FAVORITES_REQUEST,
   FAVORITES_SUCCESS,
@@ -18,7 +19,7 @@ function favoritesRequest() {
 function favoritesSuccess(payload) {
   return {
     type: FAVORITES_SUCCESS,
-    collection: payload.data
+    entities: payload.entities
   }
 }
 
@@ -38,7 +39,8 @@ export function fetchFavorites() {
       return fetch(url)
         .then(response => response.json())
         .then(json => {
-          dispatch(favoritesSuccess(json));
+          const normalized = normalize(json.data,Schemas.USER);
+          dispatch(favoritesSuccess(normalized))
         })
     }).catch((err)=> {
       dispatch(favoritesFailure(err))

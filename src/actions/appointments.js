@@ -53,7 +53,7 @@ function createAppointmentFailure(error) {
 }
 
 
-export function createAppointment(date,time,employee) {
+export function createAppointment(company,service,date,time,employee) {
 
   return (dispatch,state) => {
 
@@ -65,9 +65,10 @@ export function createAppointment(date,time,employee) {
           date:date.toISOString().slice(0, 10),
           timing_id:time.id,
           employee_id:employee.id,
-          company_id:state().company.entity.id,
-          service_id:state().companyReducer.service.id
+          company_id:company.id,
+          service_id:service.id
         };
+        console.log('params',params);
         let url = API_ROOT +`/appointments/make?api_token=${token}`;
         return fetch(url, {
           method: 'POST',

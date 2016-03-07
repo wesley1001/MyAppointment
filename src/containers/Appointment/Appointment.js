@@ -79,7 +79,7 @@ class Appointment extends Component {
   }
 
   handleConfirm() {
-    this.props.dispatch(createAppointment(this.state.selectedDate,this.state.selectedTime,this.state.selectedEmployee))
+    this.props.dispatch(createAppointment(this.props.companyProp,this.props.serviceProp,this.state.selectedDate,this.state.selectedTime,this.state.selectedEmployee))
       .then(()=>console.log('success'))
       .catch(()=>console.log('error'));
   }

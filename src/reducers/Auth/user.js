@@ -26,12 +26,12 @@ const InitialState= Record({
   entity: new (Record({})),
   favorites:new (Record({
     isFetching:false,
-    collection:[],
+    //collection:[],
     error:null
   })),
   appointments:new (Record({
     isFetching:false,
-    collection:[],
+    //collection:[],
     error:null
   })),
   appointment:new (Record({
@@ -57,7 +57,7 @@ export default function userReducer(state = initialState, action = {}) {
       return state
         .setIn(['appointments', 'isFetching'], false)
         .setIn(['appointments', 'error'], null)
-        .setIn(['appointments', 'collection'], action.collection);
+        //.setIn(['appointments', 'collection'], action.collection);
     case APPOINTMENTS_FAILURE:
       return state
         .setIn(['appointments', 'isFetching'], false)
@@ -83,8 +83,9 @@ export default function userReducer(state = initialState, action = {}) {
         .setIn(['appointment', 'created'], false)
         .setIn(['appointment', 'error'], false);
     case DELETE_APPOINTMENT:
-      return state
-        .setIn(['appointments','collection'],state.appointments.collection.filter((appointment) => appointment.id != action.id));
+      return state;
+      //return state
+        //.setIn(['appointments','collection'],state.appointments.collection.filter((appointment) => appointment.id != action.id));
     case FAVORITES_REQUEST:
       return state
         .setIn(['favorites', 'isFetching'], true)
@@ -93,23 +94,27 @@ export default function userReducer(state = initialState, action = {}) {
       return state
         .setIn(['favorites', 'isFetching'], false)
         .setIn(['favorites', 'error'], null)
-        .setIn(['favorites', 'collection'], action.collection);
+        //.setIn(['favorites', 'collection'], action.collection);
     case FAVORITES_FAILURE:
       return state
         .setIn(['favorites', 'isFetching'], false)
         .setIn(['favorites', 'error'], action.error);
     case FAVORITE_COMPANY:
-      return state
-        .setIn(['favorites','collection'],state.favorites.collection.concat(action.entity));
+      return state;
+
+    //return state
+      //  .setIn(['favorites','collection'],state.favorites.collection.concat(action.entity));
     case UNFAVORITE_COMPANY:
-      return state
-        .setIn(['favorites','collection'],state.favorites.collection.filter((favorite) => favorite.id != action.entity.id));
+      return state;
+
+    //return state
+      //  .setIn(['favorites','collection'],state.favorites.collection.filter((favorite) => favorite.id != action.entity.id));
     case LOGOUT_USER:
       return state
         .set('entity',{})
         .set('isAuthenticated',false)
-        .setIn(['favorites','collection'],[])
-        .setIn(['appointments','collection'],[]);
+        //.setIn(['favorites','collection'],[])
+        //.setIn(['appointments','collection'],[]);
     default:
       return state;
 

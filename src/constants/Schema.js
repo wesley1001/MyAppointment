@@ -30,6 +30,7 @@ userSchema.define({
   favorites:arrayOf(companySchema),
 });
 
+
 export const Schemas = {
   CATEGORY:categorySchema,
   CATEGORY_ARRAY:arrayOf(categorySchema),

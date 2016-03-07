@@ -19,11 +19,11 @@ class Favorites extends Component {
   }
 
   componentWillMount() {
-    if(!this.props.user.isAuthenticated) {
+    if(!this.props.userReducer.isAuthenticated) {
       //setTimeout(() => Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'}), 0);
       Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'})
     } else {
-      //this.props.dispatch(fetchFavorites());
+      this.props.dispatch(fetchFavorites());
     }
   }
 
@@ -41,12 +41,13 @@ class Favorites extends Component {
 
   onRefresh() {
     this.setState({isRefreshing: true});
-      this.props.dispatch(fetchFavorites())
+    this.props.dispatch(fetchFavorites())
       .then((val)=>this.setState({isRefreshing: false}));
   }
 
   render() {
-    const { user } = this.props;
+    const { userReducer,favorites } = this.props;
+
     return (
 
       <Image source={assets.nail} style={{flex: 1,width: null,height: null,paddingTop: 10}}>
@@ -62,9 +63,9 @@ class Favorites extends Component {
           />
         }
         >
-          {user.favorites.isFetching ? <LoadingIndicator /> : <View />}
+          {userReducer.favorites.isFetching ? <LoadingIndicator /> : <View />}
           <CompanyList
-            companies={user.favorites.collection}
+            companies={favorites}
             loadCompany={this.loadCompany.bind(this)}
             favoriteCompany={this.unFavoriteCompany.bind(this)}
           />
@@ -76,9 +77,12 @@ class Favorites extends Component {
 }
 
 function mapStateToProps(state) {
+  const {entities } = state;
+  let userID = state.userReducer.entity.id;
   return {
-    ...state,
-    user:state.user
+    userReducer:state.userReducer,
+    favorites: entities.users[userID] ?
+      (entities.users[userID].favorites  ? entities.users[userID].favorites.map((company) => entities.companies[company] ) :[] ) : [],
   }
 }
 
