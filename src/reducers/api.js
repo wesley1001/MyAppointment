@@ -29,6 +29,9 @@ import {
   CREATE_APPOINTMENT_FAILURE,
   TIMING_FAILURE,
   APPOINTMENTS_FAILURE,
+  API_REQUEST,
+  API_SUCCESS,
+  API_FAILURE
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -37,6 +40,7 @@ const initialState = {
 
 export default function api(state = initialState, action = {}) {
   switch (action.type) {
+    case API_REQUEST:
     case CATEGORIES_REQUEST:
     case CATEGORY_REQUEST:
     case FAVORITES_REQUEST:
@@ -51,6 +55,7 @@ export default function api(state = initialState, action = {}) {
         ... state,
         isFetching: true
       }
+    case API_SUCCESS:
     case CATEGORIES_SUCCESS:
     case CATEGORY_SUCCESS:
     case FAVORITES_SUCCESS:
@@ -67,6 +72,7 @@ export default function api(state = initialState, action = {}) {
         collection: action.collection,
         error: null
       }
+    case API_FAILURE:
     case CATEGORIES_FAILURE:
     case CATEGORY_FAILURE:
     case FAVORITES_FAILURE:

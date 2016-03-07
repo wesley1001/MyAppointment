@@ -1,5 +1,11 @@
 export const SET_USER = 'SET_USER';
 
+
+
+export const API_REQUEST = 'API_REQUEST';
+export const API_SUCCESS = 'API_SUCCESS';
+export const API_FAILURE = 'API_FAILURE';
+
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
