@@ -45,7 +45,6 @@ class Company extends Component {
   render() {
     const {companyReducer,company, services } = this.props;
 
-    console.log(this.props);
     if(companyReducer.isFetching) {
       return ( <LoadingIndicator />);
     }  else {

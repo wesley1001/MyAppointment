@@ -86,7 +86,7 @@ class Appointment extends Component {
 
   render() {
 
-    const {timings,employees,company,userReducer,service} = this.props;
+    const {timings,employees,company,userReducer,service,timingReducer} = this.props;
     return (
       <ScrollView contentContainerStyle={{paddingTop:64}} contentInset={{bottom:49}} ref="scrollView">
 
@@ -105,7 +105,7 @@ class Appointment extends Component {
           timings={timings}
           selectedTime={this.state.selectedTime}
           onTimeSelect={this.onTimeSelect.bind(this)}
-          timingReducer
+          timingReducer={timingReducer}
         />
 
         <EmployeePicker

@@ -50,7 +50,7 @@ export default class TimingList extends Component {
 }
 
 TimingList.propTypes = {
-  timings:PropTypes.array.isRequired,
+  timings:PropTypes.object.isRequired,
   timingReducer:PropTypes.object.isRequired,
   selectedTime:PropTypes.object.isRequired,
   onTimeSelect:PropTypes.func.isRequired
