@@ -8,7 +8,7 @@ import categoriesReducer from './Category/categories';
 import categoryReducer from './Category/category';
 import companyReducer from './Company/company';
 import companiesReducer from './Company/companies';
-import timingsReducer from './timings';
+import timingReducer from './timings';
 //import api from './api';
 
 const rootReducer = combineReducers({
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   categoryReducer,
   companyReducer,
   companiesReducer,
-  timingsReducer,
+  timingReducer,
   //api
 });
 

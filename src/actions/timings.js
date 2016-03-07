@@ -1,4 +1,6 @@
 import {API_ROOT} from './../utils/config';
+import { Schemas } from './../constants/Schema';
+import { normalize } from 'normalizr';
 import {
   TIMING_REQUEST,
   TIMING_SUCCESS,
@@ -14,7 +16,7 @@ function timingRequest() {
 function timingSuccess(payload) {
   return {
     type: TIMING_SUCCESS,
-    collection: payload.data
+    entities:payload.entities
   }
 }
 
@@ -32,7 +34,8 @@ export function fetchTiming() {
     return fetch(url)
       .then(response => response.json())
       .then(json => {
-        dispatch(timingSuccess(json));
+        const normalized = normalize(json.data,Schemas.TIMING_ARRAY);
+        dispatch(timingSuccess(normalized))
       })
       .catch((err)=> {
         dispatch(timingFailure(err));

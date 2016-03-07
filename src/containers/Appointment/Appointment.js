@@ -135,9 +135,10 @@ class Appointment extends Component {
 
 Appointment.propTypes = {
   timings : PropTypes.object.isRequired,
+  timingReducer : PropTypes.object.isRequired,
   employees: PropTypes.array.isRequired,
-  company: PropTypes.object.isRequired,
-  user:PropTypes.object.isRequired,
+  companyProp: PropTypes.object.isRequired,
+  userReducer:PropTypes.object.isRequired,
   serviceProp:PropTypes.object.isRequired
 };
 
@@ -152,9 +153,9 @@ function mapStateToProps(state,ownProps) {
     timings:entities.timings,
     company:entities.companies[ownProps.companyProp.id],
     service:entities.services[ownProps.serviceProp.id],
-    userReducer:state.userReducer,
     employees:entities.companies[ownProps.companyProp.id].employees ? entities.companies[ownProps.companyProp.id].employees.map((employee)=>entities.employees[employee]) : [],
-    timingReducer:state.timingReducer
+    timingReducer:state.timingReducer,
+    userReducer:state.userReducer,
   }
 }
 
