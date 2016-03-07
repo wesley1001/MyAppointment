@@ -146,10 +146,6 @@ function mapStateToProps(state,ownProps) {
   const {entities} = state;
   return {
     ...state,
-    //timings:state.timings,
-    //company:state.company,
-    //employees:state.company.entity.employees,
-    //user:state.user
     timings:entities.timings,
     company:entities.companies[ownProps.companyProp.id],
     service:entities.services[ownProps.serviceProp.id],

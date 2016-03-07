@@ -74,9 +74,7 @@ export function createAppointment(company,service,date,time,employee) {
           method: 'POST',
           body: JSON.stringify(params)
         })
-          .then(response => {
-            response.json()
-          })
+          .then(response =>  response.json())
           .then(json => {
             if (json.success) {
               dispatch(createAppointmentSuccess());
