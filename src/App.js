@@ -28,12 +28,12 @@ class App extends Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
-    dispatch(loginUserByToken()).then((success)=>{
-      if(success) {
-        dispatch(fetchFavorites());
-        //dispatch(fetchAppointments());
-      }
-    });
+    //dispatch(loginUserByToken()).then((success)=>{
+    //  if(success) {
+    //    dispatch(fetchFavorites());
+    //    //dispatch(fetchAppointments());
+    //  }
+    //});
   }
 
   componentWillMount() {
@@ -62,6 +62,8 @@ class App extends Component {
                 <Route name="categoryEntity" component={Category} title=""/>
                 <Route name="companyEntity" component={Company} title=""/>
                 <Route name="appointmentContainer" component={Appointment} title=""  />
+                <Route name="test" component={Test} hideNavBar={true} title=""/>
+
               </Router>
             </Route>
             <Route name="browse" schema="tab" title="Browse" hideNavBar={true}  selectedTabIcon="ion|ios-location" tabIcon="ion|ios-location-outline">

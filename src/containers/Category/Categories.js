@@ -28,7 +28,8 @@ class Categories extends Component {
   }
 
   render() {
-    const { categories } = this.props;
+    const { categories,categoryCollection } = this.props;
+    console.log('cat col',categoryCollection);
     return (
       <Image source={assets.lotus} style={{
         flex: 1,
@@ -40,17 +41,18 @@ class Categories extends Component {
       }}
       >
         {categories.isFetching ? <LoadingIndicator  /> : <View/>}
-        <CategoryList categories={categories.collection} loadCategory={this.loadCategory}/>
+        <CategoryList categories={categoryCollection} loadCategory={this.loadCategory}/>
       </Image>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { categories } = state;
+  const { categories,entities } = state;
   return {
     ...state,
-    categories: categories
+    categories: categories,
+    categoryCollection:entities.categories
   }
 }
 

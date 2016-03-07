@@ -1,4 +1,7 @@
 import {API_ROOT} from './../../utils/config';
+import { Schemas } from './../../constants/Schema';
+import { normalize } from 'normalizr';
+
 import {
   CATEGORIES_REQUEST,
   CATEGORIES_SUCCESS,
@@ -11,10 +14,10 @@ function categoriesRequest() {
   }
 }
 
-function categoriesSuccess(payload) {
+function categoriesSuccess(normalized) {
   return {
     type: CATEGORIES_SUCCESS,
-    collection: payload.data
+    entities:normalized.entities
   }
 }
 
@@ -31,7 +34,10 @@ export function fetchCategories() {
     dispatch(categoriesRequest());
     return fetch(url)
       .then(response => response.json())
-      .then(response => dispatch(categoriesSuccess(response)))
+      .then(response => {
+        const normalized = normalize(response.data,Schemas.CATEGORY_ARRAY);
+        dispatch(categoriesSuccess(normalized));
+      })
       .catch(error => dispatch(categoriesFailure(error)))
   };
 }

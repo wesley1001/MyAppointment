@@ -38,7 +38,7 @@ export default class CategoryList extends Component {
 }
 
 CategoryList.propTypes = ({
-  categories : PropTypes.array.isRequired
+  categories : PropTypes.object.isRequired
 });
 
 var styles = StyleSheet.create({

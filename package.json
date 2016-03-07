@@ -9,6 +9,7 @@
     "apsl-react-native-button": "^2.4.2",
     "immutable": "^3.7.6",
     "lodash": "^4.6.1",
+    "normalizr": "^2.0.0",
     "react-native": "^0.21.0",
     "react-native-calendar-picker": "^1.0.1",
     "react-native-code-push": "1.7.3-beta",

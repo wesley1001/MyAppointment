@@ -7,7 +7,6 @@ import {
 } from '../../constants/ActionTypes'
 
 const InitialState = Record({
-  collection: [],
   isFetching: false,
   error: null
 });
@@ -24,7 +23,6 @@ export default function categories(state = initialState, action = {}) {
     case CATEGORIES_SUCCESS:
       return state
         .set('isFetching',false)
-        .set('collection',action.collection)
         .set('error',null);
     case CATEGORIES_FAILURE:
       return state

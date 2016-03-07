@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 
+import entities from './entities';
 import user from './Auth/user';
 import login from './Auth/login';
 import register from './Auth/register';
@@ -12,6 +13,7 @@ import service from './Service/service';
 import timings from './timings';
 
 const rootReducer = combineReducers({
+  entities,
   user,
   login,
   register,
