@@ -28,8 +28,7 @@ class Categories extends Component {
   }
 
   render() {
-    const { categories,categoryCollection } = this.props;
-    console.log('cat col',categoryCollection);
+    const { categories,api } = this.props;
     return (
       <Image source={assets.lotus} style={{
         flex: 1,
@@ -40,19 +39,18 @@ class Categories extends Component {
         flexWrap:'wrap'
       }}
       >
-        {categories.isFetching ? <LoadingIndicator  /> : <View/>}
-        <CategoryList categories={categoryCollection} loadCategory={this.loadCategory}/>
+        {api.isFetching ? <LoadingIndicator  /> : <View/>}
+        <CategoryList categories={categories} loadCategory={this.loadCategory}/>
       </Image>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { categories,entities } = state;
+  const { entities } = state;
   return {
-    ...state,
-    categories: categories,
-    categoryCollection:entities.categories
+    api: state.api,
+    categories:entities.categories
   }
 }
 

@@ -11,6 +11,7 @@ import companies from './Company/companies';
 import services from './Service/services';
 import service from './Service/service';
 import timings from './timings';
+import api from './api';
 
 const rootReducer = combineReducers({
   entities,
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
   companies,
   services,
   service,
-  timings
+  timings,
+  api
 });
 
 export default rootReducer;

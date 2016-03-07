@@ -10,9 +10,7 @@ const initialState ={ users: {}, categories:{}, companies: {},services:{},favori
 
 export default function entities(state = initialState, action) {
   if (action.entities) {
-    console.log('red entities',action.entities);
     return _.merge({}, state, action.entities);
-    //return Object.assign({},state,action.entities);
   }
 
   return state
