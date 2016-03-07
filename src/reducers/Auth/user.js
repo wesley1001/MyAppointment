@@ -99,17 +99,15 @@ export default function userReducer(state = initialState, action = {}) {
         .setIn(['favorites', 'error'], action.error);
     case FAVORITE_COMPANY:
       return state;
-
     //return state
       //  .setIn(['favorites','collection'],state.favorites.collection.concat(action.entity));
     case UNFAVORITE_COMPANY:
       return state;
-
     //return state
       //  .setIn(['favorites','collection'],state.favorites.collection.filter((favorite) => favorite.id != action.entity.id));
     case LOGOUT_USER:
       return state
-        .set('entity',{})
+        .set('authUserID',null)
         .set('isAuthenticated',false)
         //.setIn(['favorites','collection'],[])
         //.setIn(['appointments','collection'],[]);
