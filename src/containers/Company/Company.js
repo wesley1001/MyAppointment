@@ -22,7 +22,7 @@ class Company extends Component {
 
   componentWillMount() {
     const {dispatch} = this.props;
-    dispatch(fetchCompany(this.props.id));
+    dispatch(fetchCompany(this.props.companyProp.id));
   }
 
   loadDateTime(service) {
@@ -41,31 +41,32 @@ class Company extends Component {
 
 
   render() {
-    const {company } = this.props;
+    const {companyReducer,company, services } = this.props;
 
-    if(company.isFetching) {
+    console.log(this.props);
+    if(companyReducer.isFetching) {
       return ( <LoadingIndicator />);
     }  else {
       let mapPin = {
-        title:company.entity.name,
-        subtitle:company.entity.location,
-        latitude:parseFloat(company.entity.latitude),
-        longitude:parseFloat(company.entity.longitude)
+        title:company.name,
+        subtitle:company.location,
+        latitude:parseFloat(company.latitude),
+        longitude:parseFloat(company.longitude)
       };
 
       let selectedComponent;
 
       if(this.state.selectedIndex === 1) {
-        selectedComponent = <CompanyDescription company={company.entity} />
+        selectedComponent = <CompanyDescription company={company} />
       } else if(this.state.selectedIndex === 2) {
         selectedComponent = <CompanyMap pin={mapPin} />
       } else {
-        selectedComponent = <ServiceList company={company.entity} services={company.entity.services} loadDateTime={this.loadDateTime.bind(this)} />
+        selectedComponent = <ServiceList company={company} services={services} loadDateTime={this.loadDateTime.bind(this)} />
       }
 
       return (
         <ScrollView contentContainerStyle={{paddingTop: 64}}>
-          <CompanyItem company={company.entity}/>
+          <CompanyItem company={company}/>
           <View style={{margin:5,marginTop:20}}>
             <SegmentedControlIOS values={['Services', 'Description', 'Map']} tintColor="#99ddff" momentary={true} selectedIndex={0}
                                  onChange={this.onChange}
@@ -78,11 +79,18 @@ class Company extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state,ownProps) {
+  const { companyReducer,entities} = state;
   return {
-    ...state,
-    company: state.company
+    companyReducer,
+    company:entities.companies[ownProps.companyProp.id],
+    services:entities.companies[ownProps.companyProp.id].services.map((service) => entities.services[service])
   }
 }
+
+Company.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  companyProp:PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps)(Company);

@@ -28,12 +28,12 @@ class App extends Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
-    //dispatch(loginUserByToken()).then((success)=>{
-    //  if(success) {
-    //    dispatch(fetchFavorites());
-    //    //dispatch(fetchAppointments());
-    //  }
-    //});
+    dispatch(loginUserByToken()).then((success)=>{
+      if(success) {
+        dispatch(fetchFavorites());
+        dispatch(fetchAppointments());
+      }
+    });
   }
 
   componentWillMount() {

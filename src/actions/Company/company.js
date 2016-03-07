@@ -3,8 +3,9 @@ import {
   COMPANY_REQUEST,
   COMPANY_SUCCESS,
   COMPANY_FAILURE,
-  SET_COMPANY_SERVICE
 } from '../../constants/ActionTypes';
+import { normalize } from 'normalizr';
+import { Schemas } from './../../constants/Schema';
 
 function companyRequest() {
   return {
@@ -15,7 +16,7 @@ function companyRequest() {
 function companySuccess(payload) {
   return {
     type: COMPANY_SUCCESS,
-    entity: payload.data
+    entities: payload.entities
   }
 }
 
@@ -33,17 +34,11 @@ export function fetchCompany(companyID) {
     return fetch(url)
       .then(response => response.json())
       .then(json => {
-        dispatch(companySuccess(json))
+        const normalized = normalize(json.data,Schemas.COMPANY);
+        dispatch(companySuccess(normalized))
       })
       .catch((err)=> {
         dispatch(companyFailure(err))
       })
   }
-}
-
-export function setCompanyService(service) {
-  return (dispatch) => dispatch({
-    type:SET_COMPANY_SERVICE,
-    entity:service
-  });
 }

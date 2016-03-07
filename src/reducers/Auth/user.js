@@ -43,7 +43,7 @@ const InitialState= Record({
 
 const initialState = new InitialState;
 
-export default function user(state = initialState, action = {}) {
+export default function userReducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return state

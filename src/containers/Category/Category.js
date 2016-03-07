@@ -27,7 +27,7 @@ class Category extends Component {
   loadCompany(company) {
     Actions.companyEntity({
       title:company.name,
-      id: company.id
+      companyProp: company
     });
   }
 
@@ -40,13 +40,13 @@ class Category extends Component {
       if(company.isFavorited) {
         dispatch(unFavoriteCompany(company));
         //dispatch(unFavoriteCompany(company)).then(()=> {
-          //dispatch(fetchCategory(this.props.id))
+        //dispatch(fetchCategory(this.props.id))
         //});
         //@todo:: normalize the reducers
       } else {
         dispatch(favoriteCompany(company));
         //dispatch(favoriteCompany(company)).then(()=>{
-          //dispatch(fetchCategory(this.props.id))
+        //dispatch(fetchCategory(this.props.id))
         //});
       }
     }
@@ -54,14 +54,14 @@ class Category extends Component {
   }
 
   render() {
-    const {categoryProp,categoryReducer,companies,categories} = this.props;
+    const {categoryReducer,companies} = this.props;
     return (
       <Image source={assets.bg} style={{flex: 1,width: null,height: null,paddingTop: 10}}>
         {categoryReducer.isFetching ? <LoadingIndicator /> : <View />}
         <CompanyList
           loadCompany={this.loadCompany.bind(this)}
           favoriteCompany={this.favoriteCompany.bind(this)}
-          companies={categories[categoryProp.id].companies ? categories[categoryProp.id].companies.map((i) => companies[i]) : []}
+          companies={companies}
         />
       </Image>
     );
@@ -74,12 +74,11 @@ Category.propTypes = {
   categoryProp:PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state,ownProps) {
   const { entities,categoryReducer } = state;
   return {
     categoryReducer,
-    categories:entities.categories,
-    companies:entities.companies
+    companies:entities.categories[ownProps.categoryProp.id].companies ? entities.categories[ownProps.categoryProp.id].companies.map((company) => entities.companies[company]) : []
   }
 }
 

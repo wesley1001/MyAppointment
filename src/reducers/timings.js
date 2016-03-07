@@ -12,7 +12,7 @@ const initialState = {
 
 };
 
-export default function timings(state = initialState, action = {}) {
+export default function timingsReducer(state = initialState, action = {}) {
   switch (action.type) {
     case TIMING_REQUEST:
       return {
