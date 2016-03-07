@@ -3,6 +3,7 @@ import {
   COMPANY_REQUEST,
   COMPANY_SUCCESS,
   COMPANY_FAILURE,
+  SET_COMPANY_SERVICE
 } from '../../constants/ActionTypes';
 import { normalize } from 'normalizr';
 import { Schemas } from './../../constants/Schema';
@@ -41,4 +42,11 @@ export function fetchCompany(companyID) {
         dispatch(companyFailure(err))
       })
   }
+}
+
+export function setCompanyService(service) {
+  return (dispatch) => dispatch({
+    type:SET_COMPANY_SERVICE,
+    entity:service
+  });
 }

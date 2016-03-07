@@ -25,14 +25,14 @@ export default class TimingList extends Component {
   }
 
   render() {
-    const {timings} = this.props;
+    const {timings,timingReducer} = this.props;
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
-    let dataSource = timings.collection ? ds.cloneWithRows(timings.collection) : ds.cloneWithRows([]);
+    let dataSource = timings ? ds.cloneWithRows(timings) : ds.cloneWithRows([]);
     return (
       <View >
         <Seperator />
 
-        {timings.isFetching ? <LoadingIndicator style={{marginTop:10}}/> : <View/>}
+        {timingReducer.isFetching ? <LoadingIndicator style={{marginTop:10}}/> : <View/>}
         <ListView
           horizontal={true}
           showsHorizontalScrollIndicator={false}
@@ -50,7 +50,8 @@ export default class TimingList extends Component {
 }
 
 TimingList.propTypes = {
-  timings:PropTypes.object.isRequired,
+  timings:PropTypes.array.isRequired,
+  timingReducer:PropTypes.object.isRequired,
   selectedTime:PropTypes.object.isRequired,
   onTimeSelect:PropTypes.func.isRequired
 };

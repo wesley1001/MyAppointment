@@ -40,21 +40,21 @@ export default class AppointmentConfirm extends Component {
 
   showAppointmentButton() {
 
-    const {selectedDate,selectedTime,selectedEmployee,company,user} = this.props;
+    const {selectedDate,selectedTime,selectedEmployee,company,userReducer,service} = this.props;
 
     return (
       <View style={{justifyContent:'center',alignItems:'center'}}>
         <Text style={{ fontSize:20,color:'#003333' }}>ALMOST DONE !</Text>
         <Text style={{ paddingTop:20, fontSize:13, textAlign:'center',color:'#003333',fontFamily:'menlo',lineHeight:25 }}> You Wanted a
-          <Text style={{ color:'#722A2A'}}> {company.service.name_en} </Text>
+          <Text style={{ color:'#722A2A'}}> {service.name_en} </Text>
           <Text style={{ color:'#722A2A'}}> {selectedEmployee.id  ? ' with ' + selectedEmployee.name_en : ''} at </Text>
           <Text style={{ color:'#722A2A'}}> {selectedTime.time_en} </Text> At
-          <Text style={{ color:'#722A2A'}}> {company.entity.name_en} </Text> On
+          <Text style={{ color:'#722A2A'}}> {company.name_en} </Text> On
           <Text style={{ color:'#722A2A'}}> {selectedDate.toISOString().slice(0, 10)} </Text>
         </Text>
 
-        { user.appointment.error != null ? <Text>Error occured, try again </Text>: <Text/>}
-        { user.appointment.isCreating ? <LoadingIndicator /> :
+        { userReducer.appointment.error != null ? <Text>Error occured, try again </Text>: <Text/>}
+        { userReducer.appointment.isCreating ? <LoadingIndicator /> :
           <TouchableHighlight underlayColor='transparent' onPress={()=>this.confirmAppointment()}>
             <View style={{marginTop:10, height:80,width:80,borderRadius:40,backgroundColor:'#FF4646',justifyContent:'center',alignItems:'center'}}>
               <Text style={{color:'#E1E3E3',fontFamily:'menlo'}}>
@@ -77,7 +77,7 @@ export default class AppointmentConfirm extends Component {
   }
 
   render() {
-    const {user} = this.props;
+    const {userReducer} = this.props;
 
     return(
       <Modal
@@ -96,7 +96,7 @@ export default class AppointmentConfirm extends Component {
             />
           }
       >
-        { user.appointment.created ?  this.showAppointmentSuccessText() : this.showAppointmentButton() }
+        { userReducer.appointment.created ?  this.showAppointmentSuccessText() : this.showAppointmentButton() }
 
       </Modal>
     )
@@ -112,6 +112,6 @@ AppointmentConfirm.propTypes = {
   showAppointmentConfirmModal:PropTypes.bool.isRequired,
   onAppointmentConfirm:PropTypes.func.isRequired,
   inValidateAppointment:PropTypes.func.isRequired,
-  user:PropTypes.object.isRequired
+  userReducer:PropTypes.object.isRequired
 };
 

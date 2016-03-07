@@ -29,7 +29,9 @@ class Company extends Component {
     const {dispatch} = this.props;
     dispatch(setCompanyService(service));
     Actions.appointmentContainer({
-      title:service.name
+      title:service.name,
+      serviceProp:service,
+      companyProp:this.props.companyProp
     });
   }
 
@@ -84,7 +86,7 @@ function mapStateToProps(state,ownProps) {
   return {
     companyReducer,
     company:entities.companies[ownProps.companyProp.id],
-    services:entities.companies[ownProps.companyProp.id].services.map((service) => entities.services[service])
+    services:entities.companies[ownProps.companyProp.id].services ? entities.companies[ownProps.companyProp.id].services.map((service) => entities.services[service]) : []
   }
 }
 

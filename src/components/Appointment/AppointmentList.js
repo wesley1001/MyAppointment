@@ -9,7 +9,7 @@ const Actions = require('react-native-router-flux').Actions;
 export default class AppointmentList extends Component {
 
   render() {
-    const {company,selectedEmployee,listEmployees} = this.props;
+    const {selectedEmployee,listEmployees,service} = this.props;
     return (
       <View style={styles.cellContainer}>
 
@@ -25,8 +25,8 @@ export default class AppointmentList extends Component {
             />
           </View>
           <View style={styles.middleCol}>
-            <Text style={styles.serviceName}>{company.service.name_en}</Text>
-            <Text style={styles.price}>{company.service.pivot.price|0} KD</Text>
+            <Text style={styles.serviceName}>{service.name_en}</Text>
+            <Text style={styles.price}>{service.pivot.price|0} KD</Text>
           </View>
           <View style={styles.rightCol}>
             <Text style={styles.staff}>Pick a Staff</Text>
@@ -57,7 +57,7 @@ export default class AppointmentList extends Component {
 }
 
 AppointmentList.propTypes = {
-  company : PropTypes.object.isRequired,
+  service : PropTypes.object.isRequired,
   employeeName: PropTypes.string,
   listEmployees: PropTypes.func.isRequired,
 };

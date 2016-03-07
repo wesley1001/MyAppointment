@@ -66,7 +66,7 @@ export function createAppointment(date,time,employee) {
           timing_id:time.id,
           employee_id:employee.id,
           company_id:state().company.entity.id,
-          service_id:state().company.service.id
+          service_id:state().companyReducer.service.id
         };
         let url = API_ROOT +`/appointments/make?api_token=${token}`;
         return fetch(url, {

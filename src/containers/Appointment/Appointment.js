@@ -27,7 +27,7 @@ class Appointment extends Component {
   }
 
   componentWillMount() {
-    if(!this.props.user.isAuthenticated) {
+    if(!this.props.userReducer.isAuthenticated) {
       Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'});
     }
   }
@@ -86,7 +86,7 @@ class Appointment extends Component {
 
   render() {
 
-    const {timings,employees,company,user} = this.props;
+    const {timings,employees,company,userReducer,service} = this.props;
     return (
       <ScrollView contentContainerStyle={{paddingTop:64}} contentInset={{bottom:49}} ref="scrollView">
 
@@ -96,7 +96,7 @@ class Appointment extends Component {
         />
 
         <AppointmentList
-          company={company}
+          service={service}
           selectedEmployee={this.state.selectedEmployee}
           listEmployees={this.listEmployees.bind(this)}
         />
@@ -105,6 +105,7 @@ class Appointment extends Component {
           timings={timings}
           selectedTime={this.state.selectedTime}
           onTimeSelect={this.onTimeSelect.bind(this)}
+          timingReducer
         />
 
         <EmployeePicker
@@ -123,7 +124,8 @@ class Appointment extends Component {
           showAppointmentConfirmModal={this.state.showAppointmentConfirmModal}
           onAppointmentConfirm={this.handleConfirm.bind(this)}
           inValidateAppointment={this.inValidateAppointment.bind(this)}
-          user={user}
+          userReducer={userReducer}
+          service={service}
         />
 
       </ScrollView>
@@ -135,16 +137,24 @@ Appointment.propTypes = {
   timings : PropTypes.object.isRequired,
   employees: PropTypes.array.isRequired,
   company: PropTypes.object.isRequired,
-  user:PropTypes.object.isRequired
+  user:PropTypes.object.isRequired,
+  serviceProp:PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state,ownProps) {
+  const {entities} = state;
   return {
     ...state,
-    timings:state.timings,
-    company:state.company,
-    employees:state.company.entity.employees,
-    user:state.user
+    //timings:state.timings,
+    //company:state.company,
+    //employees:state.company.entity.employees,
+    //user:state.user
+    timings:entities.timings,
+    company:entities.companies[ownProps.companyProp.id],
+    service:entities.services[ownProps.serviceProp.id],
+    userReducer:state.userReducer,
+    employees:entities.companies[ownProps.companyProp.id].employees ? entities.companies[ownProps.companyProp.id].employees.map((employee)=>entities.employees[employee]) : [],
+    timingReducer:state.timingReducer
   }
 }
 
